@@ -18,7 +18,7 @@ The render engine is `@graphlearning/flow`; the app shell is `@graphlearning/she
 
 ## Route contract
 
-`#/` is the catalog. A section is `#/<courseId>-<sectionId>`, e.g. `#/foundations-names-and-objects`.
+`#/` is the catalog. A section is `#/<courseId>-<sectionId>`, e.g. `#/foundations-names-objects-and-types`.
 `?capture=1` and `window.__scene.plan()` are the recorders' hooks and come from the shell.
 
 ## Course arc and status
@@ -28,7 +28,7 @@ next begins. A course is registered in `src/content/index.ts` / `src/scenes/inde
 
 | # | Course id | Chapter | Sections | Status |
 | --- | --- | --- | --- | --- |
-| 1 | `foundations` | Programs, Values, and Execution | 6 | not started |
+| 1 | `foundations` | Programs, Values, and Execution | 6 | authored, awaiting owner review (no narration audio yet) |
 | 2 | `collections` | Collections and Data Transformation | 9 | not started |
 | 3 | `control-flow` | Decisions, Loops, and Problem Decomposition | 7 | not started |
 | 4 | `functions` | Functions, Scope, and Contracts | 9 | not started |

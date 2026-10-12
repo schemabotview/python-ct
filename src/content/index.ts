@@ -1,8 +1,10 @@
+import { foundations } from './foundations'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. Courses are added here as each is authored.
 // One course per chapter of PYTHON-COURSE-PLAN.md; chapters are registered here as they are authored.
 export const COURSES: Record<string, Course> = {
+  [foundations.id]: foundations,
 }
 
 export type { Course, Section }
