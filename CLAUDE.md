@@ -35,7 +35,7 @@ next begins. A course is registered in `src/content/index.ts` / `src/scenes/inde
 | 5 | `files-errors` | Files, Structured Data, and Failure Handling | 10 | authored, awaiting owner review (no narration audio yet) |
 | 6 | `modules` | Modules, Environments, and Dependencies | 6 | authored, awaiting owner review (no narration audio yet) |
 | 7 | `classes` | Classes and Domain Modelling | 8 | authored, awaiting owner review (no narration audio yet) |
-| 8 | `data-model` | Iteration, Context, and the Python Data Model | 9 | not started |
+| 8 | `data-model` | Iteration, Context, and the Python Data Model | 9 | authored, awaiting owner review (no narration audio yet) |
 | 9 | `composition` | Functions as Objects and Advanced Composition | 6 | not started |
 | 10 | `concurrency` | Concurrency and Execution Trade-offs | 8 | not started |
 | 11 | `quality-packaging` | Reliable, Efficient, and Distributable Programs | 8 | not started |

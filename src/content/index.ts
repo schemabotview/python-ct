@@ -5,6 +5,7 @@ import { functions } from './functions'
 import { filesErrors } from './files-errors'
 import { modules } from './modules'
 import { classes } from './classes'
+import { dataModel } from './data-model'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. Courses are added here as each is authored.
@@ -17,6 +18,7 @@ export const COURSES: Record<string, Course> = {
   [filesErrors.id]: filesErrors,
   [modules.id]: modules,
   [classes.id]: classes,
+  [dataModel.id]: dataModel,
 }
 
 export type { Course, Section }
