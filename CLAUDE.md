@@ -29,7 +29,7 @@ next begins. A course is registered in `src/content/index.ts` / `src/scenes/inde
 | # | Course id | Chapter | Sections | Status |
 | --- | --- | --- | --- | --- |
 | 1 | `foundations` | Programs, Values, and Execution | 6 | authored, awaiting owner review (no narration audio yet) |
-| 2 | `collections` | Collections and Data Transformation | 9 | not started |
+| 2 | `collections` | Collections and Data Transformation | 9 | authored, awaiting owner review (no narration audio yet) |
 | 3 | `control-flow` | Decisions, Loops, and Problem Decomposition | 7 | not started |
 | 4 | `functions` | Functions, Scope, and Contracts | 9 | not started |
 | 5 | `files-errors` | Files, Structured Data, and Failure Handling | 10 | not started |
