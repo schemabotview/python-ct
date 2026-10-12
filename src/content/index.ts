@@ -2,6 +2,7 @@ import { foundations } from './foundations'
 import { collections } from './collections'
 import { controlFlow } from './control-flow'
 import { functions } from './functions'
+import { filesErrors } from './files-errors'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. Courses are added here as each is authored.
@@ -11,6 +12,7 @@ export const COURSES: Record<string, Course> = {
   [collections.id]: collections,
   [controlFlow.id]: controlFlow,
   [functions.id]: functions,
+  [filesErrors.id]: filesErrors,
 }
 
 export type { Course, Section }

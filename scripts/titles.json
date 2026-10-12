@@ -3,5 +3,6 @@
   "foundations": "Python For Absolute Beginners: How Programs, Values and Execution Work",
   "collections": "Python Lists, Tuples, Dictionaries and Sets Explained For Beginners",
   "control-flow": "Python If, For and While Loops Explained For Beginners",
-  "functions": "Python Functions Explained: Arguments, Scope, Return Values and Recursion"
+  "functions": "Python Functions Explained: Arguments, Scope, Return Values and Recursion",
+  "files-errors": "Python File Handling, CSV, JSON, Exceptions and Decimal For Beginners"
 }

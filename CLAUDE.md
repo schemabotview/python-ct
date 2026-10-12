@@ -32,7 +32,7 @@ next begins. A course is registered in `src/content/index.ts` / `src/scenes/inde
 | 2 | `collections` | Collections and Data Transformation | 9 | authored, awaiting owner review (no narration audio yet) |
 | 3 | `control-flow` | Decisions, Loops, and Problem Decomposition | 7 | authored, awaiting owner review (no narration audio yet) |
 | 4 | `functions` | Functions, Scope, and Contracts | 9 | authored, awaiting owner review (no narration audio yet) |
-| 5 | `files-errors` | Files, Structured Data, and Failure Handling | 10 | not started |
+| 5 | `files-errors` | Files, Structured Data, and Failure Handling | 10 | authored, awaiting owner review (no narration audio yet) |
 | 6 | `modules` | Modules, Environments, and Dependencies | 6 | not started |
 | 7 | `classes` | Classes and Domain Modelling | 8 | not started |
 | 8 | `data-model` | Iteration, Context, and the Python Data Model | 9 | not started |
