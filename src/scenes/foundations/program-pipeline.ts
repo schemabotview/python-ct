@@ -1,20 +1,42 @@
 import type { Scene } from '@graphlearning/flow'
 
-// §1 — from an idea to a result. The interpreter is the node the section is about, so it is the one
-// the section focuses; the dashed edge marks the part that is not code: the idea being written down.
+// §1 — the order-total idea carried through every stage: the plain-words algorithm, the Python that
+// writes it down, the interpreter that runs it, and what appears on screen. Each stage shows the
+// real content rather than a label for it, so the pipeline and the running example are one picture.
 export const programPipeline: Scene = {
   id: 'program-pipeline',
   title: 'From algorithm to result',
   flow: 'TB',
   nodes: [
-    { id: 'algorithm', label: 'Algorithm', sub: 'steps in plain words', pattern: 'user', icon: 'workflow' },
-    { id: 'source', label: 'Source code', sub: 'text in a .py file', pattern: 'storage', icon: 'filecode' },
-    { id: 'interpreter', label: 'Interpreter', sub: 'carries out the text', pattern: 'service', icon: 'cpu' },
-    { id: 'result', label: 'Result', sub: 'output on the screen', pattern: 'external', icon: 'monitor' },
+    {
+      id: 'algorithm',
+      kind: 'list',
+      label: 'Algorithm',
+      items: ['Take the price of one item', 'Multiply it by the quantity ordered', 'Show the total'],
+      framed: true,
+    },
+    {
+      id: 'source',
+      kind: 'code',
+      filename: 'order.py  —  source code',
+      label: `price = 4.5
+quantity = 3
+print(price * quantity)`,
+    },
+    {
+      id: 'run',
+      label: 'Run',
+      pattern: 'group',
+      flow: 'LR',
+      children: [
+        { id: 'interpreter', label: 'Interpreter', sub: 'runs each statement', pattern: 'service', icon: 'cpu' },
+        { id: 'result', label: '13.5', sub: 'printed on the screen', pattern: 'external', icon: 'monitor' },
+      ],
+      edges: [{ source: 'interpreter', target: 'result', label: 'produces' }],
+    },
   ],
   edges: [
-    { source: 'algorithm', target: 'source', label: 'written down', dashed: true },
-    { source: 'source', target: 'interpreter', label: 'read by' },
-    { source: 'interpreter', target: 'result', label: 'produces' },
+    { source: 'algorithm', target: 'source', label: 'written down in Python', dashed: true },
+    { source: 'source', target: 'run', label: 'read by the interpreter' },
   ],
 }

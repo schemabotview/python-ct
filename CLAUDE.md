@@ -49,6 +49,11 @@ Source layout per course: `src/content/<course>/NN-<section-id>.ts` plus `index.
   failure/alternative contrast → summary → bridge. Explain a term before relying on it.
 - Python version claims are pinned to **3.14**; label CPython-specific behaviour and GIL-enabled
   versus free-threaded builds. Never present a version-specific fact as a language guarantee.
+- **Fill the frame with content, not spacing.** Slides target ~880–990 modelled px (`npm run check`
+  fails above 1000). Scenes show real detail — the actual code, outputs and worked failures — rather
+  than bare labels. A scene is fitted to the pane, so a tall one is height-limited and its bottom
+  reaches the nav buttons: look at the rendered route and keep the last card clear of them. Wide
+  rows shrink everything, so keep nested rows narrow (a compact card, not a wide code card).
 - Slides are terse; narration is flowing prose. Code shown must be correct Python 3.14 with the
   stated expected output.
 

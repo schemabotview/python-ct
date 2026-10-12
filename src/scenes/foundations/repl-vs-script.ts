@@ -1,7 +1,8 @@
 import type { Scene } from '@graphlearning/flow'
 
-// §2 — the same lines, run two ways. The contrast the section teaches is the third line:
-// a bare expression is echoed in an interactive session and silently discarded in a script.
+// §2 — the same lines, run two ways, and what the script actually printed. The contrast the section
+// teaches is the third line: a bare expression is echoed in an interactive session and silently
+// discarded in a script, so the script's output is the single 12 from line four.
 export const replVsScript: Scene = {
   id: 'repl-vs-script',
   title: 'Two ways to run the same lines',
@@ -25,6 +26,16 @@ quantity = 3
 price * quantity
 print(price * quantity)`,
     },
+    {
+      id: 'terminal',
+      kind: 'code',
+      filename: 'terminal',
+      label: `$ python order.py
+12`,
+    },
   ],
-  edges: [{ source: 'session', target: 'script', label: 'the same lines, saved in a file' }],
+  edges: [
+    { source: 'session', target: 'script', label: 'the same lines, saved in a file' },
+    { source: 'script', target: 'terminal', label: 'run: only print() shows a value' },
+  ],
 }
