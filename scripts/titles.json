@@ -7,5 +7,6 @@
   "files-errors": "Python File Handling, CSV, JSON, Exceptions and Decimal For Beginners",
   "modules": "Python Modules, Packages, Imports and Virtual Environments Explained",
   "classes": "Python Classes, Dataclasses, Inheritance and Composition For Beginners",
-  "data-model": "Python Iterators, Generators, Context Managers and Dunder Methods Explained"
+  "data-model": "Python Iterators, Generators, Context Managers and Dunder Methods Explained",
+  "composition": "Python Closures, Decorators, functools and Type Hints Explained"
 }
