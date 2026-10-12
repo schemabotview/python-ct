@@ -5,7 +5,7 @@ import type { Section } from '../types'
 // between Python versions, which the narration says out loud.
 export const errorsAndReadingATraceback: Section = {
   id: 'errors-and-reading-a-traceback',
-  title: 'Syntax errors, runtime errors, and reading a traceback',
+  title: "Syntax errors, runtime errors, and reading a short traceback",
   scene: 'error-kinds',
   focus: 'runtime',
   slide: `## Syntax errors, runtime errors, and tracebacks

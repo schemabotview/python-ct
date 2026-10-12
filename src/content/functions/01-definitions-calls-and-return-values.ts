@@ -3,7 +3,7 @@ import type { Section } from '../types'
 // Opens the chapter by separating defining from calling, and returning from printing. The None result of a function without return is shown as a real value, not an absence.
 export const definitionsCallsAndReturnValues: Section = {
   id: 'definitions-calls-and-return-values',
-  title: "Definitions, calls, return values, None, and multiple results",
+  title: "Definitions, calls, return values, None, and multiple-result conventions",
   scene: 'call-trace',
   focus: 'defs',
   slide: `## Functions: definitions, calls, and return values

@@ -3,7 +3,7 @@ import type { Section } from '../types'
 // Tuples are introduced as records, not as read-only lists, so the later unpacking and dictionary-key sections have a reason behind them.
 export const tuplesFixedRecords: Section = {
   id: 'tuples-fixed-records',
-  title: "Tuples: fixed records",
+  title: "Tuples: fixed records and immutable sequence structure",
   scene: 'tuple-vs-list',
   focus: 'record',
   slide: `## Tuples: fixed records

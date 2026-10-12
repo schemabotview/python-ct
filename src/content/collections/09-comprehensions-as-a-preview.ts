@@ -3,7 +3,7 @@ import type { Section } from '../types'
 // A preview only: the loop and the filter mechanics are explained in Chapter 3, and the comprehension is shown here so the learner can read one when it appears. The Chapter 2 bridge into decisions and loops is in the narration.
 export const comprehensionsAsAPreview: Section = {
   id: 'comprehensions-as-a-preview',
-  title: "Comprehensions as a preview",
+  title: "Comprehensions as a preview of filtering and transformation",
   scene: 'comprehension-preview',
   focus: 'comp',
   slide: `## Comprehensions: a first look

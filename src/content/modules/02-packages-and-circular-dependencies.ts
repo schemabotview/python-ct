@@ -3,7 +3,7 @@ import type { Section } from '../types'
 // The circular-import error is shown exactly as observed on the sandbox Python and the narration says wording varies by version. The two repair strategies are the standard ones: a third module, or importing the module and using it at call time.
 export const packagesAndCircularDependencies: Section = {
   id: 'packages-and-circular-dependencies',
-  title: "Packages, relative and absolute imports, and circular-dependency symptoms",
+  title: "Packages, relative/absolute imports, and circular-dependency symptoms",
   scene: 'package-graph',
   focus: 'graph',
   slide: `## Packages, imports, and circular dependencies

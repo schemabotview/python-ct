@@ -3,7 +3,7 @@ import type { Section } from '../types'
 // Every set result is printed through sorted(): string hashing is randomised per run, so a bare set of strings would show a different order each time and the shown output would not be reproducible.
 export const setsMembershipAndUniqueness: Section = {
   id: 'sets-membership-and-uniqueness',
-  title: "Sets: membership and uniqueness",
+  title: "Sets: membership, uniqueness, and set operations",
   scene: 'set-operations',
   focus: 'ops',
   slide: `## Sets: membership and uniqueness

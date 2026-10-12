@@ -3,7 +3,7 @@ import type { Section } from '../types'
 // Introduces the block and indentation here, since this is the first compound statement. Order of elif tests is shown as a real bug rather than a style point.
 export const ifElifElseAndNestedDecisions: Section = {
   id: 'if-elif-else-and-nested-decisions',
-  title: "if, elif, else, and nested decisions",
+  title: "if/elif/else and nested decisions",
   scene: 'decision-branches',
   focus: 'shipping',
   slide: `## Decisions with if, elif, and else

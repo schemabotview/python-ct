@@ -3,7 +3,7 @@ import type { Section } from '../types'
 // The core mental-model section of the chapter: it extends the Chapter 1 name-to-object picture. Interning of small integers and strings is deliberately not shown; it is a CPython detail that muddies is versus ==.
 export const mutationAliasingIdentityAndCopying: Section = {
   id: 'mutation-aliasing-identity-and-copying',
-  title: "Mutation, aliasing, identity, equality, and copying",
+  title: "Mutation, aliasing, identity, equality, and shallow versus deep copying",
   scene: 'aliasing-diagram',
   focus: 'a',
   slide: `## Mutation, aliasing, and copying

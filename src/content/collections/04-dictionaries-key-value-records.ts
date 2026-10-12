@@ -3,7 +3,7 @@ import type { Section } from '../types'
 // Dictionaries are the record shape with named fields. The missing-key handling is taught here because it is the first failure learners meet with them.
 export const dictionariesKeyValueRecords: Section = {
   id: 'dictionaries-key-value-records',
-  title: "Dictionaries: key/value records",
+  title: "Dictionaries: key/value records, lookup, and missing keys",
   scene: 'dict-lookups',
   focus: 'record',
   slide: `## Dictionaries: key/value records

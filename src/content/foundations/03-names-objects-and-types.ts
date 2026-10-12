@@ -4,7 +4,7 @@ import type { Section } from '../types'
 // argument passing and mutation is this picture with more arrows.
 export const namesObjectsAndTypes: Section = {
   id: 'names-objects-and-types',
-  title: 'Names, assignment, objects, and basic types',
+  title: "Names, assignment, objects, and basic scalar types",
   scene: 'names-to-objects',
   focus: 'price',
   slide: `## Names, assignment, and basic types

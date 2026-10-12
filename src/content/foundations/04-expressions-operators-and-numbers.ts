@@ -4,7 +4,7 @@ import type { Section } from '../types'
 // exact decimal arithmetic for money waits for the files chapter, where the data actually arrives.
 export const expressionsOperatorsAndNumbers: Section = {
   id: 'expressions-operators-and-numbers',
-  title: 'Expressions, operators, and numbers',
+  title: "Expressions, operators, conversion, and numeric representation",
   scene: 'arithmetic-table',
   slide: `## Expressions, operators, and numbers
 

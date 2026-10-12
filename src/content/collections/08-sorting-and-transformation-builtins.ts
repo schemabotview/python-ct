@@ -3,7 +3,7 @@ import type { Section } from '../types'
 // Key functions are previewed only with functions that already exist (len, str.lower). Writing a key function with def waits for Chapter 4, and lambda for Chapter 9.
 export const sortingAndTransformationBuiltins: Section = {
   id: 'sorting-and-transformation-builtins',
-  title: "Sorting and built-in functions",
+  title: "Sorting and basic transformation built-ins; key functions previewed",
   scene: 'sort-builtins',
   focus: 'sorting',
   slide: `## Sorting and built-in functions

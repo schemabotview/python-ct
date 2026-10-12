@@ -4,7 +4,7 @@ import type { Section } from '../types'
 // beginner meets: input() returns text, and text times a number is not arithmetic.
 export const textInputAndFormattedOutput: Section = {
   id: 'text-input-and-formatted-output',
-  title: 'Text input and formatted output',
+  title: "Text input, formatted output, and simple interaction",
   scene: 'order-run',
   focus: 'program',
   slide: `## Text input and formatted output

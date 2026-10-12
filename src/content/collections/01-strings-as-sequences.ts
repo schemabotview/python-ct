@@ -3,7 +3,7 @@ import type { Section } from '../types'
 // Opens the collections chapter with the sequence the learner already has: text. Indexing and slicing are taught here once and reused for lists and tuples.
 export const stringsAsSequences: Section = {
   id: 'strings-as-sequences',
-  title: "Strings as sequences",
+  title: "Strings as sequences: indexing, slicing, and common transformations",
   scene: 'string-sequence',
   focus: 'cells',
   slide: `## Strings as sequences

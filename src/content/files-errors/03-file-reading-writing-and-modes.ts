@@ -3,7 +3,7 @@ import type { Section } from '../types'
 // Closing is shown by hand on purpose, so the next section's with statement answers a problem the learner has just seen. The 'w' mode emptying an existing file is stated as the destructive default.
 export const fileReadingWritingAndModes: Section = {
   id: 'file-reading-writing-and-modes',
-  title: "File reading and writing, modes, and incremental processing",
+  title: "File reading/writing, modes, and incremental processing",
   scene: 'file-modes',
   focus: 'io',
   slide: `## Reading and writing files

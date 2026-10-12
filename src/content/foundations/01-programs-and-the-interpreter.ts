@@ -4,7 +4,7 @@ import type { Section } from '../types'
 // section leans on: algorithm, source code, interpreter. "Python" here means CPython 3.14.
 export const programsAndTheInterpreter: Section = {
   id: 'programs-and-the-interpreter',
-  title: 'Programs, algorithms, and the interpreter',
+  title: "Programs, algorithms, source code, and the interpreter",
   scene: 'program-pipeline',
   focus: 'interpreter',
   slide: `## Programs, algorithms, and the interpreter

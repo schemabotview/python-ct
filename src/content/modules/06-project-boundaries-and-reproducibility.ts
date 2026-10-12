@@ -3,7 +3,7 @@ import type { Section } from '../types'
 // Concept-level only: building, publishing and the command-line entry point are Chapter 11. The pyproject.toml text shown parses with tomllib. The bridge into Chapter 7 is in the narration.
 export const projectBoundariesAndReproducibility: Section = {
   id: 'project-boundaries-and-reproducibility',
-  title: "Project boundaries, dependency declarations, and reproducible environments",
+  title: "Project boundaries, dependency declarations, and reproducible-environment concepts",
   scene: 'project-files',
   focus: 'toml',
   slide: `## Project boundaries and reproducible environments

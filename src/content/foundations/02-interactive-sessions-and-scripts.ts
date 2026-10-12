@@ -4,7 +4,7 @@ import type { Section } from '../types'
 // expression is echoed in a session and discarded in a file.
 export const interactiveSessionsAndScripts: Section = {
   id: 'interactive-sessions-and-scripts',
-  title: 'Interactive sessions versus scripts',
+  title: "Interactive sessions versus scripts: a first execution walkthrough",
   scene: 'repl-vs-script',
   focus: 'script',
   slide: `## Interactive sessions versus scripts

@@ -38,10 +38,25 @@ next begins. A course is registered in `src/content/index.ts` / `src/scenes/inde
 | 8 | `data-model` | Iteration, Context, and the Python Data Model | 9 | authored, awaiting owner review (no narration audio yet) |
 | 9 | `composition` | Functions as Objects and Advanced Composition | 6 | authored, awaiting owner review (no narration audio yet) |
 | 10 | `concurrency` | Concurrency and Execution Trade-offs | 8 | authored, awaiting owner review (no narration audio yet) |
-| 11 | `quality-packaging` | Reliable, Efficient, and Distributable Programs | 8 | not started |
+| 11 | `quality-packaging` | Reliable, Efficient, and Distributable Programs | 8 | authored, awaiting owner review (no narration audio yet) |
 
 Source layout per course: `src/content/<course>/NN-<section-id>.ts` plus `index.ts`;
 `src/scenes/<course>/` plus `index.ts` exporting `<course>Scenes`; `public/audio/<course>/`.
+
+## Verification notes (read before trusting a number)
+
+- Every code snippet and printed output was **run before it was written down**, but on **Python 3.13**,
+  not the 3.14 baseline (3.14 was not installed). Nothing relies on a 3.14-only difference, but that is
+  unconfirmed. Re-run the snippets on 3.14 before publishing.
+- **Timings, races and profiles are not deterministic.** Chapter 10 and the profiling section of
+  Chapter 11 round timings, tie them to the build (GIL-enabled CPython, 4 CPUs), and make no
+  universal speedup claim. No free-threaded build was available, so free-threaded behaviour is
+  labelled as documentation, not measurement.
+- Chapter 11's local wheel build/install/run/uninstall was really performed, in a throwaway directory
+  and a fresh venv. The system's distribution-patched setuptools failed on this Python, so a current
+  setuptools was installed into a scratch venv; nothing was published.
+- **No narration audio exists.** `.wav` files come only from the Colab + Chatterbox pass.
+- Section `title` fields match `PYTHON-COURSE-PLAN.md` exactly (audited: 86 of 86).
 
 ## Authoring conventions
 

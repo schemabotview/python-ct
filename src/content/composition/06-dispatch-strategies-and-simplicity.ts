@@ -3,7 +3,7 @@ import type { Section } from '../types'
 // Closes the chapter with a restraint lesson: the plain function often beats every pattern shown. Bridge into Chapter 10 is in the narration. singledispatch picks by the first argument's type, verified with float, list, str and int.
 export const dispatchStrategiesAndSimplicity: Section = {
   id: 'dispatch-strategies-and-simplicity',
-  title: "Dispatch strategies, and choosing direct code over abstraction",
+  title: "Dispatch strategies and choosing direct code over abstraction",
   scene: 'dispatch-choices',
   focus: 'ways',
   slide: `## Dispatch strategies and simplicity

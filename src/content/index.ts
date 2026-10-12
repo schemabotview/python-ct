@@ -8,6 +8,7 @@ import { classes } from './classes'
 import { dataModel } from './data-model'
 import { composition } from './composition'
 import { concurrency } from './concurrency'
+import { qualityPackaging } from './quality-packaging'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. Courses are added here as each is authored.
@@ -23,6 +24,7 @@ export const COURSES: Record<string, Course> = {
   [dataModel.id]: dataModel,
   [composition.id]: composition,
   [concurrency.id]: concurrency,
+  [qualityPackaging.id]: qualityPackaging,
 }
 
 export type { Course, Section }
