@@ -37,7 +37,7 @@ next begins. A course is registered in `src/content/index.ts` / `src/scenes/inde
 | 7 | `classes` | Classes and Domain Modelling | 8 | authored, awaiting owner review (no narration audio yet) |
 | 8 | `data-model` | Iteration, Context, and the Python Data Model | 9 | authored, awaiting owner review (no narration audio yet) |
 | 9 | `composition` | Functions as Objects and Advanced Composition | 6 | authored, awaiting owner review (no narration audio yet) |
-| 10 | `concurrency` | Concurrency and Execution Trade-offs | 8 | not started |
+| 10 | `concurrency` | Concurrency and Execution Trade-offs | 8 | authored, awaiting owner review (no narration audio yet) |
 | 11 | `quality-packaging` | Reliable, Efficient, and Distributable Programs | 8 | not started |
 
 Source layout per course: `src/content/<course>/NN-<section-id>.ts` plus `index.ts`;

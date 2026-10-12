@@ -8,5 +8,6 @@
   "modules": "Python Modules, Packages, Imports and Virtual Environments Explained",
   "classes": "Python Classes, Dataclasses, Inheritance and Composition For Beginners",
   "data-model": "Python Iterators, Generators, Context Managers and Dunder Methods Explained",
-  "composition": "Python Closures, Decorators, functools and Type Hints Explained"
+  "composition": "Python Closures, Decorators, functools and Type Hints Explained",
+  "concurrency": "Python Threads, Processes, asyncio and the GIL Explained"
 }

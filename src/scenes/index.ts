@@ -8,11 +8,12 @@ import { modulesScenes } from './modules'
 import { classesScenes } from './classes'
 import { dataModelScenes } from './data-model'
 import { compositionScenes } from './composition'
+import { concurrencyScenes } from './concurrency'
 
 // Scene registry. Sections reference scenes by id; scenes are grouped by course (one folder each,
 // mirroring src/content). Ids are globally unique across courses, so the flat lookup below is
 // unambiguous. Courses are added here as each is authored.
-const ALL: Scene[] = [...foundationsScenes, ...collectionsScenes, ...controlFlowScenes, ...functionsScenes, ...filesErrorsScenes, ...modulesScenes, ...classesScenes, ...dataModelScenes, ...compositionScenes]
+const ALL: Scene[] = [...foundationsScenes, ...collectionsScenes, ...controlFlowScenes, ...functionsScenes, ...filesErrorsScenes, ...modulesScenes, ...classesScenes, ...dataModelScenes, ...compositionScenes, ...concurrencyScenes]
 
 export const SCENES: Record<string, Scene> = Object.fromEntries(ALL.map((s) => [s.id, s]))
 
