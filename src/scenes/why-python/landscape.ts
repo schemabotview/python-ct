@@ -6,6 +6,7 @@ const domain = (id: string, label: string, sub: string, pattern: SceneNode['patt
 
 export const landscape: Scene = {
   id: 'python-landscape',
+  padding: 0.04,
   flow: 'LR',
   align: 'start',
   header: 'band',

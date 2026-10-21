@@ -30,6 +30,7 @@ const chip = (id: string, label: string): SceneNode => ({ id, label, variant: 'c
 
 export const philosophy: Scene = {
   id: 'python-zen',
+  padding: 0.04,
   flow: 'LR',
   align: 'start',
   header: 'band',

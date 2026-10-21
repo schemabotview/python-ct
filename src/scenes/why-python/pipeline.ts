@@ -18,6 +18,7 @@ const course = (id: string, label: string): SceneNode => ({ id, label, variant: 
 
 export const pipeline: Scene = {
   id: 'roastery-etl',
+  padding: 0.04,
   header: 'band',
   nodes: [
     {

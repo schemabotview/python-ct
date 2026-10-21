@@ -13,6 +13,7 @@ const TIMING = [
 
 export const tradeoffs: Scene = {
   id: 'python-tradeoffs',
+  padding: 0.04,
   header: 'band',
   nodes: [
     {

@@ -6,6 +6,7 @@ const era = (id: string, badge: string, label: string, sub: string, pattern: Sce
 
 export const history: Scene = {
   id: 'python-history',
+  padding: 0.04,
   flow: 'LR',
   align: 'start',
   header: 'band',
@@ -40,6 +41,20 @@ export const history: Scene = {
       label: 'The break, and the name',
       bare: true,
       children: [
+    {
+      id: 'gap',
+      label: 'The gap it filled',
+      sub: 'at CWI, for the Amoeba operating system project',
+      pattern: 'user',
+      icon: 'none',
+      cols: 3,
+      children: [
+        { id: 'shell', label: 'Shell scripts', sub: 'quick to write, too weak for real programs', icon: 'terminal', pattern: 'user' },
+        { id: 'python', label: 'Python', sub: "ABC's readability, open and extensible", icon: 'python', pattern: 'user' },
+        { id: 'c', label: 'C', sub: 'powerful, but slow to write and debug', icon: 'cpu', pattern: 'user' },
+        { id: 'abc', kind: 'note', pattern: 'user', span: 'all', label: 'ABC: the readable teaching language Guido had helped build at CWI — but closed, and impossible to extend' },
+      ],
+    },
     {
       id: 'break',
       kind: 'table',
