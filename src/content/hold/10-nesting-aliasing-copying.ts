@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const nestingAliasingCopying: Section = {
+  id: 'nesting-aliasing-and-copying',
+  title: "Nesting, aliasing and copying",
+  scene: 'hold-copying',
+  narration:
+    "Real orders have more than one product, so the final shape nests one container in another. On line five, an order is a dict, and its lines key holds a list of line items, each itself a dict with a SKU and a quantity. This is the shape the pipeline will build from every day's file, and it is also the shape of most JSON you will ever read. Nesting is where the first idea of this course pays off: names, and the values inside containers, are references to objects. Lines eleven to thirteen make three things that look like copies. same equals order copies nothing at all: it is a second name for the same dict. order dot copy makes a new dict, but a shallow one: its values are the same objects as the original's, including the same list of lines. And copy dot deepcopy, from the copy module, copies everything, all the way down. Now line fourteen changes the customer through same, and line fifteen appends a line item through shallow. The output tells the story. The original order's customer is now omar, because same is order. And the original now has two line items, although we only touched shallow, because shallow's lines and order's lines are one list. Only deep still has one. The last line confirms it: same is order, True; shallow is order, False; but shallow's lines is order's lines, True. The picture on the right is the state after line fifteen: four names, three dicts and two lists, and the list shown in red is reachable from two of the dicts. Most bugs of the form I changed one thing and another changed too are exactly this, and the table underneath is the rule for avoiding them. That completes the data the pipeline needs to hold. Next course, it starts processing it.",
+}

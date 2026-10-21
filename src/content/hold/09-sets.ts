@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const sets: Section = {
+  id: 'sets',
+  title: "Sets: unique customers, and membership",
+  scene: 'hold-sets',
+  narration:
+    "The roastery wants to know how many different customers ordered today, and who was new. A list of orders cannot answer that directly, because a customer who orders three times appears three times. The container for distinct values is the set. Line six turns today's six orders into a set, and the duplicates simply disappear. The first line of output shows six orders and three customers. Line three writes yesterday's set directly, in curly braces, like a dict without values. A set is built on the same hashing as a dict's keys, which gives it two strengths. The first is membership: asking whether omar is in today's set, or raj, is one hash lookup, however large the set grows, where the same question of a list checks every item in turn. In course eleven, that difference turns a slow pipeline into a fast one. The second strength is set algebra, and the table on the right lays it out. today ampersand yesterday is the intersection: customers who came back, lena and maya. today minus yesterday is the difference: the new customer, raj. And the bar is the union: everyone who ordered on either day. Notice the word sorted around each one. A set has no order. The order Python prints a set of strings in can even change from one run to the next, so whenever the output matters, as in a report, sort it first. The last line answers a question every beginner asks. If curly braces make a set, what is an empty pair of them? The answer is a dict; dicts had the braces first. An empty set is written set with brackets. One rule applies to everything you put in a set or use as a dict key: it must not change, which is why a tuple can be a key and a list cannot. That rule matters in the final section of this course.",
+}

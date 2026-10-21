@@ -4,7 +4,7 @@
 // is still a floor: a frame can pass and read badly. The owner reviews the rendered route.
 //
 // Run: npm run check (after check-content). PUPPETEER_EXECUTABLE_PATH picks the browser if needed.
-import { mkdir, rm } from 'node:fs/promises'
+import { mkdir, readFile, rm } from 'node:fs/promises'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { build } from 'esbuild'
@@ -22,6 +22,36 @@ await build({
 })
 const { COURSES } = await import(pathToFileURL(join(process.cwd(), bundle)).href)
 const slugs = Object.values(COURSES).flatMap((c) => c.sections.map((s) => `${c.id}-${s.id}`))
+
+// Node ids must be unique within a scene, and this is checked BEFORE the browser starts: the engine
+// resolves a node's parent by id, so a child that shares its parent's id (easy with ideFrame, which
+// names its own wrappers `<id>-explorer`, `<id>-centre`, `<id>-side`) becomes its own parent and the
+// renderer's ancestor walk never ends — the page hangs and the check dies on a timeout naming nothing.
+const raw = { name: 'raw', setup: (b) => {
+  b.onResolve({ filter: /\?raw$/ }, (a) => ({ path: join(a.resolveDir, a.path.slice(0, -4)), namespace: 'raw' }))
+  b.onLoad({ filter: /.*/, namespace: 'raw' }, async (a) => ({ contents: await readFile(a.path, 'utf8'), loader: 'text' }))
+} }
+const scenesBundle = join(temp, 'scenes.mjs')
+await build({
+  stdin: { contents: `export { SCENES } from './src/scenes'`, resolveDir: process.cwd(), loader: 'ts' },
+  outfile: scenesBundle, bundle: true, platform: 'node', format: 'esm', logLevel: 'silent',
+  external: ['@graphlearning/*'], plugins: [raw],
+})
+const { SCENES } = await import(pathToFileURL(join(process.cwd(), scenesBundle)).href)
+const duplicates = []
+for (const scene of Object.values(SCENES)) {
+  const seen = new Set()
+  const walk = (nodes) => nodes.forEach((n) => {
+    if (seen.has(n.id)) duplicates.push(`${scene.id}: node id '${n.id}' is used twice — the renderer would hang`)
+    seen.add(n.id)
+    walk(n.children ?? [])
+  })
+  walk(scene.nodes)
+}
+if (duplicates.length) {
+  console.error(duplicates.join('\n'))
+  process.exit(1)
+}
 
 const problems = []
 const ide = []

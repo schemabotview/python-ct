@@ -1,0 +1,9 @@
+$ python main.py
+5 ETH-250 BRA-500
+['COL-500', 'ETH-250']
+True 2 11
+Traceback (most recent call last):
+  File "/home/ana/roastery-etl/main.py", line 11, in <module>
+    print(skus[5])
+          ~~~~^^^
+IndexError: list index out of range

@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const numbers: Section = {
+  id: 'numbers',
+  title: "Numbers: int, float, and 0.1 + 0.2",
+  scene: 'hold-numbers',
+  narration:
+    "Python has two everyday kinds of number, and the pipeline needs to know which is which. An int is a whole number, and Python's ints are exact and have no size limit. Line eight prints two to the power of one hundred, all thirty-one digits of it, exactly. Many languages would have overflowed long before that. A float is a number with a fractional part, and it is stored the way the hardware stores it: sixty-four bits, as a binary fraction, good for about sixteen significant digits. Line seven works on the quantity, three. Times two is six, an int. Then come three ways to divide it by two. A single slash is true division, and always gives a float, one point five. A double slash is floor division, one. The percent sign is the remainder, also one. And double star, as you saw, is a power. Now the price. Line nine multiplies nine ninety-five by three, and the terminal prints twenty-nine point eight four nine nine nine, and so on, ending in eight. Not twenty-nine eighty-five. Lines ten and eleven show the same thing in its most famous form: point one plus point two prints point three, followed by a long run of zeros and a four, and asking whether it equals point three gives False. This is not a Python bug. Most decimal fractions, including point one, have no exact binary representation, just as one third has no exact decimal one. A float holds the nearest binary fraction it can, and the tiny error shows up when you add or multiply. For a measurement, a temperature or a weight in grams, that error is far below anything that matters. For money, it is not acceptable: a report that is out by a fraction of a cent on every line will eventually be out by real cents, and nobody will trust it. The note on the right says it plainly. So the next section fixes the price.",
+}

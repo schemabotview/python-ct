@@ -15,7 +15,7 @@ carries the code, its result and the mental model side by side.
 Author from it; do not drift from its section lists.
 
 The render engine is `@graphlearning/flow`; the app shell is `@graphlearning/shell`. Both are
-**published packages pinned by version** (flow ^2.2.0, shell ^0.13.0). This repo's own surface is
+**published packages pinned by version** (flow ^2.2.0, shell ^0.13.1). This repo's own surface is
 `src/content/`, `src/scenes/`, `src/main.tsx` and `src/theme.css` — nothing else.
 
 ## Route contract
@@ -34,7 +34,8 @@ Courses 1–2, IDE frames (`@graphlearning/flow` ^2.2.0: tree, terminal, folded 
 | 1 | `why-python` | Why Python | 5 | authored, awaiting owner review (no narration audio yet) |
 | 2 | `how-python-runs` | How Python runs your code | 9 | authored, awaiting owner review (no narration audio yet) |
 | 3 | `start` | Start the project | 6 | authored, awaiting owner review (no narration audio yet) |
-| 4–12 | | see the plan | 70 | not started |
+| 4 | `hold` | Hold the data | 10 | authored, awaiting owner review (no narration audio yet) |
+| 5–12 | | see the plan | 60 | not started |
 
 Every number on a Course 1 and Course 2 frame was produced here on **CPython 3.14.6** (x86-64, 4
 CPUs), installed with `uv python install 3.14` (and `3.14t` for the free-threaded build): the

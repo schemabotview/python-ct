@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const dictionaries: Section = {
+  id: 'dictionaries',
+  title: "Dictionaries: an order and the catalogue",
+  scene: 'hold-dicts',
+  narration:
+    "The dictionary is the most important container in Python, and in the pipeline it does two jobs. The first is the catalogue, on line five. A dict is written in curly braces as pairs of a key and a value, and here each key is a SKU and each value its price, as a Decimal, of course. The second job is the order itself, on line ten. It is also a dict, but now the keys are field names: id, sku and quantity. Compared with the tuple, nothing is a position any more; every field says what it is. Line twelve uses both together. order square bracket sku reads the order's SKU, and the catalogue looks that SKU up to find its price: nine ninety-five, and for three bags, twenty-nine eighty-five. A lookup like this does not scan the catalogue from the top. A dict hashes the key, which takes it straight to the right slot, so finding one product among five or among five million takes about the same time. Line fourteen asks how many entries the catalogue holds, three, and whether C O L five hundred is a key, True. Then it looks up a product that is not there yet. get returns None instead of failing, which is the safe way to ask about a key that may be missing. Line fifteen adds that product, simply by assigning to a new key. Listing the catalogue shows the four keys in the order they were added: dicts keep insertion order, a language guarantee since Python 3.7. Finally, square brackets with a key that does not exist, P E R two fifty, stop the program with a KeyError that names the missing key. That is what will happen when a day's file mentions a product the catalogue does not know, and in course six the pipeline will catch it and report the row, instead of crashing.",
+}

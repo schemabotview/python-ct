@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const booleansAndNone: Section = {
+  id: 'booleans-and-none',
+  title: "Booleans and None: a value that may be missing",
+  scene: 'hold-none',
+  narration:
+    "Some facts about an order are yes or no, and some are simply missing. Python has a type for each. Line fifteen asks whether this order is wholesale, meaning ten bags or more. The comparison quantity greater than or equal to ten produces a bool, one of exactly two values, True or False, and the first line of output shows False and its type. Comparisons like this produce bools, and in the next course they will drive every decision the pipeline makes. Line fourteen is different. Most orders have no coupon, and we need to say so. Not with zero, which is a number, or an empty string, which is text, but with None: Python's value for no value at all. There is exactly one None object in a running program, so the right way to test for it is with is, the identity check you met in the last course. coupon is None prints True, and its type is NoneType. Next, a rule that Python uses everywhere: every value can be asked whether it counts as true. Line nineteen tries four. Zero is false, three is true, the empty string is false, and a non-empty one is true. The table on the right adds the rest of the pattern: None and an empty list are false too. Empty or zero means false; anything else means true. That lets the next course write if orders, rather than if the length of orders is greater than zero. The last line is the reason None needs care. Call upper on the coupon, as if it were a string, and the program stops with an AttributeError: NoneType object has no attribute upper. This is one of the most common errors in real Python code. A value that may be missing will, one day, be missing, and the code that uses it must check first. We will, with an if, in the very next course.",
+}

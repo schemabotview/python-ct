@@ -1,0 +1,6 @@
+$ python main.py
+E 0 7
+ETH 250 750
+['ETH', '250'] ETHIOPIA YIRGACHEFFE
+3 x Ethiopia Yirgacheffe (250 g): $29.85
+250250 500
