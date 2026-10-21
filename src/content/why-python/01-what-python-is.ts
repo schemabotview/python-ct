@@ -1,0 +1,10 @@
+import type { Section } from '../types'
+
+export const whatPythonIs: Section = {
+  id: 'what-python-is',
+  title: 'What Python is, and where it runs',
+  scene: 'python-landscape',
+  focus: 'what',
+  narration:
+    "Python is a general-purpose programming language, and before we write a single line of it, it is worth knowing what kind of language it is, because those five words on the left of the screen explain almost everything you will meet in this course. It is high-level: you describe what you want done, and Python takes care of how the machine does it, so you never manage memory addresses or registers. It is interpreted: you write a file and run it, with no separate compile step to wait for, which is why trying an idea in Python takes seconds. It is dynamically typed: a value knows its own type, a number or a piece of text, but a name does not, so the same name can point at different kinds of value over time. It is garbage-collected: when nothing uses a value any more, Python reclaims the memory for you. And it is multi-paradigm: you can write a ten-line script, a set of small functions, or a system built from objects, and all three are ordinary Python. Now look to the right. The same language turns up in very different jobs. Web sites and the services behind them, with Django, Flask and FastAPI. Data analysis in notebooks, with pandas, NumPy and Jupyter. Machine learning, where PyTorch, TensorFlow and scikit-learn are written to be driven from Python. Data engineering, where Airflow schedules pipelines, PySpark drives Spark, and DuckDB queries files directly. Infrastructure tools like Ansible, the cloud providers' own SDKs, and countless command-line tools. And the everyday automation of moving files, filling spreadsheets and reading web pages. This course stays in one of these worlds, data engineering, and builds a real pipeline from an empty folder. But everything you learn transfers to the others, because it is all the same language. Next, where that language came from.",
+}

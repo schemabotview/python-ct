@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "check": "node scripts/check-content.mjs",
+    "check": "node scripts/check-content.mjs && node scripts/check-render.mjs",
     "preview": "vite preview",
     "build:snapshot": "vite build --outDir dist-snapshot",
     "capture": "vite preview --outDir dist-snapshot --port 5181",
@@ -20,7 +20,7 @@
     "thumb": "graphl-thumb"
   },
   "dependencies": {
-    "@graphlearning/flow": "^2.0.0",
+    "@graphlearning/flow": "^2.1.0",
     "@graphlearning/shell": "^0.12.0",
     "lucide-react": "^1.28.0",
     "react": "^19.2.0",

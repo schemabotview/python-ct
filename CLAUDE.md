@@ -25,12 +25,18 @@ The render engine is `@graphlearning/flow`; the app shell is `@graphlearning/she
 
 ## Course arc and status
 
-**Reset on 2026-10-21.** The previous 11-course / 86-section content, its scenes and its narration
-audio were removed to restart from a new plan. Nothing is authored yet: the plan is at the OUTLINE
-stage (16 courses, 110 sections; concept frames for Courses 1–2, IDE frames from Course 3) awaiting
-owner approval. IDE frames need `@graphlearning/flow` ^2.1.0 (tree, terminal, folded code). Courses are authored one at a time, each
-reviewed by the owner on its rendered routes before the next begins, and a course is registered in
-`src/content/index.ts` / `src/scenes/index.ts` only once authored.
+**Reset on 2026-10-21** and restarted from `PYTHON-COURSE-PLAN.md`: 12 courses, 89 sections, built
+around one ETL pipeline (`roastery-etl`); courses are named by what we build. Concept frames for
+Courses 1–2, IDE frames (`@graphlearning/flow` ^2.1.0: tree, terminal, folded code) from Course 3.
+
+| # | Course id | Course | Sections | Status |
+| --- | --- | --- | --- | --- |
+| 1 | `why-python` | Why Python | 5 | authored, awaiting owner review (no narration audio yet) |
+| 2–12 | | see the plan | 84 | not started |
+
+Every number on a Course 1 frame was produced here on CPython 3.13 (x86-64, 4 CPUs): the
+`import this` text, the `timeit` pair, and the sample day's report. History dates and the 3.11
+speed-up are from the CPython docs and PEPs, not measured.
 
 Source layout per course: `src/content/<course>/NN-<section-id>.ts` plus `index.ts`;
 `src/scenes/<course>/` plus `index.ts` exporting `<course>Scenes`; `public/audio/<course>/`.
@@ -86,15 +92,13 @@ Source layout per course: `src/content/<course>/NN-<section-id>.ts` plus `index.
 
 ## Layout rules the frames actually care about
 
-`npm run check` (`scripts/check-content.mjs`) models four silent failures — each builds green and
+`npm run check` (`check-content.mjs` + `check-render.mjs`) catches silent failures — each builds green and
 breaks only on screen. Its comments carry the measured constants; the short version:
 
-- **KNOWN DRIFT — the leaf-card and slide budgets in `check-content.mjs` predate engine 2.0.** It
-  still models leaf cards as a fixed 210×96 and budgets slide height; under flow 2.x a card is 300
-  wide and grows to fit its text, and sections are scene-only. Rewrite those two checks with the
-  first authored course; until then their passes mean nothing. Unbreakable tokens are still real —
-  `_`, `.` and `/` are **not** break opportunities in CSS, so `snake_case` and paths overflow
-  sideways.
+- **Text that leaves its node is caught by rendering, not modelling.** The old 210×96 leaf and
+  slide-height models were removed with Course 1: under flow 2.x cards grow to fit their text.
+  `check-render.mjs` measures the real frame instead. Unbreakable tokens are still the thing to
+  watch — `_`, `.` and `/` are **not** break opportunities in CSS.
 - **A `focus:` that names no node in its scene is a silent no-op** — nothing lights up.
 - **`icon:` names are NOT guarded.** A wrong name type-checks, passes `check`, builds, and renders
   the pattern's default glyph. The engine's `icon-gallery` fixture lists every valid key (AWS, Azure,
@@ -111,7 +115,9 @@ What `check` does *not* model: an edge label landing on top of a card. Look at t
 npm run build && npx tsc --noEmit && npm run check
 ```
 
-All three are a **floor, not proof** — they pass on frames that are visually wrong. The rendered
+`check` is two scripts: `check-content.mjs` (scene-only, narration, `focus`, wavs) and
+`check-render.mjs`, which boots vite and measures every section at 3840×2160 under `?capture=1` for
+text leaving its node. All three are a **floor, not proof** — they pass on frames that are visually wrong. The rendered
 route is the real bar, and the owner reviews it.
 
 ## Working agreement

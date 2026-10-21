@@ -1,8 +1,11 @@
+import { whyPython } from './why-python'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. One course per chapter of PYTHON-COURSE-PLAN.md; a course is
 // registered here only once it is authored.
-export const COURSES: Record<string, Course> = {}
+export const COURSES: Record<string, Course> = {
+  [whyPython.id]: whyPython,
+}
 
 export type { Course, Section }
 
