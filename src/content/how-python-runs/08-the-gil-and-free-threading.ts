@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const theGilAndFreeThreading: Section = {
+  id: 'the-gil-and-free-threading',
+  title: 'The GIL and the free-threaded build',
+  scene: 'the-gil',
+  narration:
+    "Your computer almost certainly has several processor cores, so it is natural to expect that two threads would do twice the work in the same time. In the default build of CPython, for code that is busy computing, they do not, and this file shows it. It counts down from twenty million twice, first one count after the other, then on two threads at the same time. The terminal shows one run on the machine this course was made on: about a second either way. Run it a few times and the two numbers trade places by a tenth of a second or so, which is just noise; what never happens is two threads finishing in half the time. The reason is the global interpreter lock, the GIL. In the default build, a thread must hold this one lock to run Python bytecode, so only one thread runs bytecode at any moment, however many cores you have. The lock made CPython's memory management simple and safe, and it is why reference counting, from the last section, never needs extra locks. It does not make threads useless. A thread that is waiting, for a file, a database or the network, releases the lock while it waits, so threads that mostly wait still overlap very well, and you will use exactly that when the pipeline reads many sources at once. Things are changing. Python 3.13 introduced an experimental free-threaded build with no GIL, and Python 3.14 made it officially supported. It is a separate interpreter, called python three fourteen t, where threads really do run bytecode on separate cores at the same time. This machine only has the default build, so that behaviour is described here, not measured. When we make the pipeline fast, we will choose between threads, processes and asyncio with this in mind. Next, the last piece: reading an error.",
+}

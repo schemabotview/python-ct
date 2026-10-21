@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const sourceToBytecode: Section = {
+  id: 'source-to-bytecode',
+  title: 'Source to bytecode',
+  scene: 'bytecode-cache',
+  narration:
+    "Compiling every file on every run would waste time, so Python keeps the bytecode it compiles for modules you import. Look at the project on the left. Main dot py imports a function from pricing dot py. After one run, a new folder has appeared: double underscore pycache. Inside it is pricing dot cpython three thirteen dot pyc, the compiled bytecode of the pricing module. The name tells you which interpreter made it, so if you run the same project with a different Python version, each version keeps its own cache instead of reading the wrong one. On the right is what that file holds for the line total function, shown with the dis module, Python's disassembler. Four instructions: resume, load both arguments, multiply, and return. Notice that main dot py has no pyc file. The script you run directly is compiled fresh every time and never cached; only modules you import are. The rules are short, and they are in the list. An imported module is compiled once and the bytecode is saved. The cache records the source file's modification time and size, so the next time you import it, Python checks whether the source has changed: if it has, it compiles again; if not, it loads the saved bytecode and skips the work. You never need to manage this folder yourself, and it is safe to delete, because Python rebuilds it. It also belongs in your gitignore file, since it is generated, not written. In a small project you will not notice the time saved. In a large one, with hundreds of modules imported at start-up, the cache is the difference between starting instantly and starting slowly. Next, what the virtual machine does with those instructions.",
+}

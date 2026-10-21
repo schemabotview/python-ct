@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const framesAndCallStack: Section = {
+  id: 'frames-and-the-call-stack',
+  title: 'Frames and the call stack',
+  scene: 'call-stack',
+  narration:
+    "A program is mostly functions calling other functions, and Python keeps track of that with a second stack, the call stack. Every time you call a function, Python creates a frame: a small record holding that function's own names and values, and the place to return to when it finishes. The new frame goes on top. When the function returns, its frame is removed, and the function underneath carries on exactly where it stopped. The file in the editor has three levels: the script itself calls order total, which calls line total. Inside line total, line seven asks Python to list the frames that exist at that moment, and the terminal shows the answer: line total, then order total, then module, which is Python's name for the script itself. Newest first. On the right is that same moment drawn as a stack. At the top, line total is running, and its frame holds just two names: the product code and the quantity. Underneath, order total is paused, waiting for line total to return. Its frame has its own names, including total, which is still zero, because the first line has not been added yet. At the bottom is the module's frame, holding the global names: the price table and the two functions. Two consequences matter for the rest of the course. Each call gets its own frame, so two functions can use the same name, like quantity, without interfering. And when something goes wrong deep inside a call, Python can tell you exactly how you got there, by reading this stack from top to bottom. That is what a traceback is, and we will read one at the end of this course. Next, what a name actually is.",
+}
