@@ -1,0 +1,4 @@
+$ python main.py
+priced: [('ORD-1001', Decimal('29.85')), ('ORD-1003', Decimal('62.00'))]
+rejected ORD-1005 unknown sku 'PER-250'
+rejected ORD-1006 invalid literal for int() with base 10: 'two'

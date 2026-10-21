@@ -35,7 +35,8 @@ Courses 1–2, IDE frames (`@graphlearning/flow` ^2.2.0: tree, terminal, folded 
 | 2 | `how-python-runs` | How Python runs your code | 9 | authored, awaiting owner review (no narration audio yet) |
 | 3 | `start` | Start the project | 6 | authored, awaiting owner review (no narration audio yet) |
 | 4 | `hold` | Hold the data | 10 | authored, awaiting owner review (no narration audio yet) |
-| 5–12 | | see the plan | 60 | not started |
+| 5 | `process` | Process the data | 11 | authored, awaiting owner review (no narration audio yet) |
+| 6–12 | | see the plan | 49 | not started |
 
 Every number on a Course 1 and Course 2 frame was produced here on **CPython 3.14.6** (x86-64, 4
 CPUs), installed with `uv python install 3.14` (and `3.14t` for the free-threaded build): the

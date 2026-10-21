@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const functions: Section = {
+  id: 'functions',
+  title: "Functions: price_line()",
+  scene: 'process-functions',
+  narration:
+    "The pricing rules now appear inside a loop, and soon they will be needed in more places: when the pipeline re-prices a refund, when a test checks them, when the report shows a single order. Copying the same lines into each place would mean every future change to a discount has to be made several times, and one day someone will miss one. The answer is a function: a block of code with a name. Line twenty defines price line with the keyword def. The names in brackets, order and catalogue, are its parameters. Whatever the caller passes in is bound to those names for the duration of the call. Line twenty-one is a docstring, a string that describes what the function does, and Python keeps it with the function: the last line of output prints it back. The body, from line twenty-two, is the same rules as before, folded by the editor. And line thirty uses return to hand the result back to whoever called the function. When return runs, the function ends. Now look at the loop on line thirty-five. It no longer knows anything about discounts. It calls price line with an order and the catalogue, and gets a line total back. The output is the same as in section four, order by order, with the same day total of two hundred and seventy-seven twenty, which is the point: we changed the structure, not the behaviour. There is one more benefit, and it matters a great deal later. The names quantity, subtotal and discount are local to the function. They exist only while it runs, so they cannot collide with any other part of the program. A function is a small, sealed unit with inputs and an output, and that is exactly what can be tested, which is what course ten will do. Next, the different ways of passing arguments, and a trap that catches almost everyone once.",
+}

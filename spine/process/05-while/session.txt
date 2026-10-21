@@ -1,0 +1,6 @@
+$ python main.py
+ORD-1001 -> 3 x ETH-250
+ORD-1002 skipped: quantity 0
+ORD-1003 -> 1 x KEN-1000
+trailer reached; 1 row(s) after it ignored
+processed 2

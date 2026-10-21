@@ -1,0 +1,5 @@
+$ python main.py
+52.50 4.66 57.16
+14 20 -4
+True True
+52.50 7

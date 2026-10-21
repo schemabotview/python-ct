@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const matchStatement: Section = {
+  id: 'match',
+  title: "match: dispatching on the shape of a row",
+  scene: 'process-match',
+  narration:
+    "Not every row the shop sends is a sale. Some are refunds, and one day there will be a row type nobody planned for. The pipeline needs to look at a row, work out what kind of thing it is, and pull out the fields that kind has. An if chain can do that, but Python has a statement built for exactly this job: match, added in Python 3.10. The row on line five is a refund, against an earlier order, for nine ninety-five. Line seven matches it against a list of cases, tried from the top, and the first one that fits wins. Each case is a pattern, and a pattern describes a shape. The first case, on line eight, is a dictionary whose type is sale, with a SKU that is a string and a quantity that is an int. That is three checks at once: the keys must be there, the type must be sale, and the values must have the right types. Then if qty greater than zero is a guard, an extra condition the pattern must also pass. Our row's type is refund, so this case does not match. The second case does. Its type is refund, and it has order and amount keys. And here is the part an if chain cannot do neatly: the names order ID and amount in the pattern are bound to the values found in the row, so the line underneath can use them straight away. The terminal shows: refund, nine ninety-five, against order zero nine nine eight. A mapping pattern only asks for the keys it names, so extra keys in the row are fine. The third case catches any row with a type we do not know, and binds that type to kind so we can report it. And the last case, a single underscore, matches anything at all, including something that is not a row. The table on the right lists the four cases in order. Next, running rules like these over every order of the day.",
+}

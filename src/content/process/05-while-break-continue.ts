@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const whileBreakContinue: Section = {
+  id: 'while-break-and-continue',
+  title: "while, break and continue",
+  scene: 'process-while',
+  narration:
+    "A for loop runs once for each item in a collection that already exists. Sometimes the job is different: keep going until something changes. That is a while loop. On line six, while queue means: as long as the queue is not empty, run the block again. An empty list counts as false, as you saw in the last course, so the loop ends by itself when the queue runs out. Line seven takes the first row off the front of the queue with pop zero, so every pass shrinks the list. Each row here is raw text, the way an old till exports orders, and line eleven splits it at the commas and unpacks it into three names, using the tuple unpacking from the last course. Two keywords steer the loop from inside. The first is continue. On line twelve, a row with a quantity of zero is not an error, but there is nothing to price, so we print that it was skipped and continue, which jumps straight back to the top for the next row, skipping everything below it in the block. The second is break. Some exports end with a trailer row, the word END, and anything after it is not part of the day. So on line eight, when the row is END, we report how many rows remain and break, which leaves the loop at once. The terminal shows the whole story. Order one thousand and one is processed. One thousand and two is skipped. One thousand and three is processed. Then the trailer is reached, with one row after it ignored, and the final count is two. A word of caution: a while loop whose condition never becomes false runs forever. Here, pop guarantees progress, because every pass removes a row. Whenever you write a while loop, look for the line that moves it toward the end. Most of the time, a for loop is the right choice. Next, building whole lists in a single line.",
+}

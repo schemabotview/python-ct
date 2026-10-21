@@ -1,0 +1,8 @@
+$ python main.py
+global ('local', 'enclosing')
+8
+Traceback (most recent call last):
+  File "/home/ana/roastery-etl/main.py", line 19, in <module>
+    print(len("ORD-1002"))
+          ~~~^^^^^^^^^^^^
+TypeError: 'int' object is not callable

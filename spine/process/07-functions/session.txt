@@ -1,0 +1,7 @@
+$ python main.py
+ORD-1001 29.85
+ORD-1002 178.50
+ORD-1003 58.90
+ORD-1004 9.95
+day total: 277.20
+Return an order's line total in dollars, after any discount.

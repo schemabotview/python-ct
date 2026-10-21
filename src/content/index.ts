@@ -2,6 +2,7 @@ import { whyPython } from './why-python'
 import { howPythonRuns } from './how-python-runs'
 import { start } from './start'
 import { hold } from './hold'
+import { processCourse } from './process'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. One course per chapter of PYTHON-COURSE-PLAN.md; a course is
@@ -11,6 +12,7 @@ export const COURSES: Record<string, Course> = {
   [howPythonRuns.id]: howPythonRuns,
   [start.id]: start,
   [hold.id]: hold,
+  [processCourse.id]: processCourse,
 }
 
 export type { Course, Section }
