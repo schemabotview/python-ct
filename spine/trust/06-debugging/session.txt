@@ -1,0 +1,8 @@
+$ python debug.py
+> /home/ana/roastery-etl/debug.py(5)<module>()
+-> breakpoint()
+(Pdb) p row["quantity"], row["quantity"].isdigit()
+('three', False)
+(Pdb) row["quantity"] = "3"
+(Pdb) c
+{'order_id': 'ORD-1004', 'sku': 'ETH-250', 'quantity': 3, 'price': Decimal('9.95')}

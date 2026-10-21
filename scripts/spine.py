@@ -12,7 +12,7 @@ so a frame can only show what this script has verified.
 
 Each step is replayed in a fresh temp copy named roastery-etl, inside a temp "home" directory, by
 ONE bash process, so `cd` and `source .venv/bin/activate` carry from command to command as they do
-in a real terminal. A `$ python` command followed by `>>> ` lines is a REPL session: it is run in a
+in a real terminal. A command followed by `>>> ` (or `(Pdb) `) lines is an interactive session: it is run in a
 pseudo-terminal and fed those lines. Temp paths are rewritten to /home/ana/roastery-etl, the path the
 frames show. Run it with the course's pinned interpreter first on PATH as `python` (see CLAUDE.md).
 
@@ -23,6 +23,8 @@ step.json (all keys optional):
   {"project": "name"}           the folder's name (default roastery-etl): Course 1-2 demos are not the spine
   {"volatile": true}            output carries ids or timings that change every run: compared with every
                                 digit masked, so the text and shape are checked but not the numbers
+  {"setup": ["cmd", ...]}       run silently before the transcript (after the venv): the state a step
+                                starts from, e.g. the project already installed with pip install -e
 """
 import json
 import os
@@ -52,6 +54,8 @@ def commands(session: str) -> list[tuple[str, list[str]]]:
             out.append((line[2:], []))
         elif out and (line.startswith('>>> ') or line == '>>>' or line.startswith('... ')):
             out[-1][1].append(line[4:])
+        elif out and line.startswith('(Pdb) '):
+            out[-1][1].append(line[6:])
     return out
 
 
@@ -112,6 +116,8 @@ def replay(step: Path) -> tuple[str, dict[str, str]]:
             env['PATH'] = f"{project / '.venv' / 'bin'}:{env['PATH']}"
             env['VIRTUAL_ENV'] = str(project / '.venv')
         cwd = home if config.get('start') == 'home' else project
+        for cmd in config.get('setup', []):
+            subprocess.run(['bash', '-c', cmd], cwd=project, env=env, check=True, capture_output=True)
         blocks: list[str] = []
         for cmd, inputs in commands(session):
             if inputs:

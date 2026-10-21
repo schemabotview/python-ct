@@ -40,7 +40,8 @@ Courses 1–2, IDE frames (`@graphlearning/flow` ^2.2.0: tree, terminal, folded 
 | 7 | `aggregate` | Aggregate it | 7 | authored, awaiting owner review (no narration audio yet) |
 | 8 | `load` | Write the results | 6 | authored, awaiting owner review (no narration audio yet) |
 | 9 | `structure` | Structure the pipeline | 9 | authored, awaiting owner review (no narration audio yet) |
-| 10–12 | | see the plan | 20 | not started |
+| 10 | `trust` | Make it trustworthy | 7 | authored, awaiting owner review (no narration audio yet) |
+| 11–12 | | see the plan | 13 | not started |
 
 Every number on a Course 1 and Course 2 frame was produced here on **CPython 3.14.6** (x86-64, 4
 CPUs), installed with `uv python install 3.14` (and `3.14t` for the free-threaded build): the
