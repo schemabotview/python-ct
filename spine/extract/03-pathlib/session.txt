@@ -1,0 +1,9 @@
+$ python main.py
+True True
+orders-2026-10-01.csv 264 bytes
+orders-2026-10-02.csv 147 bytes
+orders-2026-10-03.csv 189 bytes
+orders-2026-10-01 .csv data/raw
+2026-10-01
+data/raw/catalogue.json
+/home/ana/roastery-etl

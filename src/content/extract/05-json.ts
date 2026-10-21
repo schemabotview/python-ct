@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const jsonSection: Section = {
+  id: 'json',
+  title: "JSON: loading the catalogue",
+  scene: 'extract-json',
+  narration:
+    "The catalogue, the list of products and their prices, comes from the shop's website, and it is JSON: JavaScript Object Notation, the format most web services speak. JSON has a handful of types, and the table on the right shows what each becomes in Python. An object, in curly braces, becomes a dict. An array becomes a list. Strings become str, and true, false and null become True, False and None. Line nine reads the whole file with json dot load. The first line of output shows the result: a dict with four entries, keyed by SKU, in the order they appear in the file. The second line shows one entry, itself a dict, with the product's name and its price. Now look closely at that price. It is in quotes. Whoever wrote this catalogue stored every price as a string, and that was the right decision. Line thirteen turns it into a Decimal, and nine ninety-five times three is exactly twenty-nine eighty-five. The next line shows what happens otherwise. If the price had been stored as a plain JSON number, json dot loads would turn it into a float, and multiplying by three would give the same long, slightly wrong number you met in course four. The format itself is not the problem; the type it is read into is. And when you do not control the file, there is a fix on the last line: the parse float argument tells the json module to build every number with a decimal point as a Decimal instead of a float, and the answer is exact again. Between the CSV files and this catalogue, everything the pipeline needs to read is now in Python. But reading is not trusting. Some of those rows are wrong, and the next section decides what happens to them.",
+}

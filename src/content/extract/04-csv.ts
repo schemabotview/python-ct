@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const csvSection: Section = {
+  id: 'csv',
+  title: "CSV: lines into order records",
+  scene: 'extract-csv',
+  narration:
+    "Each order file is CSV: comma-separated values, with a header row naming the columns. It is tempting to read one by splitting each line at its commas. Look at the last order of the day to see why that fails. The customer is Luna Caf\u00e9, Limited, and that comma is part of the name. In the file, the name is wrapped in double quotes so that the comma inside it is data, not a separator. A plain split cuts the name in two and shifts every column after it, as the note on the right warns. The standard library's csv module understands quoting, escaping and line endings, so it is the right tool. Line seven opens the file with one extra argument: newline equals the empty string. It tells Python to leave line endings alone and let the csv module handle them, which is what the csv documentation asks for. Line eight wraps the file in a DictReader. A DictReader reads the header row itself, and line nine prints what it found: the five field names. Then every following row comes back as a dictionary, keyed by those names. Line ten collects them into a list. The loop prints three fields from each row, and the output shows two things. Luna Caf\u00e9, Limited, arrived as one field, comma and all. And every quantity is shown in quotes. That is the lesson of the last line of output: every value read from a CSV file is a string. Three is the text three, and the word three is just as much a string as the digit, so a CSV file can never promise you a number. Converting each value to the right type, and deciding what to do when it will not convert, is the pipeline's job. Reading row by name, row square bracket sku, instead of by position, also means the code keeps working if the shop ever adds or reorders columns. Next, the catalogue, which is not CSV at all.",
+}

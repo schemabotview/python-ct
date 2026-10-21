@@ -1,0 +1,4 @@
+$ python main.py
+4 good rows, 2 rejected
+  line 5: ORD-1004: bad quantity 'three'
+  line 6: ORD-1005: unknown sku PER-250
