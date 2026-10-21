@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const aNewProject: Section = {
+  id: 'a-new-project',
+  title: "A new project and its virtual environment",
+  scene: 'new-project',
+  narration:
+    "Every Python project should start the same way: an empty folder, and a virtual environment inside it. The terminal at the bottom shows the whole thing, run for real. We make a folder called roastery etl and move into it. Then python dash m venv dot venv creates the virtual environment, in a folder named dot venv. The dot at the start of the name hides it in most file listings, which is the convention. Source dot venv slash bin slash activate switches this terminal over to it, and the next two commands prove it worked: which python now points inside the project, and the version is Python 3.14. On Windows the activate script lives in a folder called Scripts instead of bin, but everything else is the same. So what is a virtual environment? The list on the right says it in five lines. It is a folder with its own python and pip, its own place for installed packages, and one small configuration file, open in the editor. Look at the two highlighted lines: home says which Python it was made from, and version says which version that was. That is the whole trick. The environment does not copy Python; it points back at it, and keeps everything you install separate. Why does that matter? Because different projects need different packages, and different versions of the same package, and installing everything into one shared Python eventually breaks something. With one environment per project, each project gets exactly what it needs and nothing else. The folder is rebuilt, never shared, so it never goes into version control; Python even writes its own gitignore file inside it for that reason. Next, the first file of the pipeline.",
+}

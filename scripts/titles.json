@@ -1,5 +1,6 @@
 {
   "_comment": "Curated publish titles (YouTube title + thumbnail header) per course, keyed by course id. Search-first: what someone would actually type, never 'Course 4'. One entry per course in src/content/index.ts.",
   "why-python": "Why Python? What It Is, Where It Came From, and What It Is Good At",
-  "how-python-runs": "How Python Runs Your Code: Bytecode, the Call Stack, Memory and the GIL"
+  "how-python-runs": "How Python Runs Your Code: Bytecode, the Call Stack, Memory and the GIL",
+  "start": "Start a Python Project the Right Way: Virtual Environments, main.py, the REPL and Your First Errors"
 }

@@ -33,7 +33,8 @@ Courses 1–2, IDE frames (`@graphlearning/flow` ^2.1.0: tree, terminal, folded 
 | --- | --- | --- | --- | --- |
 | 1 | `why-python` | Why Python | 5 | authored, awaiting owner review (no narration audio yet) |
 | 2 | `how-python-runs` | How Python runs your code | 9 | authored, awaiting owner review (no narration audio yet) |
-| 3–12 | | see the plan | 75 | not started |
+| 3 | `start` | Start the project | 5 | authored, awaiting owner review (no narration audio yet) |
+| 4–12 | | see the plan | 70 | not started |
 
 Every number on a Course 1 and Course 2 frame was produced here on **CPython 3.14.6** (x86-64, 4
 CPUs), installed with `uv python install 3.14` (and `3.14t` for the free-threaded build): the
@@ -44,6 +45,26 @@ ids and timings change every run: the narration claims only what survives re-run
 on the default build; about half the time on two threads with `python3.14t`). History dates and
 the 3.11 speed-up are from the CPython docs and PEPs, not measured. 3.15 was still a beta
 (3.15.0b4) when this was checked.
+
+## The spine: code is executed, not pasted
+
+From Course 3 on, every code and terminal pane comes from `spine/<course>/<step>/`: `project/` is a
+snapshot of `roastery-etl/` at that step, `session.txt` is the terminal transcript, `step.json` says
+where it starts, whether a venv exists, and which generated files to `capture`. Scenes import these
+files with Vite's `?raw`, so a frame can only show what was replayed. `npm run check:spine`
+(`scripts/spine.py`) replays every step in a fresh copy — one bash per step so `cd` and `activate`
+carry over, REPL lines typed into a real pty — and fails on any difference; `--write` regenerates
+the transcripts after an edit. Paths are normalised to `/home/ana/roastery-etl`.
+
+**Run it with Python 3.14 as `python` on PATH.** Here that was a python-build-standalone 3.14.6
+copied into `/usr/local` (so a venv's `pyvenv.cfg` reads `home = /usr/local/bin`, as on a learner's
+machine); a different interpreter changes the banner, `pyvenv.cfg` and some error text, and the
+check reports exactly that.
+
+IDE frames are built with `ideFrame()` in `src/scenes/ide.ts`: explorer | editor over terminal |
+side pane. A frame of short files is shallow and letterboxes, so `sideBelow` puts the side pane
+under the terminal and `stack` puts several editor+terminal pairs one above the other — pick
+whichever brings the frame nearest 16:9.
 
 Source layout per course: `src/content/<course>/NN-<section-id>.ts` plus `index.ts`;
 `src/scenes/<course>/` plus `index.ts` exporting `<course>Scenes`; `public/audio/<course>/`.

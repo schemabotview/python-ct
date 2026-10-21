@@ -1,0 +1,5 @@
+$ python main.py
+  File "/home/ana/roastery-etl/main.py", line 3
+    print("roastery-etl: starting"
+         ^
+SyntaxError: '(' was never closed

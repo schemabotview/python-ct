@@ -17,7 +17,8 @@
     "shots:4k": "graphl-shots-4k",
     "gen:audio": "graphl-gen-audio",
     "gen:desc": "graphl-gen-desc",
-    "thumb": "graphl-thumb"
+    "thumb": "graphl-thumb",
+    "check:spine": "python3 scripts/spine.py"
   },
   "dependencies": {
     "@graphlearning/flow": "^2.1.0",

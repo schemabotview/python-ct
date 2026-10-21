@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const whenTheFirstRunFails: Section = {
+  id: 'when-the-first-run-fails',
+  title: "When the first run fails",
+  scene: 'first-errors',
+  narration:
+    "Every programmer's first runs fail, and the skill is not avoiding errors but reading them. Here are the two you will meet most often, side by side, in the same file. On the left, a bracket was opened on line three and never closed. Running the file produces a SyntaxError, and Python tells you exactly where: line three, with a caret under the open bracket, and a message in plain words, that the bracket was never closed. Look at what did not happen: nothing was printed at all. That is because, as you saw in the previous course, Python parses the whole file before running any of it. A SyntaxError is found by the parser, so not a single line runs. On the right, every bracket is fine, but on line four print is spelt p r n t. This time Python does start running. The first print works, and its line appears in the terminal. Then line four runs, Python looks up the name p r n t, finds nothing, and raises a NameError. The traceback names the line, underlines the word, and even makes a suggestion: did you mean print? The table on the right compares the two. A SyntaxError is found before the program starts, and nothing runs. A NameError is found while it runs, so everything before the bad line has already happened. That difference will matter a lot when the pipeline processes thousands of rows: a mistake that only shows up halfway through a run is far more dangerous than one that stops it at the start. In both cases the fix was one character, and the error message pointed straight at it. Read the last line first, then the line it names. That completes the setup. In the next course, we start holding real data.",
+}
