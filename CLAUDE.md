@@ -27,7 +27,8 @@ The render engine is `@graphlearning/flow`; the app shell is `@graphlearning/she
 
 **Reset on 2026-10-21.** The previous 11-course / 86-section content, its scenes and its narration
 audio were removed to restart from a new plan. Nothing is authored yet: the plan is at the OUTLINE
-stage (15 courses, 103 sections) awaiting owner approval. Courses are authored one at a time, each
+stage (16 courses, 110 sections; concept frames for Courses 1–2, IDE frames from Course 3) awaiting
+owner approval. IDE frames need `@graphlearning/flow` ^2.1.0 (tree, terminal, folded code). Courses are authored one at a time, each
 reviewed by the owner on its rendered routes before the next begins, and a course is registered in
 `src/content/index.ts` / `src/scenes/index.ts` only once authored.
 
