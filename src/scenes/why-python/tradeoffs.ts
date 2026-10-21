@@ -1,58 +1,47 @@
 import type { Scene } from '@graphlearning/flow'
+import { ideFrame } from '../ide'
+import code from '../../../spine/why-python/04-tradeoffs/project/sum_two_ways.py?raw'
+import session from '../../../spine/why-python/04-tradeoffs/session.txt?raw'
 
-// The terminal pane is a real run (CPython 3.14.6, x86-64, 4 CPUs). The ratio is what this machine
-// measured, not a universal speedup — the narration says so.
-const TIMING = [
-  '$ python -m timeit -s "nums = list(range(1_000_000))" \\',
-  '      "total = 0" "for n in nums: total += n"',
-  '10 loops, best of 5: 19.2 msec per loop',
-  '',
-  '$ python -m timeit -s "nums = list(range(1_000_000))" "sum(nums)"',
-  '50 loops, best of 5: 4.26 msec per loop',
-].join('\n')
-
-export const tradeoffs: Scene = {
-  id: 'python-tradeoffs',
-  padding: 0.04,
-  header: 'band',
-  nodes: [
-    {
-      id: 'top', framed: true,
-      label: 'Where it fits, and why',
-      bare: true,
-      flow: 'LR',
-      align: 'start',
-      children: [
-        {
-          id: 'fit',
-          kind: 'table',
-          label: 'Where Python fits',
-          headers: ['job', 'Python', 'why'],
-          values: [
-            ['automation and glue', 'strong', 'short code, large standard library'],
-            ['data analysis and ML', 'strong', 'NumPy, pandas, PyTorch run in C'],
-            ['data pipelines', 'strong', 'readable, rich connectors and tools'],
-            ['web back ends', 'good', 'Django, FastAPI; Go or Java at huge scale'],
-            ['tight loops in pure Python', 'slow', 'push the loop into C, or use Rust'],
-            ['mobile apps', 'weak', 'Kotlin and Swift own the platforms'],
-            ['in the browser', 'not native', 'JavaScript and TypeScript'],
-          ],
-        },
-        {
-          id: 'lesson',
-          kind: 'list',
-          icon: 'zap',
-          label: 'Fast where it counts',
-          pattern: 'service',
-          items: [
-            'The loop runs one bytecode instruction at a time',
-            'sum() does the same work in compiled C',
-            'Fast Python code hands its inner loops to C',
-          ],
-        },
-      ],
-    },
-    { id: 'timing', kind: 'terminal', filename: 'Terminal — the same sum, two ways', label: TIMING, span: 'all' },
-  ],
-  edges: [],
-}
+// The timings are a real run and change every time (the step is volatile); the narration claims only
+// the gap, never the exact numbers.
+export const tradeoffs: Scene = ideFrame(
+  'python-tradeoffs',
+  'why-python',
+  [{ name: 'sum_two_ways.py', state: 'active' }],
+  { file: 'sum_two_ways.py', code, highlight: [8, 9, 14, 15], pattern: 'network', terminal: session },
+  {
+    id: 'python-tradeoffs-pane',
+    label: 'side',
+    bare: true,
+    children: [
+      {
+        id: 'fit',
+        kind: 'table',
+        label: 'Where Python fits',
+        headers: ['job', 'Python'],
+        values: [
+          ['automation and glue', 'strong'],
+          ['data analysis and ML', 'strong'],
+          ['data pipelines', 'strong'],
+          ['web back ends', 'good'],
+          ['tight pure-Python loops', 'slow'],
+          ['mobile apps', 'weak'],
+          ['in the browser', 'not native'],
+        ],
+      },
+      {
+        id: 'lesson',
+        kind: 'list',
+        icon: 'zap',
+        label: 'Fast where it counts',
+        pattern: 'service',
+        items: [
+          'The loop runs one bytecode instruction at a time',
+          'sum() does the same work in compiled C',
+          'Fast Python code hands its inner loops to C',
+        ],
+      },
+    ],
+  },
+)

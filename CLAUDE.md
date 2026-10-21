@@ -42,7 +42,9 @@ Every number on a Course 1 and Course 2 frame was produced here on **CPython 3.1
 CPUs), installed with `uv python install 3.14` (and `3.14t` for the free-threaded build): the
 `import this` text, the `timeit` pair, the sample day's report, and every Course 2 pane — tokens,
 AST, `dis`, `__pycache__`, `inspect.stack()`, ids, ref counts, the traceback, and the GIL timings on
-both builds. Course 2's scripts are in `demos/how-python-runs/`. Bytecode is version-specific, and
+both builds. Course 2's scripts, and Course 1's two runnable frames, are spine steps (`spine/how-python-runs/`,
+`spine/why-python/`) shown in the same IDE template; `identity.py`, `gil.py` and `sum_two_ways.py` print
+ids or timings, so their steps are `volatile` (compared with digits masked). Bytecode is version-specific, and
 ids and timings change every run: the narration claims only what survives re-running (no speed-up
 on the default build; about half the time on two threads with `python3.14t`). History dates and
 the 3.11 speed-up are from the CPython docs and PEPs, not measured. 3.15 was still a beta
@@ -64,7 +66,7 @@ machine); a different interpreter changes the banner, `pyvenv.cfg` and some erro
 check reports exactly that.
 
 IDE frames are built with `ideFrame()` in `src/scenes/ide.ts`: ONE fixed template — explorer
-(290) | editor (80 columns — PEP 8's limit — × 500) over terminal (280) | side pane (520) — so every panel sits at the
+(300) | editor (80 columns — PEP 8's limit — × 500) over terminal (280) | side pane (520) — so every panel sits at the
 same pixels in every section (`@graphlearning/flow` ^2.2.0 `minW` / `minH`). A file longer than the
 editor is folded with `show`, never allowed to grow the pane, and two versions of a file are two
 sections, never two editors in one frame. `check-render.mjs` fails any IDE frame whose explorer,

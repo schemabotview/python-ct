@@ -1,0 +1,7 @@
+$ python big_orders.py
+big order: 120
+big order: 300
+$ python -m this | grep -E "Readability|silently|obvious way"
+Readability counts.
+Errors should never pass silently.
+There should be one-- and preferably only one --obvious way to do it.

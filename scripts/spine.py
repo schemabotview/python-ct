@@ -8,6 +8,7 @@ so a frame can only show what this script has verified.
 
   python3 scripts/spine.py            check every step (exit 1 on any difference)
   python3 scripts/spine.py --write    re-run every step and rewrite its session.txt / captures
+  python3 scripts/spine.py hold/03    only the steps whose path starts with an argument
 
 Each step is replayed in a fresh temp copy named roastery-etl, inside a temp "home" directory, by
 ONE bash process, so `cd` and `source .venv/bin/activate` carry from command to command as they do
@@ -19,6 +20,9 @@ step.json (all keys optional):
   {"start": "home"}             start in the directory ABOVE the project (default: the project)
   {"venv": true}                create .venv before replaying and start with it activated
   {"capture": ["path", ...]}    files the session creates that a scene shows; saved to captured/
+  {"project": "name"}           the folder's name (default roastery-etl): Course 1-2 demos are not the spine
+  {"volatile": true}            output carries ids or timings that change every run: compared with every
+                                digit masked, so the text and shape are checked but not the numbers
 """
 import json
 import os
@@ -94,7 +98,7 @@ def replay(step: Path) -> tuple[str, dict[str, str]]:
     session = (step / 'session.txt').read_text()
     with tempfile.TemporaryDirectory() as tmp:
         home = Path(tmp) / 'home'
-        project = home / PROJECT
+        project = home / config.get('project', PROJECT)
         home.mkdir()
         if (step / 'project').exists():
             shutil.copytree(step / 'project', project)
@@ -132,9 +136,17 @@ def replay(step: Path) -> tuple[str, dict[str, str]]:
     return fix(transcript).rstrip('\n') + '\n', {k: fix(v) for k, v in captured.items()}
 
 
+def masked(text: str, step: Path) -> str:
+    """For a volatile step, hide the numbers that legitimately change from run to run."""
+    config = json.loads((step / 'step.json').read_text()) if (step / 'step.json').exists() else {}
+    return re.sub(r'\d+', '#', text) if config.get('volatile') else text
+
+
 def main() -> int:
     write = '--write' in sys.argv
+    only = [a for a in sys.argv[1:] if not a.startswith('--')]
     steps = sorted(p.parent for p in ROOT.glob('*/*/session.txt'))
+    steps = [s for s in steps if not only or any(str(s.relative_to(ROOT)).startswith(o) for o in only)]
     problems = 0
     for step in steps:
         transcript, captured = replay(step)
@@ -148,7 +160,7 @@ def main() -> int:
             print(f'wrote {name}')
             continue
         expected = (step / 'session.txt').read_text()
-        if transcript != expected:
+        if masked(transcript, step) != masked(expected, step):
             problems += 1
             print(f'✗ {name}: the terminal pane differs from a real run')
             import difflib

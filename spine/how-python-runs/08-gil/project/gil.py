@@ -1,6 +1,6 @@
 import sys
-import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 
 
 def count(n):
@@ -17,9 +17,6 @@ count(N)
 print(f"one after another: {time.perf_counter() - start:.2f} s")
 
 start = time.perf_counter()
-threads = [threading.Thread(target=count, args=(N,)) for _ in range(2)]
-for t in threads:
-    t.start()
-for t in threads:
-    t.join()
+with ThreadPoolExecutor(max_workers=2) as pool:
+    pool.map(count, [N, N])
 print(f"two threads:       {time.perf_counter() - start:.2f} s")

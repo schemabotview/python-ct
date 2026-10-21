@@ -1,0 +1,8 @@
+$ python gil.py
+GIL enabled: True
+one after another: 0.68 s
+two threads:       0.77 s
+$ python3.14t gil.py
+GIL enabled: False
+one after another: 0.71 s
+two threads:       0.45 s

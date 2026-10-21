@@ -1,0 +1,5 @@
+$ python refs.py
+2
+3
+2
+1

@@ -1,0 +1,9 @@
+$ python -X no_debug_ranges broken.py
+Traceback (most recent call last):
+  File "/home/ana/how-python-runs/broken.py", line 15, in <module>
+    print(order_total({"ETH-250": 2, "KEN-250": 1}))
+  File "/home/ana/how-python-runs/broken.py", line 11, in order_total
+    total += line_total(sku, qty)
+  File "/home/ana/how-python-runs/broken.py", line 5, in line_total
+    return PRICES[sku] * qty
+KeyError: 'KEN-250'

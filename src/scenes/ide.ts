@@ -11,7 +11,7 @@ import type { Scene, SceneNode, TreeEntry } from '@graphlearning/flow'
 // allowed to grow the pane — check-render.mjs fails any IDE frame whose panels move. Code and terminal
 // text come from spine/ via `?raw`, so a frame can only show what scripts/spine.py has replayed.
 
-export const EXPLORER_W = 290
+export const EXPLORER_W = 300
 export const EDITOR_COLS = 80
 export const EDITOR_W = 792
 export const EDITOR_H = 500

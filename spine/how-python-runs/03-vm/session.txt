@@ -1,0 +1,7 @@
+$ python line_total.py
+19.0
+$ python -m dis line_total.py | grep -A3 "^  3 "
+  3           LOAD_NAME                0 (price)
+              LOAD_NAME                1 (qty)
+              BINARY_OP                5 (*)
+              STORE_NAME               2 (total)
