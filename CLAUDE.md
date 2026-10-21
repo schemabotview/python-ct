@@ -15,7 +15,8 @@ carries the code, its result and the mental model side by side.
 Author from it; do not drift from its section lists.
 
 The render engine is `@graphlearning/flow`; the app shell is `@graphlearning/shell`. Both are
-**published packages pinned by version** (flow ^2.2.0, shell ^0.13.1). This repo's own surface is
+**published packages pinned by version** (flow ^2.2.0, shell ^0.14.0 — the first release that
+leaves a section frame headerless and exports `SCENE_ASPECT`). This repo's own surface is
 `src/content/`, `src/scenes/`, `src/main.tsx` and `src/theme.css` — nothing else.
 
 ## Route contract
@@ -75,11 +76,15 @@ machine); a different interpreter changes the banner, `pyvenv.cfg` and some erro
 check reports exactly that.
 
 IDE frames are built with `ideFrame()` in `src/scenes/ide.ts`: ONE fixed template — explorer
-(300) | editor (80 columns — PEP 8's limit — × 544, 21 rows) over terminal (302, 10 lines) | side pane (520) — so every panel sits at the
+(300) | editor (80 columns — PEP 8's limit — × 588, 23 rows) over terminal (320, 11 lines) | side pane (520) — so every panel sits at the
 same pixels in every section (`@graphlearning/flow` ^2.2.0 `minW` / `minH`). A file longer than the
-editor is folded with `show`, never allowed to grow the pane. The whole template is 1632 × 856, 1.91:1 —
-the shape of the scene area under the header at 16:9 — so it is fitted edge to edge with no slack band
-above it, and every side card is stretched to the full 520. Two versions of a file are two
+editor is folded with `show`, never allowed to grow the pane. The whole template is 1632 × 918, 16:9
+exactly — the shape of the WHOLE scene area, because a section frame carries no header (owner's call,
+2026-10-21; the shell stopped drawing one in 0.14.0, `sectionHeader` defaulting to false). TERMINAL_H
+is DERIVED, not typed: `TOTAL_H = width / SCENE_ASPECT`, with `SCENE_ASPECT` imported from the shell,
+so the template follows if the shell ever changes what it reserves above a section. That is the whole
+point — it was 1632 × 856 (1.91:1) while the header took the top 6.5vh, and when the header went that
+hardcoded 856 silently left 111px of slack above and below. Every side card is stretched to the full 520. Two versions of a file are two
 sections, never two editors in one frame. `check-render.mjs` fails any IDE frame whose explorer,
 editor, terminal or side pane moves.
 

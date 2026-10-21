@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "description": "Template for a GraphL content repo — authors scenes (diagrams + code cards) and slides per section, renders them full-frame, and captures screenshots + coords for the compose pipeline. The render engine is @graphlearning/flow; the app shell is @graphlearning/shell.",
+  "description": "Template for a GraphL content repo \u2014 authors scenes (diagrams + code cards) and slides per section, renders them full-frame, and captures screenshots + coords for the compose pipeline. The render engine is @graphlearning/flow; the app shell is @graphlearning/shell.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,6 +13,7 @@
     "capture": "vite preview --outDir dist-snapshot --port 5181",
     "capture:shots": "graphl-capture-shots",
     "record": "graphl-record",
+    "record:all": "graphl-record-all",
     "record:reels": "graphl-record-reels",
     "shots:4k": "graphl-shots-4k",
     "gen:audio": "graphl-gen-audio",
@@ -22,7 +23,7 @@
   },
   "dependencies": {
     "@graphlearning/flow": "^2.2.0",
-    "@graphlearning/shell": "^0.13.1",
+    "@graphlearning/shell": "^0.14.0",
     "lucide-react": "^1.28.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

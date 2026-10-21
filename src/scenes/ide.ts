@@ -1,4 +1,5 @@
 import type { Scene, SceneNode, TreeEntry } from '@graphlearning/flow'
+import { SCENE_ASPECT } from '@graphlearning/shell'
 
 // The IDE frame every course from 3 on is built from — ONE fixed template, so every panel sits at the
 // same pixels in every section and a viewer always knows where to look:
@@ -11,20 +12,25 @@ import type { Scene, SceneNode, TreeEntry } from '@graphlearning/flow'
 // allowed to grow the pane — check-render.mjs fails any IDE frame whose panels move.
 //
 // The proportions are the frame's: explorer + editor + side is 1632 wide and editor + terminal is
-// 856 tall, 1.91:1 — the shape of the scene area under the section header at 16:9 (3840×2020 at 4K).
-// A composition of that shape is fitted edge to edge; at the old 790 tall (2.07:1) the frame filled
-// the width and left ~230px of slack split above and below it. EDITOR_H holds 21 code rows and
-// TERMINAL_H 10 lines (22px each, plus 61px of chrome). Every side card is stretched to SIDE_W, so the
+// 918 tall — 16:9 exactly, the shape of the whole scene area now that a section frame carries no
+// header (owner's call, 2026-10-21). A composition of that shape is fitted edge to edge; at the old
+// 856 tall (1.91:1, the shape of the scene area *under* a header) the frame filled the width and
+// left 111px of slack above and below it, and at the 790 before that, ~230px. EDITOR_H holds 23 code
+// rows and TERMINAL_H 11 lines (22px each, plus 61px of chrome). Every side card is stretched to SIDE_W, so the
 // column's right edge is a real edge rather than wherever the widest card happens to end. Code and terminal
 // text come from spine/ via `?raw`, so a frame can only show what scripts/spine.py has replayed.
 
 export const EXPLORER_W = 300
 export const EDITOR_COLS = 80
 export const EDITOR_W = 792
-export const EDITOR_H = 544
-export const TERMINAL_H = 302
+export const EDITOR_H = 588
 export const SIDE_W = 520
 const GAP = 10
+// The template is as tall as its width allows in the scene area, so it fits edge to edge with no
+// slack band. SCENE_ASPECT comes from the shell (@graphlearning/shell >=0.14.0), so if the shell
+// ever changes what it reserves above a section the template follows instead of silently drifting.
+const TOTAL_H = Math.round((EXPLORER_W + EDITOR_W + SIDE_W + 2 * GAP) / SCENE_ASPECT)
+export const TERMINAL_H = TOTAL_H - GAP - EDITOR_H
 
 export interface Pane {
   file: string
