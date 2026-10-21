@@ -29,7 +29,6 @@ export const forLoops: Scene = ideFrame(
       {
         id: 'process-for-facts',
         kind: 'list',
-        pills: true,
         icon: 'repeat',
         label: 'for runs its body once per item',
         pattern: 'network',

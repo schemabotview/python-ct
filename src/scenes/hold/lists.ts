@@ -30,7 +30,6 @@ export const lists: Scene = ideFrame(
       {
         id: 'hold-lists-facts',
         kind: 'list',
-        pills: true,
         icon: 'layers',
         label: 'A list is ordered and changeable',
         pattern: 'network',

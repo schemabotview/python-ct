@@ -30,7 +30,6 @@ export const comprehensions: Scene = ideFrame(
       {
         id: 'process-comprehensions-facts',
         kind: 'list',
-        pills: true,
         icon: 'funnel',
         label: 'Use one when it reads as one idea',
         pattern: 'network',

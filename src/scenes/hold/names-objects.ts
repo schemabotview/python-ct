@@ -41,7 +41,6 @@ export const namesAndObjects: Scene = ideFrame(
       {
         id: 'hold-names-facts',
         kind: 'list',
-        pills: true,
         icon: 'tag',
         label: 'A name is a label, not a box',
         pattern: 'network',

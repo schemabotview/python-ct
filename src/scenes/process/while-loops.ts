@@ -28,7 +28,6 @@ export const whileLoops: Scene = ideFrame(
       {
         id: 'process-while-facts',
         kind: 'list',
-        pills: true,
         icon: 'clock',
         label: 'while repeats until a condition fails',
         pattern: 'network',

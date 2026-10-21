@@ -58,7 +58,7 @@ export function ideFrame(id: string, project: string, tree: TreeEntry[], pane: P
     nodes: [
       { id: `${id}-explorer`, kind: 'tree', label: project, tree, minW: EXPLORER_W },
       centre,
-      { id: `${id}-side`, label: 'side', bare: true, minW: SIDE_W, children: [{ ...side, minW: SIDE_W }] },
+      { id: `${id}-side`, label: 'side', bare: true, framed: true, minW: SIDE_W, children: [{ ...side, minW: SIDE_W }] },
     ],
     edges: [],
   }

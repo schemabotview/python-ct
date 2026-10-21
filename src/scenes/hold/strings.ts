@@ -27,7 +27,6 @@ export const strings: Scene = ideFrame(
       {
         id: 'hold-strings-facts',
         kind: 'list',
-        pills: true,
         icon: 'scissors',
         label: 'A string is a sequence of characters',
         pattern: 'network',

@@ -17,19 +17,19 @@ export const theGil: Scene = {
   nodes: [
     { id: 'code', kind: 'code', filename: 'gil.py', label: GIL },
     {
-      id: 'builds',
+      id: 'builds', framed: true,
       label: 'Two builds of CPython 3.14',
       bare: true,
       gap: 'tight',
       children: [
         { id: 'default-run', kind: 'terminal', filename: 'Terminal — the default build (python)', label: DEFAULT },
-        { id: 'default-facts', kind: 'list', pills: true, icon: 'lock', label: 'With the GIL', pattern: 'service', items: [
+        { id: 'default-facts', kind: 'list', icon: 'lock', label: 'With the GIL', pattern: 'service', items: [
           'One thread runs Python bytecode at a time',
           'Two CPU-bound threads: no faster than one after another',
           'Threads waiting on files or the network still overlap',
         ] },
         { id: 'free-run', kind: 'terminal', filename: 'Terminal — the free-threaded build (python3.14t)', label: FREE },
-        { id: 'free-facts', kind: 'list', pills: true, icon: 'cpu', label: 'Without the GIL', pattern: 'network', items: [
+        { id: 'free-facts', kind: 'list', icon: 'cpu', label: 'Without the GIL', pattern: 'network', items: [
           'Threads run bytecode on separate cores at the same time',
           'A separate interpreter: experimental in 3.13, supported in 3.14',
           '3.14 documents a 5–10% cost for single-threaded code',

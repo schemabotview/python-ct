@@ -8,6 +8,7 @@ const BYTECODE = "  3           LOAD_NAME                0 (price)\n            
 
 export const stackMachine: Scene = {
   id: 'stack-machine',
+  framed: true,
   padding: 0.04,
   header: 'band',
   flow: 'LR',

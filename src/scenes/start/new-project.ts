@@ -24,7 +24,6 @@ export const newProject: Scene = ideFrame(
   {
     id: 'venv-facts',
     kind: 'list',
-    pills: true,
     icon: 'box',
     label: 'A virtual environment',
     sub: 'one per project',

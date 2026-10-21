@@ -24,7 +24,7 @@ export const callStack: Scene = {
       ],
     },
     {
-      id: 'stack',
+      id: 'stack', framed: true,
       label: 'The call stack at line 7',
       sub: 'one frame per call, newest on top',
       pattern: 'group',

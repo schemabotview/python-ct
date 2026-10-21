@@ -12,7 +12,6 @@ export const decimalMoney: Scene = ideFrame(
   {
     id: 'hold-decimal-facts',
     kind: 'list',
-    pills: true,
     icon: 'receipt',
     label: 'Money is a Decimal',
     sub: 'from the moment it appears',

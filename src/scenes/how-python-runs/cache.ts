@@ -39,7 +39,7 @@ export const bytecodeCache: Scene = {
       ],
     },
     {
-      id: 'inside',
+      id: 'inside', framed: true,
       label: 'Inside the .pyc',
       bare: true,
       gap: 'tight',

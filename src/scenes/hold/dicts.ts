@@ -29,7 +29,6 @@ export const dicts: Scene = ideFrame(
       {
         id: 'hold-dicts-facts',
         kind: 'list',
-        pills: true,
         icon: 'key',
         label: 'A dict maps keys to values',
         pattern: 'network',

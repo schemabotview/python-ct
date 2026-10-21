@@ -14,6 +14,7 @@ const stage = (id: string, badge: string, label: string, sub: string, pattern: S
 
 export const runPipeline: Scene = {
   id: 'run-pipeline',
+  framed: true,
   padding: 0.04,
   header: 'band',
   nodes: [

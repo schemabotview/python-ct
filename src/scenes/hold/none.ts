@@ -31,7 +31,6 @@ export const none: Scene = ideFrame(
       {
         id: 'hold-none-facts',
         kind: 'list',
-        pills: true,
         icon: 'circleslash',
         label: 'None means “no value”',
         pattern: 'warn',

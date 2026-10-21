@@ -132,6 +132,10 @@ breaks only on screen. Its comments carry the measured constants; the short vers
   `check-render.mjs` measures the real frame instead. Unbreakable tokens are still the thing to
   watch — `_`, `.` and `/` are **not** break opportunities in CSS.
 - **A `focus:` that names no node in its scene is a silent no-op** — nothing lights up.
+- **A list is a framed card with bullets, never pills** (owner's call, 2026-10-21: a bordered card with
+  a divider reads better than centred pills). `framed` is inherited, so it is set on the list's PARENT:
+  `ideFrame` frames every side pane, and a concept frame frames the container (or scene) holding its
+  list. Only prose cards and lists read `framed`, so check a parent holds no prose card before framing it.
 - **`icon:` names are NOT guarded.** A wrong name type-checks, passes `check`, builds, and renders
   the pattern's default glyph. The engine's `icon-gallery` fixture lists every valid key (AWS, Azure,
   brand marks such as `python`, `git`, `github`, `docker`, and ~75 lucide glyphs). Avoid `monitor`

@@ -24,7 +24,7 @@ export const refcountGc: Scene = {
       ],
     },
     {
-      id: 'model',
+      id: 'model', framed: true,
       label: 'Counting references',
       bare: true,
       children: [

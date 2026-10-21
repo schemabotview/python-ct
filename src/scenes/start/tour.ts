@@ -53,7 +53,6 @@ export const projectTour: Scene = ideFrame(
   {
     id: 'legend',
     kind: 'list',
-    pills: true,
     icon: 'folder',
     label: 'Reading every lesson',
     sub: 'the same panels, always',

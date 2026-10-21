@@ -17,7 +17,6 @@ export const raising: Scene = ideFrame(
       {
         id: 'process-raising-facts',
         kind: 'list',
-        pills: true,
         icon: 'ban',
         label: 'InvalidOrder: our own error',
         pattern: 'warn',

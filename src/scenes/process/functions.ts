@@ -12,7 +12,6 @@ export const functions: Scene = ideFrame(
   {
     id: 'process-functions-facts',
     kind: 'list',
-    pills: true,
     icon: 'cog',
     label: 'price_line(): one named step',
     sub: 'written once, called for every order',

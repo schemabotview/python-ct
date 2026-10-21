@@ -29,7 +29,6 @@ export const exceptions: Scene = ideFrame(
       {
         id: 'process-exceptions-facts',
         kind: 'list',
-        pills: true,
         icon: 'shieldcheck',
         label: 'try / except / else',
         pattern: 'storage',

@@ -37,7 +37,7 @@ export const philosophy: Scene = {
   nodes: [
     { id: 'zen', kind: 'terminal', filename: 'Terminal', label: ZEN },
     {
-      id: 'ideas',
+      id: 'ideas', framed: true,
       label: 'Three ideas',
       bare: true,
       children: [

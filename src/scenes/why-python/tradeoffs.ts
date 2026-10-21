@@ -17,7 +17,7 @@ export const tradeoffs: Scene = {
   header: 'band',
   nodes: [
     {
-      id: 'top',
+      id: 'top', framed: true,
       label: 'Where it fits, and why',
       bare: true,
       flow: 'LR',

@@ -28,7 +28,6 @@ export const tuples: Scene = ideFrame(
       {
         id: 'hold-tuples-facts',
         kind: 'list',
-        pills: true,
         icon: 'lock',
         label: 'A tuple is a fixed record',
         pattern: 'storage',

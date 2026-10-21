@@ -29,7 +29,6 @@ export const matchRows: Scene = ideFrame(
       {
         id: 'process-match-facts',
         kind: 'list',
-        pills: true,
         icon: 'regex',
         label: 'match checks shape and binds names',
         pattern: 'network',

@@ -35,7 +35,7 @@ export const namesObjects: Scene = {
       children: [
         { id: 'namespace', label: 'Global namespace', sub: 'a dict of names', pattern: 'network', icon: 'none', children: [name('order'), name('same')] },
         {
-          id: 'heap', label: 'Heap', sub: 'where objects live', pattern: 'storage', icon: 'none',
+          id: 'heap', framed: true, label: 'Heap', sub: 'where objects live', pattern: 'storage', icon: 'none',
           children: [{ id: 'list', kind: 'list', icon: 'box', label: 'one list object', sub: 'type: list', pattern: 'storage', items: ["'ETH-250'", "'COL-500'", "'BRA-1K'"] }],
         },
         { id: 'lesson', kind: 'note', pattern: 'network', label: 'same = order copied nothing: two names, one list — so a change through either name shows in both' },

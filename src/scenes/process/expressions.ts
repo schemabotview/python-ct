@@ -31,7 +31,6 @@ export const expressions: Scene = ideFrame(
       {
         id: 'process-expressions-facts',
         kind: 'list',
-        pills: true,
         icon: 'sigma',
         label: 'An expression computes one value',
         pattern: 'network',

@@ -14,7 +14,6 @@ export const firstMain: Scene = ideFrame(
   {
     id: 'anatomy',
     kind: 'list',
-    pills: true,
     icon: 'filecode',
     label: 'What is in the file',
     pattern: 'storage',

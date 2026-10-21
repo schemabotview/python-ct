@@ -28,7 +28,6 @@ export const decisions: Scene = ideFrame(
       {
         id: 'process-decisions-facts',
         kind: 'list',
-        pills: true,
         icon: 'merge',
         label: 'if / elif / else',
         pattern: 'network',

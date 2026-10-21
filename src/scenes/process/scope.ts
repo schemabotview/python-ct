@@ -29,7 +29,6 @@ export const scope: Scene = ideFrame(
       {
         id: 'process-scope-facts',
         kind: 'list',
-        pills: true,
         icon: 'search',
         label: 'The first match wins',
         pattern: 'network',

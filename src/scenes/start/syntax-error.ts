@@ -14,7 +14,6 @@ export const syntaxError: Scene = ideFrame(
   {
     id: 'syntax-facts',
     kind: 'list',
-    pills: true,
     icon: 'ban',
     label: 'A SyntaxError',
     sub: 'the file is not valid Python',

@@ -28,7 +28,6 @@ export const sets: Scene = ideFrame(
       {
         id: 'hold-sets-facts',
         kind: 'list',
-        pills: true,
         icon: 'fingerprint',
         label: 'A set holds each value once',
         pattern: 'user',
