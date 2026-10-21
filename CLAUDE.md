@@ -35,15 +35,15 @@ Courses 1–2, IDE frames (`@graphlearning/flow` ^2.1.0: tree, terminal, folded 
 | 2 | `how-python-runs` | How Python runs your code | 9 | authored, awaiting owner review (no narration audio yet) |
 | 3–12 | | see the plan | 75 | not started |
 
-Every number on a Course 1 frame was produced here on CPython 3.13 (x86-64, 4 CPUs): the
-`import this` text, the `timeit` pair, and the sample day's report. History dates and the 3.11
-speed-up are from the CPython docs and PEPs, not measured.
-
-Course 2's code and terminal panes are the scripts in `demos/how-python-runs/`, run on CPython 3.13
-(GIL build): tokens, AST, `dis` output, `__pycache__`, `inspect.stack()`, ids, ref counts, the
-traceback. Bytecode is version-specific and ids and timings change every run; the GIL timing varies
-0.89–1.11 s either way across runs, so the narration claims only "no real speed-up". The
-free-threaded build was not available and is described, not measured.
+Every number on a Course 1 and Course 2 frame was produced here on **CPython 3.14.6** (x86-64, 4
+CPUs), installed with `uv python install 3.14` (and `3.14t` for the free-threaded build): the
+`import this` text, the `timeit` pair, the sample day's report, and every Course 2 pane — tokens,
+AST, `dis`, `__pycache__`, `inspect.stack()`, ids, ref counts, the traceback, and the GIL timings on
+both builds. Course 2's scripts are in `demos/how-python-runs/`. Bytecode is version-specific, and
+ids and timings change every run: the narration claims only what survives re-running (no speed-up
+on the default build; about half the time on two threads with `python3.14t`). History dates and
+the 3.11 speed-up are from the CPython docs and PEPs, not measured. 3.15 was still a beta
+(3.15.0b4) when this was checked.
 
 Source layout per course: `src/content/<course>/NN-<section-id>.ts` plus `index.ts`;
 `src/scenes/<course>/` plus `index.ts` exporting `<course>Scenes`; `public/audio/<course>/`.
@@ -51,8 +51,8 @@ Source layout per course: `src/content/<course>/NN-<section-id>.ts` plus `index.
 ## Verification notes (read before trusting a number)
 
 - **Every code snippet and printed output is run before it is written down**, on the pinned Python
-  version. If that version is not installed, say which one the code was run on — never present an
-  unrun output.
+  version — `uv python install 3.14` provides it (and `3.14t`, the free-threaded build). Never
+  present an unrun output.
 - **Timings, races and profiles are not deterministic.** Round them, tie them to the build they were
   measured on, and make no universal speedup claim. Free-threaded behaviour that was not measured is
   labelled as documentation, not measurement.

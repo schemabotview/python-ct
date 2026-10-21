@@ -1,6 +1,6 @@
 import type { Scene, SceneNode } from '@graphlearning/flow'
 
-// The terminal pane is the real output of `python -c "import this"` (CPython 3.13).
+// The terminal pane is the real output of `python -c "import this"` (CPython 3.14.6).
 const ZEN = [
   '$ python -c "import this"',
   "The Zen of Python, by Tim Peters",

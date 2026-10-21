@@ -1,7 +1,7 @@
 import type { Scene, SceneNode } from '@graphlearning/flow'
 
 // The CSV is the sample day the course builds on; the report table is what a real run over it
-// printed (CPython 3.13): order 1004's quantity is "three", so it is rejected and the rest is priced.
+// printed (CPython 3.14.6): order 1004's quantity is "three", so it is rejected and the rest is priced.
 const ORDERS = [
   'order_id,date,customer,sku,qty',
   '1001,2026-10-01,ana@example.com,ETH-250,2',

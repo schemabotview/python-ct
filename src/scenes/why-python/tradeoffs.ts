@@ -1,14 +1,14 @@
 import type { Scene } from '@graphlearning/flow'
 
-// The terminal pane is a real run (CPython 3.13, x86-64, 4 CPUs). The ratio is what this machine
+// The terminal pane is a real run (CPython 3.14.6, x86-64, 4 CPUs). The ratio is what this machine
 // measured, not a universal speedup — the narration says so.
 const TIMING = [
   '$ python -m timeit -s "nums = list(range(1_000_000))" \\',
   '      "total = 0" "for n in nums: total += n"',
-  '20 loops, best of 5: 18.3 msec per loop',
+  '10 loops, best of 5: 19.2 msec per loop',
   '',
   '$ python -m timeit -s "nums = list(range(1_000_000))" "sum(nums)"',
-  '50 loops, best of 5: 3.9 msec per loop',
+  '50 loops, best of 5: 4.26 msec per loop',
 ].join('\n')
 
 export const tradeoffs: Scene = {
