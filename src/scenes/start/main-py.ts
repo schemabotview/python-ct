@@ -10,7 +10,7 @@ export const firstMain: Scene = ideFrame(
     { name: '.venv', folder: true, state: 'muted', note: 'activated' },
     { name: 'main.py', state: 'new' },
   ],
-  [{ file: 'main.py', code: main, highlight: [3, 4], terminal: session }],
+  { file: 'main.py', code: main, highlight: [3, 4], terminal: session },
   {
     id: 'anatomy',
     kind: 'list',
@@ -25,5 +25,4 @@ export const firstMain: Scene = ideFrame(
       'Python runs the file top to bottom, one line at a time',
     ],
   },
-  { sideBelow: true },
 )

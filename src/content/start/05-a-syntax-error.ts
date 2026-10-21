@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const aSyntaxError: Section = {
+  id: 'a-syntax-error',
+  title: "A SyntaxError: found before anything runs",
+  scene: 'syntax-error',
+  narration:
+    "Every programmer's first runs fail, and the skill that matters is not avoiding errors but reading them. Here is the first error you will meet, and the most common. On line three, highlighted in the editor, a bracket was opened and never closed. Running the file produces a SyntaxError, and the terminal shows how much Python tells you. It names the file and the line: line three. It prints that line, with a caret underneath, marking the bracket that was left open. And the last line says what is wrong in plain words: the bracket was never closed. Look carefully at what did not happen. Nothing was printed at all, not even the first message, although line three is the very line that was supposed to print it, and the problem is only at the end of it. That is the stage you met in the previous course. Before running anything, Python reads and parses the whole file, and a file that is not valid Python never reaches the compiler, let alone the virtual machine. A SyntaxError means the text could not be understood, so not a single line runs. The list on the right sums it up. Found by the parser. Nothing runs. The line and the caret show you where. The last line says what. And the fix here is one character: close the bracket. Editors catch most of these as you type, by colouring the rest of the file oddly or underlining the line, so a SyntaxError is usually the cheapest error you will ever fix. It is also the friendliest: Python's messages for it have become much clearer in recent versions, and they often suggest the fix. Next, an error that waits until the program is already running.",
+}

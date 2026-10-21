@@ -20,7 +20,7 @@ export const newProject: Scene = ideFrame(
       ],
     },
   ],
-  [{ file: '.venv/pyvenv.cfg', code: cfg, highlight: [1, 4], pattern: 'network', terminal: session }],
+  { file: '.venv/pyvenv.cfg', code: cfg, highlight: [1, 4], pattern: 'network', terminal: session },
   {
     id: 'venv-facts',
     kind: 'list',
@@ -37,5 +37,4 @@ export const newProject: Scene = ideFrame(
       'Never committed — it is rebuilt, not shared',
     ],
   },
-  { sideBelow: true },
 )

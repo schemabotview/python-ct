@@ -3,6 +3,7 @@ import { projectTour } from './tour'
 import { newProject } from './new-project'
 import { firstMain } from './main-py'
 import { replBeside } from './repl'
-import { firstErrors } from './first-errors'
+import { syntaxError } from './syntax-error'
+import { nameError } from './name-error'
 
-export const startScenes: Scene[] = [projectTour, newProject, firstMain, replBeside, firstErrors]
+export const startScenes: Scene[] = [projectTour, newProject, firstMain, replBeside, syntaxError, nameError]

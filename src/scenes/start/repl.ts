@@ -10,7 +10,7 @@ export const replBeside: Scene = ideFrame(
     { name: '.venv', folder: true, state: 'muted', note: 'activated' },
     { name: 'main.py', state: 'active' },
   ],
-  [{ file: 'main.py', code: main, terminal: session }],
+  { file: 'main.py', code: main, terminal: session },
   {
     id: 'repl-vs-script',
     kind: 'table',
@@ -23,5 +23,4 @@ export const replBeside: Scene = ideFrame(
       ['use it to', 'try one line', 'build the program'],
     ],
   },
-  { sideBelow: true },
 )

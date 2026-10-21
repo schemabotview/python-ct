@@ -24,6 +24,7 @@ const { COURSES } = await import(pathToFileURL(join(process.cwd(), bundle)).href
 const slugs = Object.values(COURSES).flatMap((c) => c.sections.map((s) => `${c.id}-${s.id}`))
 
 const problems = []
+const ide = []
 const server = await createServer({ server: { host: '127.0.0.1', port: PORT, strictPort: true }, logLevel: 'silent' })
 let browser
 try {
@@ -58,6 +59,16 @@ try {
       return [...new Set(out)]
     })
     for (const f of found) problems.push(`${slug}  ${f}`)
+    const panes = await page.evaluate(() => {
+      const box = (suffix) => {
+        const el = [...document.querySelectorAll('.flow-node[data-id]')].find((n) => n.dataset.id.endsWith(suffix))
+        if (!el) return null
+        const r = el.getBoundingClientRect()
+        return [r.left, r.top, r.width, r.height].map((v) => Math.round(v))
+      }
+      return { explorer: box('-explorer'), side: box('-side'), editor: box('-editor'), terminal: box('-terminal') }
+    })
+    if (panes.explorer) ide.push({ slug, panes })
   }
 } finally {
   await browser?.close()
@@ -65,9 +76,21 @@ try {
   await rm(temp, { recursive: true, force: true })
 }
 
+// Every IDE frame (one with an explorer) must put its panels at the SAME pixels as the first one —
+// the template in src/scenes/ide.ts exists so the viewer's eye never has to look for them.
+const [ref] = ide
+for (const { slug, panes } of ide.slice(1))
+  for (const pane of ['explorer', 'side', 'editor', 'terminal']) {
+    const a = ref.panes[pane]
+    const b = panes[pane]
+    if (!a || !b) continue
+    if (a.some((v, i) => Math.abs(v - b[i]) > 1))
+      problems.push(`${slug}  the ${pane} pane is at [${b}], not [${a}] as in ${ref.slug} — an IDE frame's panels must not move`)
+  }
+
 if (problems.length) {
   console.error(`\n✗ ${problems.length} render problem(s) at 3840×2160:`)
   for (const p of problems) console.error('  ' + p)
   process.exit(1)
 }
-console.log(`✓ ${slugs.length} section(s) render cleanly at 3840×2160`)
+console.log(`✓ ${slugs.length} section(s) render cleanly at 3840×2160; ${ide.length} IDE frame(s) share one layout`)

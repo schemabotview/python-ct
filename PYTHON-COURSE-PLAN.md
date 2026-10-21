@@ -63,15 +63,17 @@ Every section is **one full-screen frame and one narration** (90–180 s), no sl
 
 1. **Concept frame** — a diagram: the landscape, a timeline, the interpreter pipeline, the call
    stack, the heap. Courses 1–2 are made of these; later courses use one where an idea has no file.
-2. **IDE frame** — the default from Course 3 on: the **explorer** (the project tree) on the left, the
-   **editor** with one file, and the **terminal** docked under it with the real command and its real
-   output (the `ide-frame` study in `ui-flow`).
+2. **IDE frame** — the default from Course 3 on, and ONE fixed template so every panel sits at the
+   same place in every section: the **explorer** (the project tree) on the left, the **editor** with
+   one file in the centre, the **terminal** docked under it with the real command and its real
+   output, and a **side pane** on the right for the lesson's key points (the `ide-frame` study in
+   `ui-flow`; `src/scenes/ide.ts` here). One file per frame — two versions of a file are two sections.
    - The tree grows with the course: a file appears, marked `NEW`, when the step that needs it
      arrives; the open file is highlighted.
    - A file under ~30 lines is shown whole; a longer one shows this section's lines highlighted, the
      rest collapsed to `··· N lines` with real line numbers.
-3. **IDE + model frame** — the IDE frame with a third pane for what the terminal cannot show: names
-   and objects in memory, the call stack, a generator's state, a table of rows.
+3. **IDE + model frame** — the same template, with the side pane holding what the terminal cannot
+   show: names and objects in memory, the call stack, a generator's state, a table of rows.
 
 ## How a section teaches
 
@@ -83,7 +85,7 @@ Every section is **one full-screen frame and one narration** (90–180 s), no sl
   traceback, then fix it.
 - **Narration explains; the frame shows.** It never reads code aloud line by line.
 
-## The courses — 12 courses, 89 sections
+## The courses — 12 courses, 90 sections
 
 ### Part 0 — The picture (concept frames)
 
@@ -107,12 +109,13 @@ Every section is **one full-screen frame and one narration** (90–180 s), no sl
 
 ### Part I — Build it (IDE frames)
 
-**3. `start` · Start the project · 5 sections**
+**3. `start` · Start the project · 6 sections**
 1. The finished project, toured — every folder and file, and what it is for
 2. A new project — an empty folder, `python -m venv .venv`, activating it
 3. `main.py` — the first line of the pipeline, run from the terminal
 4. The REPL beside the editor — trying a line before writing it down
-5. When the first run fails — a `SyntaxError` and a `NameError`, read and fixed
+5. A `SyntaxError` — found by the parser, before anything runs
+6. A `NameError` — found while it runs, after earlier lines already ran
 
 **4. `hold` · Hold the data · 10 sections**
 1. Names and objects — a variable is a name for an object (IDE + model)

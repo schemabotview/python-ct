@@ -1,10 +1,23 @@
 import type { Scene, SceneNode, TreeEntry } from '@graphlearning/flow'
 
-// The IDE frame every course from 3 on is built from: the explorer on the left, then one or more
-// editor columns (each an editor with its terminal docked underneath), then an optional side pane
-// for what the terminal cannot show. Panes sit edge to edge (`gap: 'tight'`) and the explorer runs
-// the full height (`stretch`). Code and terminal text come from spine/ via `?raw` imports, so a
-// frame can only show what scripts/spine.py has replayed.
+// The IDE frame every course from 3 on is built from — ONE fixed template, so every panel sits at the
+// same pixels in every section and a viewer always knows where to look:
+//
+//   explorer (EXPLORER_W, full height) | editor (EDITOR_COLS × EDITOR_H)  | side (SIDE_W, full height)
+//                                       80 columns: PEP 8's line limit, so a well-formatted line always fits
+//                                       | terminal docked underneath (TERMINAL_H)
+//
+// The sizes are floors (minW / minH): a file longer than the editor must be folded with `show`, not
+// allowed to grow the pane — check-render.mjs fails any IDE frame whose panels move. Code and terminal
+// text come from spine/ via `?raw`, so a frame can only show what scripts/spine.py has replayed.
+
+export const EXPLORER_W = 290
+export const EDITOR_COLS = 80
+export const EDITOR_W = 792
+export const EDITOR_H = 500
+export const TERMINAL_H = 280
+export const SIDE_W = 520
+const GAP = 10
 
 export interface Pane {
   file: string
@@ -18,29 +31,23 @@ export interface Pane {
 
 export const trim = (text: string) => text.replace(/\n+$/, '')
 
-export interface Layout {
-  stack?: boolean
-  sideBelow?: boolean
-}
-
-// A short file makes a wide, shallow frame that 16:9 letterboxes. `sideBelow` moves the side pane
-// under the terminal; `stack` puts several editor columns one above the other instead of side by
-// side. Both trade width for height, which is what a frame of small files needs.
-export function ideFrame(id: string, project: string, tree: TreeEntry[], panes: Pane[], side?: SceneNode, layout: Layout = {}): Scene {
-  const pane = (p: Pane, i: number): SceneNode[] => [
-    { id: `${id}-editor${i}`, kind: 'code', filename: p.title ?? p.file, label: trim(p.code), show: p.show, highlight: p.highlight, pattern: p.pattern ?? 'storage' },
-    ...(p.terminal ? [{ id: `${id}-terminal${i}`, kind: 'terminal' as const, filename: `Terminal — ${project}`, label: trim(p.terminal), span: 'all' as const }] : []),
-  ]
-  const below = side && layout.sideBelow ? [{ ...side, span: 'all' as const }] : []
-  const columns: SceneNode[] = layout.stack
-    ? [{ id: `${id}-col`, label: 'editors', bare: true, gap: 'tight', children: [...panes.flatMap(pane), ...below] }]
-    : panes.map((p, i) => ({
-        id: `${id}-col${i}`,
-        label: p.file,
-        bare: true,
-        gap: 'tight' as const,
-        children: [...pane(p, i), ...(i === panes.length - 1 ? below : [])],
-      }))
+export function ideFrame(id: string, project: string, tree: TreeEntry[], pane: Pane | SceneNode, side: SceneNode): Scene {
+  const centre: SceneNode =
+    'code' in pane
+      ? {
+          id: `${id}-centre`,
+          label: pane.file,
+          bare: true,
+          gap: 'tight',
+          children: [
+            {
+              id: `${id}-editor`, kind: 'code', filename: pane.title ?? pane.file, label: trim(pane.code), show: pane.show,
+              highlight: pane.highlight, pattern: pane.pattern ?? 'storage', minCols: EDITOR_COLS, minH: EDITOR_H,
+            },
+            { id: `${id}-terminal`, kind: 'terminal', filename: `Terminal — ${project}`, label: trim(pane.terminal ?? ''), span: 'all', minH: TERMINAL_H },
+          ],
+        }
+      : { ...pane, minW: EDITOR_W, minH: EDITOR_H + GAP + TERMINAL_H }
   return {
     id,
     padding: 0.04,
@@ -48,7 +55,11 @@ export function ideFrame(id: string, project: string, tree: TreeEntry[], panes: 
     align: 'start',
     stretch: true,
     gap: 'tight',
-    nodes: [{ id: `${id}-explorer`, kind: 'tree', label: project, tree }, ...columns, ...(side && !layout.sideBelow ? [side] : [])],
+    nodes: [
+      { id: `${id}-explorer`, kind: 'tree', label: project, tree, minW: EXPLORER_W },
+      centre,
+      { id: `${id}-side`, label: 'side', bare: true, minW: SIDE_W, children: [{ ...side, minW: SIDE_W }] },
+    ],
     edges: [],
   }
 }

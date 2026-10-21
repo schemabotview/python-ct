@@ -15,7 +15,7 @@ carries the code, its result and the mental model side by side.
 Author from it; do not drift from its section lists.
 
 The render engine is `@graphlearning/flow`; the app shell is `@graphlearning/shell`. Both are
-**published packages pinned by version** (flow ^2.0.0, shell ^0.12.0). This repo's own surface is
+**published packages pinned by version** (flow ^2.2.0, shell ^0.13.0). This repo's own surface is
 `src/content/`, `src/scenes/`, `src/main.tsx` and `src/theme.css` — nothing else.
 
 ## Route contract
@@ -25,15 +25,15 @@ The render engine is `@graphlearning/flow`; the app shell is `@graphlearning/she
 
 ## Course arc and status
 
-**Reset on 2026-10-21** and restarted from `PYTHON-COURSE-PLAN.md`: 12 courses, 89 sections, built
+**Reset on 2026-10-21** and restarted from `PYTHON-COURSE-PLAN.md`: 12 courses, 90 sections, built
 around one ETL pipeline (`roastery-etl`); courses are named by what we build. Concept frames for
-Courses 1–2, IDE frames (`@graphlearning/flow` ^2.1.0: tree, terminal, folded code) from Course 3.
+Courses 1–2, IDE frames (`@graphlearning/flow` ^2.2.0: tree, terminal, folded code, min sizes) from Course 3.
 
 | # | Course id | Course | Sections | Status |
 | --- | --- | --- | --- | --- |
 | 1 | `why-python` | Why Python | 5 | authored, awaiting owner review (no narration audio yet) |
 | 2 | `how-python-runs` | How Python runs your code | 9 | authored, awaiting owner review (no narration audio yet) |
-| 3 | `start` | Start the project | 5 | authored, awaiting owner review (no narration audio yet) |
+| 3 | `start` | Start the project | 6 | authored, awaiting owner review (no narration audio yet) |
 | 4–12 | | see the plan | 70 | not started |
 
 Every number on a Course 1 and Course 2 frame was produced here on **CPython 3.14.6** (x86-64, 4
@@ -61,10 +61,12 @@ copied into `/usr/local` (so a venv's `pyvenv.cfg` reads `home = /usr/local/bin`
 machine); a different interpreter changes the banner, `pyvenv.cfg` and some error text, and the
 check reports exactly that.
 
-IDE frames are built with `ideFrame()` in `src/scenes/ide.ts`: explorer | editor over terminal |
-side pane. A frame of short files is shallow and letterboxes, so `sideBelow` puts the side pane
-under the terminal and `stack` puts several editor+terminal pairs one above the other — pick
-whichever brings the frame nearest 16:9.
+IDE frames are built with `ideFrame()` in `src/scenes/ide.ts`: ONE fixed template — explorer
+(290) | editor (80 columns — PEP 8's limit — × 500) over terminal (280) | side pane (520) — so every panel sits at the
+same pixels in every section (`@graphlearning/flow` ^2.2.0 `minW` / `minH`). A file longer than the
+editor is folded with `show`, never allowed to grow the pane, and two versions of a file are two
+sections, never two editors in one frame. `check-render.mjs` fails any IDE frame whose explorer,
+editor, terminal or side pane moves.
 
 Source layout per course: `src/content/<course>/NN-<section-id>.ts` plus `index.ts`;
 `src/scenes/<course>/` plus `index.ts` exporting `<course>Scenes`; `public/audio/<course>/`.
