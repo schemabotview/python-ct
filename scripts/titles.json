@@ -5,5 +5,6 @@
   "start": "Start a Python Project the Right Way: Virtual Environments, main.py, the REPL and Your First Errors",
   "hold": "Python Data Types for Beginners: Numbers, Decimal for Money, Strings, Lists, Tuples, Dicts and Sets",
   "process": "Python Control Flow and Functions: if, match, for and while Loops, Comprehensions and Exceptions",
-  "extract": "Reading Files in Python: open and with, Encodings, pathlib, CSV, JSON, Validation and Generators"
+  "extract": "Reading Files in Python: open and with, Encodings, pathlib, CSV, JSON, Validation and Generators",
+  "aggregate": "Python Data Aggregation: Grouping, Counter, Sorting, Statistics, Dates and itertools"
 }

@@ -1,0 +1,6 @@
+$ python main.py
+2026-10-01 4 orders 21 bags 329.00 COL-500
+2026-10-02 3 orders 4 bags 75.95 COL-500
+2026-10-03 3 orders 9 bags 214.10 KEN-1000
+31 days, 401430.14 revenue
+79 rows rejected and reported

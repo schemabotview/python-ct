@@ -1,0 +1,8 @@
+$ python main.py
+KEN-1000 170833.25
+COL-500 95158.07
+BRA-500 80181.58
+ETH-250 55257.24
+top customers: ['lena', 'zoë', 'omar']
+['Luna Café, Ltd', 'ana', 'maya']
+['ana', 'Luna Café, Ltd', 'maya']

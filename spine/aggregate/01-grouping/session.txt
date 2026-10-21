@@ -1,0 +1,7 @@
+$ python main.py
+ETH-250 55257.24
+COL-500 95158.07
+KEN-1000 170833.25
+BRA-500 80181.58
+month: 401430.14 from 4 products
+79 rows rejected; the first is ORD-1004

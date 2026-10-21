@@ -1,0 +1,8 @@
+$ python main.py
+best day: 2026-10-22 Thursday 17403.49
+week 40 14359.00
+week 41 99489.69
+week 42 93505.27
+week 43 108445.30
+week 44 85630.88
+2026-10-29 9 days left
