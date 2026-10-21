@@ -1,0 +1,9 @@
+$ pip install -q -e ".[dev]"
+$ pip list --format=freeze | grep -E "roastery|mypy"
+mypy==2.4.0
+mypy_extensions==1.1.0
+roastery-etl==0.1.0
+$ python -c "import importlib.metadata as m; print(m.version('roastery-etl'))"
+0.1.0
+$ mypy --pretty pipeline
+Success: no issues found in 5 source files

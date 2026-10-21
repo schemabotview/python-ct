@@ -1,0 +1,8 @@
+$ python main.py
+extract:   5,797 rows read, 79 rejected
+transform: 31 days, $401,430.14 revenue
+load:      5,797 rows in warehouse.db, two CSV files
+$ python -c "import pipeline; print(pipeline.__doc__)"
+roastery-etl: October's order files in, a report and a warehouse out.
+$ python -c "import pipeline.extract as e; print(e.__name__, e.__file__)"
+pipeline.extract /home/ana/roastery-etl/pipeline/extract.py

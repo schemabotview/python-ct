@@ -1,0 +1,9 @@
+$ python -q
+>>> from decimal import Decimal as D
+>>> from pipeline.models import LineItem, Order
+>>> order = Order("ORD-1010", "omar")
+>>> order.items.append(LineItem("BRA-500", D("16.25"), 4))
+>>> order.items.append(LineItem("ETH-250", D("9.95"), 2))
+>>> order, len(order), [item.sku for item in order], order.total
+(<Order ORD-1010 for omar: 2 items>, 2, ['BRA-500', 'ETH-250'], Decimal('81.65'))
+>>> exit()

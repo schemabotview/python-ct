@@ -1,0 +1,9 @@
+$ pip install -q mypy==2.4.0
+$ mypy --pretty pipeline
+Success: no issues found in 5 source files
+$ mypy --pretty check.py
+check.py:5: error: Argument 2 to "line_total" has incompatible type "str";
+expected "int"  [arg-type]
+    print(line_total(Decimal("9.95"), "3"))
+                                      ^~~
+Found 1 error in 1 file (checked 1 source file)

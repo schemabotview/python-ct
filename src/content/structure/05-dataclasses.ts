@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const dataclassesSection: Section = {
+  id: 'dataclasses',
+  title: "Dataclasses: less boilerplate, same object",
+  scene: 'structure-dataclasses',
+  narration:
+    "Most classes that hold data look like the last one: an init method that does nothing but copy its arguments onto self. The standard library's dataclasses module writes that code for you. Look at the new version of Order. The init method has gone. Instead, the class lists its fields, one per line: id is a str, date is a str, and so on, ending with quantity, an int. The decorator above the class, at dataclass, reads that list and generates the methods, and the table on the right shows which. It writes an init that takes the fields in order, so Order is created exactly as before. It writes a repr, the text the REPL shows for an object. And it writes eq, so that two orders with equal fields compare equal. The terminal shows all three. Creating an order works as before. Typing its name at the prompt now shows something useful: Order, then every field with its value, instead of the unhelpful object at an address that the plain class would have printed. Comparing it with a second Order built from the same values gives True. A plain class compares by identity, the is test from course two, so two separately built orders would be unequal, even with identical contents; the dataclass compares by value, which is what you almost always want for data. And is wholesale still works, because a dataclass is an ordinary class, and you can add any methods you like. The lines that name the fields use annotations, the colon and a type after each name. For a dataclass they are how it finds its fields; for Python itself, they are only descriptions, and section eight shows what they are really for. The class is now shorter and does more. Next, an object that protects itself from bad values.",
+}

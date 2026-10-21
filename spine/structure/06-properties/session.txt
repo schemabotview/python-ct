@@ -1,0 +1,4 @@
+$ python -m pipeline.models
+178.50 for LineItem(sku='COL-500', price=Decimal('17.50'), quantity=12)
+rejected: quantity -2 is below 1
+FrozenInstanceError: cannot assign to field 'quantity'

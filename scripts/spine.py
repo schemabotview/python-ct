@@ -29,6 +29,7 @@ import os
 import pty
 import re
 import select
+import shlex
 import shutil
 import subprocess
 import sys
@@ -54,12 +55,12 @@ def commands(session: str) -> list[tuple[str, list[str]]]:
     return out
 
 
-def repl(cwd: Path, env: dict, inputs: list[str]) -> str:
-    """Run `python` in a pty, type each input line, and return the screen text."""
+def repl(cwd: Path, env: dict, inputs: list[str], argv: list[str]) -> str:
+    """Run the REPL command (`python`, `python -q`) in a pty, type each input line, return the screen."""
     pid, fd = pty.fork()
     if pid == 0:
         os.chdir(cwd)
-        os.execvpe('python', ['python'], {**env, 'TERM': 'xterm-256color'})
+        os.execvpe(argv[0], argv, {**env, 'TERM': 'xterm-256color'})
     screen = b''
 
     def drain(timeout: float) -> None:
@@ -102,7 +103,9 @@ def replay(step: Path) -> tuple[str, dict[str, str]]:
         home.mkdir()
         if (step / 'project').exists():
             shutil.copytree(step / 'project', project)
-        env = {**os.environ, 'HOME': str(home), 'NO_COLOR': '1', 'PYTHON_COLORS': '0', 'TERM': 'dumb', 'PS1': ''}
+        # pip's "a new release is available" notice depends on the date, not the code: switched off.
+        env = {**os.environ, 'HOME': str(home), 'NO_COLOR': '1', 'PYTHON_COLORS': '0', 'TERM': 'dumb', 'PS1': '',
+               'PIP_DISABLE_PIP_VERSION_CHECK': '1'}
         if config.get('venv'):
             project.mkdir(exist_ok=True)
             subprocess.run(['python', '-m', 'venv', '.venv'], cwd=project, env=env, check=True)
@@ -112,7 +115,7 @@ def replay(step: Path) -> tuple[str, dict[str, str]]:
         blocks: list[str] = []
         for cmd, inputs in commands(session):
             if inputs:
-                output = repl(cwd, env, inputs)
+                output = repl(cwd, env, inputs, shlex.split(cmd))
             else:
                 script = f'cd {cwd!s}\n{{ {cmd}\n}} 2>&1\necho "{MARK}$PWD"\n'
                 state = home / '.spine-state'

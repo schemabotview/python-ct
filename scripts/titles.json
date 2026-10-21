@@ -7,5 +7,6 @@
   "process": "Python Control Flow and Functions: if, match, for and while Loops, Comprehensions and Exceptions",
   "extract": "Reading Files in Python: open and with, Encodings, pathlib, CSV, JSON, Validation and Generators",
   "aggregate": "Python Data Aggregation: Grouping, Counter, Sorting, Statistics, Dates and itertools",
-  "load": "Writing Data in Python: CSV Reports, f-strings, JSON, SQLite Transactions and Safe Re-runs"
+  "load": "Writing Data in Python: CSV Reports, f-strings, JSON, SQLite Transactions and Safe Re-runs",
+  "structure": "Structure a Python Project: Modules, Packages, Classes, Dataclasses, Type Hints and pyproject.toml"
 }

@@ -1,0 +1,10 @@
+$ python -q
+>>> from pipeline.models import Order
+>>> order = Order("ORD-1002", "2026-10-01", "omar", "COL-500", 12)
+>>> order.customer, order.quantity
+('omar', 12)
+>>> order.is_wholesale()
+True
+>>> type(order)
+<class 'pipeline.models.Order'>
+>>> exit()

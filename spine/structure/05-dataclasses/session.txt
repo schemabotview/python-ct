@@ -1,0 +1,10 @@
+$ python -q
+>>> from pipeline.models import Order
+>>> a = Order("ORD-1002", "2026-10-01", "raj", "COL-500", 12)
+>>> a
+Order(id='ORD-1002', date='2026-10-01', customer='raj', sku='COL-500', quantity=12)
+>>> a == Order("ORD-1002", "2026-10-01", "raj", "COL-500", 12)
+True
+>>> a.is_wholesale()
+True
+>>> exit()

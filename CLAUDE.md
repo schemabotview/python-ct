@@ -39,7 +39,8 @@ Courses 1–2, IDE frames (`@graphlearning/flow` ^2.2.0: tree, terminal, folded 
 | 6 | `extract` | Read the data | 7 | authored, awaiting owner review (no narration audio yet) |
 | 7 | `aggregate` | Aggregate it | 7 | authored, awaiting owner review (no narration audio yet) |
 | 8 | `load` | Write the results | 6 | authored, awaiting owner review (no narration audio yet) |
-| 9–12 | | see the plan | 29 | not started |
+| 9 | `structure` | Structure the pipeline | 9 | authored, awaiting owner review (no narration audio yet) |
+| 10–12 | | see the plan | 20 | not started |
 
 Every number on a Course 1 and Course 2 frame was produced here on **CPython 3.14.6** (x86-64, 4
 CPUs), installed with `uv python install 3.14` (and `3.14t` for the free-threaded build): the
@@ -62,6 +63,9 @@ files with Vite's `?raw`, so a frame can only show what was replayed. `npm run c
 (`scripts/spine.py`) replays every step in a fresh copy — one bash per step so `cd` and `activate`
 carry over, REPL lines typed into a real pty — and fails on any difference; `--write` regenerates
 the transcripts after an edit. Paths are normalised to `/home/ana/roastery-etl`.
+
+From Course 9 on, some steps `pip install` pinned tools (mypy, pytest, ruff) from PyPI, so the replay
+needs network access; pip's date-dependent upgrade notice is switched off in the replay.
 
 **Run it with Python 3.14 as `python` on PATH.** Here that was a python-build-standalone 3.14.6
 copied into `/usr/local` (so a venv's `pyvenv.cfg` reads `home = /usr/local/bin`, as on a learner's
