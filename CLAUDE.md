@@ -5,72 +5,62 @@
 
 ## What this repo is
 
-A GraphL concept app for **Python — From Programming Foundations to Advanced Application**, a
-beginner course on Python 3.14. One concept, 11 courses (one per chapter), 86 sections. A **section** is
-`(scene, slide, narration)` and is one segment of the course video. One section = one slide.
+A GraphL concept app for **Python — from first program to production**: one course path from
+absolute beginner to working professional, built around one spine application (`roastery`, a coffee
+roastery's order service) shown in real code. A **section** is `(scene, narration)` — one full-screen
+frame and one segment of the course video. Sections are **scene-only** (no `slide`): the frame
+carries the code, its result and the mental model side by side.
 
-`PYTHON-COURSE-PLAN.md` is the source of truth for scope, audience, teaching method, section titles,
-worked illustrations, outcomes and bridges. Author from it; do not drift from its section lists.
+`PYTHON-COURSE-PLAN.md` is the source of truth for scope, audience, courses, sections and the spine.
+Author from it; do not drift from its section lists.
 
 The render engine is `@graphlearning/flow`; the app shell is `@graphlearning/shell`. Both are
-**published packages pinned by version**. This repo's own surface is `src/content/`, `src/scenes/`,
-`src/main.tsx` and `src/theme.css` — nothing else.
+**published packages pinned by version** (flow ^2.0.0, shell ^0.12.0). This repo's own surface is
+`src/content/`, `src/scenes/`, `src/main.tsx` and `src/theme.css` — nothing else.
 
 ## Route contract
 
-`#/` is the catalog. A section is `#/<courseId>-<sectionId>`, e.g. `#/foundations-names-objects-and-types`.
+`#/` is the catalog. A section is `#/<courseId>-<sectionId>`, e.g. `#/how-python-runs-names-point-to-objects`.
 `?capture=1` and `window.__scene.plan()` are the recorders' hooks and come from the shell.
 
 ## Course arc and status
 
-Chapters are authored one at a time, each reviewed by the owner on its rendered routes before the
-next begins. A course is registered in `src/content/index.ts` / `src/scenes/index.ts` only once authored.
-
-| # | Course id | Chapter | Sections | Status |
-| --- | --- | --- | --- | --- |
-| 1 | `foundations` | Programs, Values, and Execution | 6 | authored, awaiting owner review (no narration audio yet) |
-| 2 | `collections` | Collections and Data Transformation | 9 | authored, awaiting owner review (no narration audio yet) |
-| 3 | `control-flow` | Decisions, Loops, and Problem Decomposition | 7 | authored, awaiting owner review (no narration audio yet) |
-| 4 | `functions` | Functions, Scope, and Contracts | 9 | authored, awaiting owner review (no narration audio yet) |
-| 5 | `files-errors` | Files, Structured Data, and Failure Handling | 10 | authored, awaiting owner review (no narration audio yet) |
-| 6 | `modules` | Modules, Environments, and Dependencies | 6 | authored, awaiting owner review (no narration audio yet) |
-| 7 | `classes` | Classes and Domain Modelling | 8 | authored, awaiting owner review (no narration audio yet) |
-| 8 | `data-model` | Iteration, Context, and the Python Data Model | 9 | authored, awaiting owner review (no narration audio yet) |
-| 9 | `composition` | Functions as Objects and Advanced Composition | 6 | authored, awaiting owner review (no narration audio yet) |
-| 10 | `concurrency` | Concurrency and Execution Trade-offs | 8 | authored, awaiting owner review (no narration audio yet) |
-| 11 | `quality-packaging` | Reliable, Efficient, and Distributable Programs | 8 | authored, awaiting owner review (no narration audio yet) |
+**Reset on 2026-10-21.** The previous 11-course / 86-section content, its scenes and its narration
+audio were removed to restart from a new plan. Nothing is authored yet: the plan is at the OUTLINE
+stage (15 courses, 103 sections) awaiting owner approval. Courses are authored one at a time, each
+reviewed by the owner on its rendered routes before the next begins, and a course is registered in
+`src/content/index.ts` / `src/scenes/index.ts` only once authored.
 
 Source layout per course: `src/content/<course>/NN-<section-id>.ts` plus `index.ts`;
 `src/scenes/<course>/` plus `index.ts` exporting `<course>Scenes`; `public/audio/<course>/`.
 
 ## Verification notes (read before trusting a number)
 
-- Every code snippet and printed output was **run before it was written down**, but on **Python 3.13**,
-  not the 3.14 baseline (3.14 was not installed). Nothing relies on a 3.14-only difference, but that is
-  unconfirmed. Re-run the snippets on 3.14 before publishing.
-- **Timings, races and profiles are not deterministic.** Chapter 10 and the profiling section of
-  Chapter 11 round timings, tie them to the build (GIL-enabled CPython, 4 CPUs), and make no
-  universal speedup claim. No free-threaded build was available, so free-threaded behaviour is
+- **Every code snippet and printed output is run before it is written down**, on the pinned Python
+  version. If that version is not installed, say which one the code was run on — never present an
+  unrun output.
+- **Timings, races and profiles are not deterministic.** Round them, tie them to the build they were
+  measured on, and make no universal speedup claim. Free-threaded behaviour that was not measured is
   labelled as documentation, not measurement.
-- Chapter 11's local wheel build/install/run/uninstall was really performed, in a throwaway directory
-  and a fresh venv. The system's distribution-patched setuptools failed on this Python, so a current
-  setuptools was installed into a scratch venv; nothing was published.
 - **No narration audio exists.** `.wav` files come only from the Colab + Chatterbox pass.
-- Section `title` fields match `PYTHON-COURSE-PLAN.md` exactly (audited: 86 of 86).
 
 ## Authoring conventions
 
-- Teaching method per section: objective → mental model → annotated code and expected result →
-  failure/alternative contrast → summary → bridge. Explain a term before relying on it.
-- Python version claims are pinned to **3.14**; label CPython-specific behaviour and GIL-enabled
-  versus free-threaded builds. Never present a version-specific fact as a language guarantee.
-- **Fill the frame with content, not spacing.** Slides target ~880–990 modelled px (`npm run check`
-  fails above 1000). Scenes show real detail — the actual code, outputs and worked failures — rather
-  than bare labels. A scene is fitted to the pane, so a tall one is height-limited and its bottom
-  reaches the nav buttons: look at the rendered route and keep the last card clear of them. Wide
-  rows shrink everything, so keep nested rows narrow (a compact card, not a wide code card).
-- Slides are terse; narration is flowing prose. Code shown must be correct Python 3.14 with the
-  stated expected output.
+- Teaching method per section: objective → mental model → annotated code and its real result →
+  failure/alternative contrast → bridge. Explain a term before relying on it.
+- Python version claims are pinned to the **current stable release at authoring time** (decided in
+  `PYTHON-COURSE-PLAN.md`); label CPython-specific behaviour and GIL-enabled versus free-threaded
+  builds. Never present a version-specific fact as a language guarantee.
+- **Author wide, not tall.** A section has the whole 16:9 frame, but a scene is fitted to it, so a
+  tall stack is height-limited and gains nothing from the width. Lay frames out left to right
+  (code → result → model) with `flow: 'LR'` or columns.
+- **Fill the frame with content, not spacing.** Scenes show real detail — the actual code, outputs
+  and worked failures — rather than bare labels. What a slide used to say goes into tables, lists,
+  pills and notes in the scene, or into the narration.
+- **One idea per frame.** To walk a big picture, reuse one scene across consecutive sections with a
+  different `focus` each.
+- Narration is flowing prose and never reads code aloud line by line. Code shown must run on the
+  pinned version with exactly the output shown.
 
 ## Invariants — do not break
 
@@ -98,18 +88,17 @@ Source layout per course: `src/content/<course>/NN-<section-id>.ts` plus `index.
 `npm run check` (`scripts/check-content.mjs`) models four silent failures — each builds green and
 breaks only on screen. Its comments carry the measured constants; the short version:
 
-- **Leaf cards are a fixed 210×96** with a ~134px text column. Only containers grow to fit. Keep the
-  `label` to 2 wrapped lines; 2 label lines + 2 sub lines fits. Watch unbreakable tokens — `_`, `.`
-  and `/` are **not** break opportunities in CSS, so `snake_case` and paths overflow sideways in a
-  way the height model cannot see.
-- **Slides do not scale to fit.** Type size is fixed by the frame (`zoom = paneWidth / 806`,
-  width-proportional only), so an over-long slide **clips at the bottom** with no error. Budget
-  ~1000 design px of modelled height. Bullets cost far more than prose of the same length.
+- **KNOWN DRIFT — the leaf-card and slide budgets in `check-content.mjs` predate engine 2.0.** It
+  still models leaf cards as a fixed 210×96 and budgets slide height; under flow 2.x a card is 300
+  wide and grows to fit its text, and sections are scene-only. Rewrite those two checks with the
+  first authored course; until then their passes mean nothing. Unbreakable tokens are still real —
+  `_`, `.` and `/` are **not** break opportunities in CSS, so `snake_case` and paths overflow
+  sideways.
 - **A `focus:` that names no node in its scene is a silent no-op** — nothing lights up.
-- **`icon:` names are NOT guarded.** The engine's lucide registry is `Record<string, LucideIcon>`
-  and does not enumerate its keys, so a wrong name type-checks, passes `check`, builds, and renders
-  a card with no glyph. There are ~75 valid keys; copy one off an existing scene rather than
-  guessing a lucide name (`volume`, `move`, `maximize` and `git` are all absent, for instance).
+- **`icon:` names are NOT guarded.** A wrong name type-checks, passes `check`, builds, and renders
+  the pattern's default glyph. The engine's `icon-gallery` fixture lists every valid key (AWS, Azure,
+  brand marks such as `python`, `git`, `github`, `docker`, and ~75 lucide glyphs). Avoid `monitor`
+  and `users`: Azure tiles shadow those lucide names.
 - **A section with no wav narrates silence** and records a silent segment. Audio resolves purely by
   convention: `public/audio/<course>/<section-id>.wav`.
 
@@ -126,7 +115,7 @@ route is the real bar, and the owner reviews it.
 
 ## Working agreement
 
-- **Author the whole unit, then hand over the route.** Scenes, slides and narration together.
+- **Author the whole unit, then hand over the route.** Scenes and narration together.
 - **No ASCII sketches of scenes.** A sketch cannot show what the layout engine will do, which is the
   only thing worth looking at.
 - **No silent scaffolding**, no work outside the ask. Say plainly what was built, what was verified,

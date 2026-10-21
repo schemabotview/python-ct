@@ -1,8 +1,9 @@
 # python-ct
 
-**Python — From Programming Foundations to Advanced Application.** A GraphL concept app: 11
-courses (one per chapter), 86 sections, each section a `(scene, slide, narration)` triple that is one
-segment of the course video. Built from `content-repo-template`.
+**Python — from first program to production.** A GraphL concept app: one path from absolute
+beginner to working professional, built around one spine application (`roastery`). Each section is a
+`(scene, narration)` pair — one full-screen frame — that is one segment of the course video. Built
+from `content-repo-template`. The content was reset on 2026-10-21; the new plan is at outline stage.
 
 Scope, audience, teaching method and every section title are in [`PYTHON-COURSE-PLAN.md`](PYTHON-COURSE-PLAN.md).
 Authoring status per chapter is tracked in [`CLAUDE.md`](CLAUDE.md).

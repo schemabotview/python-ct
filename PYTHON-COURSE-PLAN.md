@@ -1,236 +1,226 @@
-# Python — From Programming Foundations to Advanced Application
-
-## Audience and prerequisites
-
-For beginners with basic computer literacy and no prior programming knowledge. Explain programming terms before using them. Annotated Python code, expected outputs, diagrams, and worked failure cases connect concepts with application. Learners may run examples, but installation, submitted exercises, assessments, and monitoring are not required.
-
-Reference baseline: **Python 3.14**. Distinguish language guarantees from CPython implementation behaviour and distinguish GIL-enabled from free-threaded builds. This fixed baseline is not a claim about the newest release.
-
-Scope: core programming, Python data structures and object behaviour, files, reusable code, advanced language protocols, concurrency, and program-quality/distribution concepts. The standard library is introduced by purpose rather than exhaustively catalogued.
-
-Target: understand how to construct and organise Python programs, interpret their execution and results, diagnose common failures, and justify abstraction and execution choices. The course does not claim to verify individual mastery.
-
-Structure: **11 chapters**, with **6, 9, 7, 9, 10, 6, 8, 9, 6, 8, and 8 sections**. Scope determines counts; sections need not have equal duration.
-
-## Learning spine
-
-Trace a small program → choose and transform data → control execution → compose functions → handle files and failures → organise modules → model objects → use Python protocols → compose advanced functions → choose concurrency → reason about quality and distribution.
-
-Recurring example: an order-processing/reporting tool starts with an order-total calculation, then gains collections, validation, reusable functions, structured file input, modules, domain objects, lazy processing, concurrent work, and a packaged command-line interface. Small contrasting examples expose misconceptions that the main example may not reveal.
-
-Teaching method: objective → mental model → annotated code and expected result → failure/alternative contrast → explanation summary → bridge. Use reference diagrams, call stacks, generator traces, and execution timelines where useful. Advanced syntax is explained before it is relied on. Comprehensions and sort keys receive brief previews followed by explicit treatment of their dependencies; validation and diagnosis begin before the dedicated quality chapter.
-
-## Chapter 1 — Programs, Values, and Execution
-
-Objective: Build a mental model of a program and trace a small calculation.
-
-1. Programs, algorithms, source code, and the interpreter
-2. Interactive sessions versus scripts: a first execution walkthrough
-3. Names, assignment, objects, and basic scalar types
-4. Expressions, operators, conversion, and numeric representation
-5. Text input, formatted output, and simple interaction
-6. Syntax errors, runtime errors, and reading a short traceback
-
-Worked illustrations: Annotated order-total code with input and output; a name-to-object diagram; integer versus floating-point calculations; a malformed-input traceback. Introduce the programming vocabulary before relying on it.
-
-Outcome: Explain what each statement does, trace values through a short program, and distinguish syntax, runtime, and result errors.
-
-Bridge: One order can be represented by a few values; next we organise many related values and records.
-
-## Chapter 2 — Collections and Data Transformation
-
-Objective: Choose data representations and explain their ordering, lookup, and mutation behaviour.
-
-1. Strings as sequences: indexing, slicing, and common transformations
-2. Lists: ordered mutable collections
-3. Tuples: fixed records and immutable sequence structure
-4. Dictionaries: key/value records, lookup, and missing keys
-5. Sets: membership, uniqueness, and set operations
-6. Mutation, aliasing, identity, equality, and shallow versus deep copying
-7. Unpacking, nested collections, and record shapes
-8. Sorting and basic transformation built-ins; key functions previewed
-9. Comprehensions as a preview of filtering and transformation
-
-Worked illustrations: Order records represented as lists, tuples, and dictionaries; before/after mutation diagrams; shared nested-list surprises; slicing and set comparisons; a small sorted report. Preview comprehension results visually; explain their loop/filter mechanics in Chapter 3 and key functions in Chapter 4.
-
-Outcome: Compare collection choices, predict simple lookup and mutation results, and recognise unintended sharing of mutable data.
-
-Bridge: We have data structures; next we explain how decisions and iteration transform their contents.
-
-## Chapter 3 — Decisions, Loops, and Problem Decomposition
-
-Objective: Trace conditional and repeated execution and break a small problem into explicit steps.
-
-1. Truth values, comparisons, Boolean operators, and short-circuit evaluation
-2. if/elif/else and nested decisions
-3. for loops and iteration with range, enumerate, and zip
-4. while loops, progress conditions, and termination
-5. break, continue, loop else, and common loop mistakes
-6. Structural pattern matching and its distinction from ordinary comparisons
-7. From traced loops to comprehensions and small algorithms
-
-Worked illustrations: Line-by-line inventory filtering and sales aggregation; loop-state tables; short-circuit examples; a nonterminating-loop contrast; a loop rewritten as a readable comprehension; a match example on an order record.
-
-Outcome: Predict control flow, explain termination and boundary cases, and compare a loop with an equivalent comprehension.
-
-Bridge: Repeated logic is now visible; next we give it names, inputs, outputs, and clear responsibilities.
-
-## Chapter 4 — Functions, Scope, and Contracts
-
-Objective: Construct reusable calculations and explain how calls bind inputs and produce outputs.
-
-1. Definitions, calls, return values, None, and multiple-result conventions
-2. Positional and keyword arguments; positional-only and keyword-only parameters
-3. Defaults, mutable-default pitfalls, and variadic arguments
-4. Argument binding, mutation, and object-sharing semantics
-5. Local, enclosing, global, and built-in name lookup
-6. Pure calculations, side effects, and explicit dependencies
-7. Docstrings, annotations, and runtime validation: different roles
-8. Recursion, base cases, and iterative alternatives
-9. Decomposing a program; functions as values in simple callbacks
-
-Worked illustrations: Pricing functions with call/return traces; a shared-default failure; names and objects across a call; annotated function contracts; recursive category totals versus a loop; a named sorting-key function.
-
-Outcome: Explain parameter binding and scope, construct a small calculation from functions, and identify hidden side effects and invalid assumptions.
-
-Bridge: Functions organise computation; next we connect that computation to files and handle failures at its boundaries.
-
-## Chapter 5 — Files, Structured Data, and Failure Handling
-
-Objective: Explain how a program exchanges persistent data while validating inputs and releasing resources.
-
-1. Paths and filesystem operations with pathlib
-2. Unicode text, bytes, encoding, and decoding boundaries
-3. File reading/writing, modes, and incremental processing
-4. Using with for deterministic resource cleanup
-5. CSV and JSON: parsing, record shapes, and serialization limits
-6. Exceptions, try/except/else/finally, and targeted handling
-7. Raising and chaining exceptions; domain-specific error meaning
-8. Validation, malformed records, missing fields, and recovery policies
-9. Dates, time zones, Decimal, and domain-appropriate representations
-10. Worked import-to-report flow: valid records, rejected records, and output
-
-Worked illustrations: A short CSV/JSON sample paired with parsing code and expected records; a Unicode decoding failure; an exception-flow diagram; cleanup on success/failure; monetary calculations from decimal strings; a timestamp interpretation contrast.
-
-Outcome: Explain file and data boundaries, trace successful and failed input handling, and justify representations and recovery policies.
-
-Bridge: The script now has several responsibilities; next we organise code and dependencies without relying on one large file.
-
-## Chapter 6 — Modules, Environments, and Dependencies
-
-Objective: Explain how reusable Python code is located, organised, and isolated.
-
-1. Modules, imports, namespaces, and import-time execution
-2. Packages, relative/absolute imports, and circular-dependency symptoms
-3. Script entry points, __name__, and python -m
-4. Discovering and reusing the standard library
-5. Virtual environments, interpreters, and installing dependencies
-6. Project boundaries, dependency declarations, and reproducible-environment concepts
-
-Worked illustrations: A reporting project split into calculation, input, and command-line modules; an import graph and circular-import failure; annotated environment/install commands; distinguish import-package names from distribution names. Commands are illustrations, not actions the learner must run.
-
-Outcome: Explain module execution and import boundaries, interpret a project layout, and distinguish an environment from a distributable package.
-
-Bridge: Modules organise code; next we decide when related data and behaviour should form domain objects.
-
-## Chapter 7 — Classes and Domain Modelling
-
-Objective: Compare object-based designs and express domain behaviour without unnecessary inheritance.
-
-1. Classes, instances, construction, and instance state
-2. Attribute lookup; instance versus class attributes
-3. Methods, self, class methods, and static methods
-4. Dataclasses, generated methods, and per-instance defaults
-5. Composition, responsibilities, and object collaboration
-6. Inheritance, overriding, super, and a conceptual method-resolution order
-7. Polymorphism and duck typing across interchangeable behaviours
-8. Object invariants, validation boundaries, and choosing functions versus classes
-
-Worked illustrations: Order and LineItem examples using plain classes and dataclasses; a shared-class-attribute mistake; composition versus inheritance diagrams; interchangeable pricing strategies; a brief dataclass-decorator explanation before custom decorators in Chapter 9.
-
-Outcome: Explain instance behaviour, compare class and function designs, and justify composition or inheritance for a stated responsibility.
-
-Bridge: Objects now model the domain; next we connect their behaviour to the protocols used by Python’s own syntax and built-ins.
-
-## Chapter 8 — Iteration, Context, and the Python Data Model
-
-Objective: Explain how Python protocols support lazy processing, resource management, and predictable object behaviour.
-
-1. Iterable and iterator protocols; iter, next, and exhaustion
-2. Generator functions, yield, suspended execution, and generator expressions
-3. Lazy pipelines, one-shot consumption, and itertools concepts
-4. Context-manager protocols and contextlib
-5. Equality, identity, hashing, and collection-key contracts
-6. Readable representations, truth testing, and object inspection
-7. Special methods for sequence/container behaviour and operator cooperation
-8. Properties, attribute access, and a conceptual descriptor model
-9. Object lifetime, references, garbage collection, and explicit cleanup boundaries
-
-Worked illustrations: An order generator with execution-state traces; a consumed-iterator surprise; eager versus lazy flow diagrams; a resource-manager example; equality/hash contrasts; a property-backed invariant. Label CPython-specific memory details and avoid equating garbage collection with guaranteed resource cleanup.
-
-Outcome: Trace a lazy computation, explain protocol-driven behaviour, and recognise incompatible equality, hashing, or cleanup assumptions.
-
-Bridge: Protocols let objects cooperate; next we use functions themselves as composable objects and make interfaces more explicit.
-
-## Chapter 9 — Functions as Objects and Advanced Composition
-
-Objective: Explain callable composition and select abstractions that improve clarity.
-
-1. First-class functions, callable objects, lambdas, and callback interfaces
-2. Closures, captured state, nonlocal, and late binding
-3. Decorators, wrapping order, and parameterised decorators
-4. functools: wraps, partial, caching, and their trade-offs
-5. Type aliases, generics, Protocol, and static versus runtime guarantees
-6. Dispatch strategies and choosing direct code over abstraction
-
-Worked illustrations: A pricing callback, captured-loop-variable failure, decorator expansion into ordinary calls, a wrapped logging function, and a cache with stale-input assumptions; a typed protocol contrasted with runtime validation. No particular type-checker tool is required.
-
-Outcome: Explain closure/decorator execution, compare callable designs, and distinguish type-checking support from runtime enforcement.
-
-Bridge: Code is now composable; next we decide how independently waiting or computing work should execute.
-
-## Chapter 10 — Concurrency and Execution Trade-offs
-
-Objective: Compare execution models using workload characteristics and explicit runtime assumptions.
-
-1. Concurrency versus parallelism; I/O-bound versus CPU-bound work
-2. Threads, shared memory, and coordination responsibilities
-3. Processes, isolation, serialization, and startup/transfer costs
-4. Executors, futures, submission, and result collection
-5. Coroutines, async/await, event loops, and cooperative scheduling
-6. Task groups, timeouts, cancellation, and cleanup
-7. Shared-state races, synchronization, bounded work, and backpressure
-8. CPython, the GIL, free-threaded builds, and extension compatibility
-
-Worked illustrations: Serial/thread/process/async timelines for illustrative tasks; executor and coroutine snippets; a lost-update interleaving; a cancelled operation with cleanup; a workload-choice table. Explain GIL-enabled and free-threaded CPython separately and avoid universal speedup claims.
-
-Outcome: Choose a plausible execution model for a stated workload, trace waiting and shared-state hazards, and explain runtime-dependent limitations.
-
-Bridge: Execution choices add complexity; next we combine correctness, diagnosis, performance, and distribution into one coherent program.
-
-## Chapter 11 — Reliable, Efficient, and Distributable Programs
-
-Objective: Explain the engineering decisions behind a maintainable program and its delivery.
-
-1. Testing as a program-quality technique: examples, boundaries, isolation, and regression cases
-2. Tracebacks, debugger workflows, assertions, and systematic diagnosis
-3. Logging levels, context, and useful operational signals
-4. Timing and profiling: baselines, bottlenecks, and measurement limits
-5. Algorithmic complexity, collection choices, and memory trade-offs
-6. Security boundaries: untrusted input, unsafe deserialization, and subprocess assumptions
-7. Command-line interfaces, pyproject.toml, builds, and installation boundaries
-8. Integrated walkthrough: organise, validate, diagnose, and package the reporting tool
-
-Worked illustrations: Annotated unittest examples without learner grading; a bug traced from a failing case; supplied timing/profile output; list-versus-set lookup reasoning; an argparse interface and project tree; a local build/install flow. Publishing, infrastructure deployment, and running external commands are outside the plan’s authorisation.
-
-Outcome: Explain quality checks and diagnostic evidence, justify measured improvements, and interpret how a program becomes an installable command-line application.
-
-Bridge: Continue with unfamiliar programs and domain-specific libraries; deeper practical competence grows through separate implementation experience and feedback.
-
-## Sources and scope
-
-The primary baseline is the [Python 3.14 tutorial](https://docs.python.org/3.14/tutorial/) and [language data model](https://docs.python.org/3.14/reference/datamodel.html), supplemented by selected standard-library guides for functions, classes, files, exceptions, typing, context managers, concurrency, and testing. The official tutorial assumes prior programming experience; this course adds a beginner opening instead of copying its order directly.
-
-The [Python Packaging User Guide](https://packaging.python.org/en/latest/tutorials/packaging-projects/) informs project/build concepts. Publisher descriptions and contents were compared for Eric Matthes’s [Python Crash Course, third edition](https://nostarch.com/python-crash-course-3rd-edition) and Luciano Ramalho’s [Fluent Python, second edition](https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/) (2022). Full book text was not accessed. Detailed evidence, coverage mapping, and review status remain in [README.md](../README.md).
-
-Web frameworks, scientific/data libraries, machine learning, GUI/game development, advanced network services, native extensions, exhaustive metaclass programming, and every standard-library API are outside the main course. Descriptors, method resolution, and memory management receive explanatory coverage rather than implementation-level treatment. Type-checker behaviour, third-party tools, platform-specific process details, and package-backend choices require further source verification when lessons are authored. No executable course lessons or measured benchmarks are delivered by this TOC.
+# Python — from first program to production
+
+**Status: outline for review.** Courses, sections and the spine application only. Scene designs,
+narration and code come after this outline is approved — one course at a time, each reviewed on its
+rendered routes before the next begins.
+
+## Who it is for
+
+One path that takes an absolute beginner to a working professional, and lets an experienced
+developer drop in at any course. Four parts, each with its own entry level:
+
+| Part | For | Leaves you able to |
+| --- | --- | --- |
+| I — Foundations | someone who has never programmed | read and write small, correct programs |
+| II — Building programs | someone who can write a script | structure a real program: files, errors, modules, classes |
+| III — Pythonic depth | a working developer new to Python's internals | use the data model, functions as objects and types the way Python intends |
+| IV — Professional Python | someone shipping Python | test it, run it concurrently, package and serve it |
+
+## How a section teaches
+
+Every section is **one full-screen frame and one narration**, no slide. The frame carries what a
+slide used to: the code, what it prints or leaves in memory, and the mental model that explains it,
+side by side across the full width.
+
+- **Code is real.** A `kind: 'code'` card holds roastery code that runs on the pinned Python
+  version, and its output is shown as it actually prints. Every snippet is run before it is written
+  down.
+- **Wide, not tall.** Frames are laid out left to right (code → result → model). A tall stack is
+  fitted by the frame's height and wastes the width the scene-only layout gave us.
+- **One idea per frame.** If a frame needs two ideas, it is two sections. A section that wants to
+  walk a big picture reuses ONE scene across consecutive sections with a different `focus` each.
+- **Narration explains; the frame shows.** The narration never reads the code aloud line by line.
+- **Failure is taught, not hidden.** Most sections show the wrong version next to the right one,
+  with the real traceback or wrong output.
+
+Target length: 90–180 seconds of narration per section.
+
+## The spine: `roastery`
+
+One application grows across the whole course: the order service of a small coffee roastery. A
+customer orders bags of beans; the service prices the order (by weight, roast and discounts),
+checks stock, records it, and produces invoices and reports.
+
+It is chosen because it stays honest at every level:
+
+- **Beginner**: a bag's price is a multiplication; an order is a list; a discount is an `if`.
+- **Intermediate**: orders arrive as CSV and JSON with bad rows; the code splits into modules;
+  `Order`, `LineItem` and `Product` become classes.
+- **Advanced**: a large order file streams through generators; pricing rules become first-class
+  functions and decorators; types catch mistakes before they run.
+- **Professional**: supplier prices are fetched concurrently; the service is tested, given a CLI and
+  an HTTP API, and packaged.
+
+Money is a `Decimal` from the moment it appears (Course 3), and the course says why.
+
+Where it ends up — the map each course opens on, with the part being built lit:
+
+```
+roastery/
+  models.py      Product, LineItem, Order, Customer        (Course 9)
+  pricing.py     prices, discounts, pricing rules           (3 → 6 → 11)
+  inventory.py   stock levels, reservations                 (5, 9)
+  io.py          CSV / JSON import, validation              (7, 10)
+  suppliers.py   concurrent price fetching                  (13)
+  reports.py     invoices, daily summaries                  (6, 10)
+  cli.py         command line                               (15)
+  api.py         HTTP API                                   (15)
+tests/           pytest suite                               (14)
+pyproject.toml   packaging                                  (8, 15)
+```
+
+## The courses — 15 courses, 103 sections
+
+### Part I — Foundations
+
+**1. `why-python` · Why Python · 5 sections**
+The course opener: what you are about to learn and why it is worth it.
+1. What Python is, and where it runs — the landscape: scripting, web, data, ML, automation
+2. A short history, 1991 to today — `evolution` timeline: 1.0, 2.0, 3.0, the 2→3 break, the yearly releases
+3. The design philosophy — readability counts, batteries included, one obvious way
+4. The trade-offs — what Python is slow at, what it is fast to write, when to pick something else
+5. Meet `roastery` — the application we build, shown finished
+
+**2. `how-python-runs` · How Python runs your code · 7 sections**
+The mental model everything later depends on: names point to objects.
+1. The interpreter, the REPL and a script — three ways to run the same line
+2. Source → bytecode → virtual machine — what `python order.py` actually does (`dis`)
+3. Names point to objects — assignment binds, it never copies
+4. Every object has an identity, a type and a value — `id`, `type`, `==` versus `is`
+5. Mutable and immutable — why changing a list is visible through every name
+6. Reading a traceback — bottom line first, then up the stack
+7. Statements and expressions — what produces a value and what only does something
+
+**3. `values` · Values, types and operators · 7 sections**
+1. Integers and floats — and why `0.1 + 0.2` is not `0.3`
+2. `Decimal` for money — pricing the first bag correctly
+3. Strings — text, indexing, slicing, immutability
+4. Booleans, `None` and truthiness
+5. Operators and precedence — reading an expression the way Python does
+6. Converting between types — `int()`, `str()`, `float()` and where they fail
+7. Formatting output — f-strings, alignment, and a printed receipt
+
+**4. `collections` · Collections · 8 sections**
+1. Lists — an order as an ordered, changeable list of bags
+2. Tuples — fixed records and unpacking
+3. Dictionaries — a product catalogue keyed by SKU
+4. Sets — membership and uniqueness (which roasts are in stock)
+5. Nesting — an order as a dict of line items
+6. Aliasing and copying — shallow versus deep, drawn in memory
+7. Slicing and unpacking — `*rest`, swapping, star expressions
+8. Choosing a collection — lookup cost, order, mutability, at a glance
+
+**5. `control-flow` · Decisions and loops · 7 sections**
+1. `if` / `elif` / `else` — the discount rules
+2. `match` — dispatching on the shape of an order
+3. `for` loops — `range`, `enumerate`, `zip`
+4. `while`, `break`, `continue` — and the loop `else`
+5. Comprehensions — list, dict and set, and when not to use them
+6. Loop patterns — accumulate, filter, find, group
+7. Pricing a whole order — the first complete roastery program
+
+**6. `functions` · Functions · 8 sections**
+1. Defining and calling — `def`, parameters, `return`
+2. Arguments — positional, keyword, defaults, `*args`, `**kwargs`, keyword-only
+3. The mutable default trap — what really happens at `def` time
+4. Scope — local, enclosing, global, built-in (LEGB)
+5. Docstrings and type hints — the function's contract
+6. Pure functions and side effects — why `price()` should not print
+7. Decomposing the order pipeline — from one long script to small functions
+8. Functions as keys — `sorted`, `min`, `max` with `key=` and `lambda`
+
+### Part II — Building programs
+
+**7. `errors-files` · Errors and files · 8 sections**
+1. Exceptions — what is raised, what is caught, the hierarchy
+2. `try` / `except` / `else` / `finally` — handling one failure well
+3. Raising and defining your own exceptions — `OutOfStock`, `InvalidOrder`
+4. Files and `with` — opening, reading, writing, closing for certain
+5. Text and encodings — bytes versus str, UTF-8
+6. `pathlib` — paths that work on every OS
+7. CSV and JSON — loading `orders.csv` and `catalogue.json`
+8. Validating input — rejecting bad rows without losing good ones
+
+**8. `modules` · Modules, packages and environments · 6 sections**
+1. Modules and `import` — what importing actually executes
+2. Packages — turning roastery into a folder of modules
+3. `if __name__ == "__main__"` — a module that is also a script
+4. The standard library tour — what ships with Python
+5. Virtual environments and `pip` — isolating dependencies
+6. `pyproject.toml` — declaring a project and its dependencies
+
+**9. `classes` · Classes and objects · 8 sections**
+1. Classes and instances — `Product` from a dict to a type
+2. Attributes and lookup — instance, class, and the order Python searches
+3. Methods — instance, `@classmethod`, `@staticmethod`
+4. Properties and invariants — a `LineItem` that cannot have negative quantity
+5. Dataclasses — less boilerplate, same object
+6. Composition — an `Order` has line items, a customer and a status
+7. Inheritance and `super()` — and when it is the wrong tool
+8. Protocols and abstract base classes — depending on behaviour, not ancestry
+
+**10. `data-model` · The Python data model · 7 sections**
+1. `__repr__` and `__str__` — objects that print usefully
+2. Equality and hashing — `__eq__`, `__hash__`, using objects as dict keys
+3. Operators — `__add__` for adding two orders
+4. The container protocol — `__len__`, `__getitem__`, `__contains__`
+5. The iteration protocol — iterables, iterators, `__iter__` and `__next__`
+6. Generators — streaming a million-line order file in constant memory
+7. Context managers — `__enter__`, `__exit__` and `contextlib`
+
+### Part III — Pythonic depth
+
+**11. `functional` · Functions as objects · 6 sections**
+1. First-class functions — passing pricing rules around
+2. Closures — functions that remember
+3. Decorators — `@timed`, `@retry`, and how `@` desugars
+4. `functools` — `partial`, `lru_cache`, `wraps`, `singledispatch`
+5. `itertools` — pipelines without intermediate lists
+6. A pricing-rules engine — composing small rules into one price
+
+**12. `typing` · Types at scale · 5 sections**
+1. Type hints in depth — unions, optionals, collections, `Self`
+2. Generics and `TypeVar` — a typed repository
+3. `Protocol` and `TypedDict` — structural types for real data
+4. Checking types — mypy / pyright and what they catch
+5. Validating at the boundary — parsing untrusted input into typed objects
+
+**13. `concurrency` · Concurrency · 8 sections**
+1. CPU-bound versus I/O-bound — the question that picks the tool
+2. Threads — and what the GIL does and does not stop
+3. The free-threaded build — what changes without the GIL
+4. Processes — `multiprocessing` and `concurrent.futures`
+5. `asyncio` — the event loop, coroutines, `await`
+6. Async in practice — `gather`, timeouts, cancellation
+7. Choosing a model — threads, processes or asyncio, side by side
+8. Fetching supplier prices concurrently — roastery's `suppliers.py`
+
+### Part IV — Professional Python
+
+**14. `quality` · Testing and quality · 7 sections**
+1. `pytest` — the first test of `price()`
+2. Fixtures and parametrisation — one test, many orders
+3. Test doubles — mocking the supplier boundary, and only the boundary
+4. What to test — coverage as a tool, not a target
+5. Linting and formatting — ruff, and why style is automated
+6. Logging — `logging` instead of `print`
+7. Debugging and profiling — `pdb`, `cProfile`, finding the slow line
+
+**15. `shipping` · Shipping Python · 6 sections**
+1. A command-line interface — `argparse` for `roastery price orders.csv`
+2. Configuration and secrets — environment, files, never in code
+3. An HTTP API — serving roastery over the network
+4. Packaging — building a wheel and installing it clean
+5. Performance — data structures first, then profiling, then native code
+6. The finished roastery — a tour of everything built, and where to go next
+
+## Decisions to confirm before authoring
+
+1. **The spine.** `roastery` (coffee orders) as above, or a different domain.
+2. **The version pin.** Current stable at authoring time. Python 3.15 is scheduled for October 2026;
+   if it has shipped, pin to it and re-check every free-threading and `typing` claim against it.
+3. **The HTTP API in Course 15.** A third-party framework (FastAPI) is what professionals use; the
+   standard library's `http.server` keeps the course dependency-free. Recommended: FastAPI, named as
+   the one third-party dependency the course adds on purpose.
+4. **Course 12 (typing).** Kept separate because types change how a professional writes Python; it
+   could fold into Courses 9 and 14 to save five sections.

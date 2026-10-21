@@ -1,31 +1,8 @@
-import { foundations } from './foundations'
-import { collections } from './collections'
-import { controlFlow } from './control-flow'
-import { functions } from './functions'
-import { filesErrors } from './files-errors'
-import { modules } from './modules'
-import { classes } from './classes'
-import { dataModel } from './data-model'
-import { composition } from './composition'
-import { concurrency } from './concurrency'
-import { qualityPackaging } from './quality-packaging'
 import type { Course, Section } from './types'
 
-// Course registry, in syllabus order. Courses are added here as each is authored.
-// One course per chapter of PYTHON-COURSE-PLAN.md; chapters are registered here as they are authored.
-export const COURSES: Record<string, Course> = {
-  [foundations.id]: foundations,
-  [collections.id]: collections,
-  [controlFlow.id]: controlFlow,
-  [functions.id]: functions,
-  [filesErrors.id]: filesErrors,
-  [modules.id]: modules,
-  [classes.id]: classes,
-  [dataModel.id]: dataModel,
-  [composition.id]: composition,
-  [concurrency.id]: concurrency,
-  [qualityPackaging.id]: qualityPackaging,
-}
+// Course registry, in syllabus order. One course per chapter of PYTHON-COURSE-PLAN.md; a course is
+// registered here only once it is authored.
+export const COURSES: Record<string, Course> = {}
 
 export type { Course, Section }
 

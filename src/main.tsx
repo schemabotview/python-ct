@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 // Three stylesheets, in cascade order — the last one wins, and it is the only one this repo owns:
-//   engine — react-flow + the IBM Plex faces its code-node metrics are calibrated to
+//   engine — node styles + the IBM Plex faces its code-node metrics are calibrated to
 //   shell  — the concept-app layout and surface (it paints --bg, which SceneView assumes)
 //   theme  — this repo's three brand tokens
 // The order is load-bearing: theme last, or this repo's brand loses to the shell's neutral defaults.
