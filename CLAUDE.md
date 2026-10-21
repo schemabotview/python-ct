@@ -42,7 +42,7 @@ Courses 1–2, IDE frames (`@graphlearning/flow` ^2.2.0: tree, terminal, folded 
 | 9 | `structure` | Structure the pipeline | 9 | authored, awaiting owner review (no narration audio yet) |
 | 10 | `trust` | Make it trustworthy | 7 | authored, awaiting owner review (no narration audio yet) |
 | 11 | `speed` | Make it fast | 7 | authored, awaiting owner review (no narration audio yet) |
-| 12 | | see the plan | 6 | not started |
+| 12 | `ship` | Ship it | 6 | authored, awaiting owner review (no narration audio yet; §1 uses `--month`, not the plan's `--date`: the job is monthly) |
 
 Every number on a Course 1 and Course 2 frame was produced here on **CPython 3.14.6** (x86-64, 4
 CPUs), installed with `uv python install 3.14` (and `3.14t` for the free-threaded build): the

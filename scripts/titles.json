@@ -10,5 +10,6 @@
   "load": "Writing Data in Python: CSV Reports, f-strings, JSON, SQLite Transactions and Safe Re-runs",
   "structure": "Structure a Python Project: Modules, Packages, Classes, Dataclasses, Type Hints and pyproject.toml",
   "trust": "Testing Python Code: pytest, Fixtures, Mocks, Logging, Decorators, pdb and ruff",
-  "speed": "Make Python Fast: Profiling, Sets, Generators, Threads and the GIL, Processes and asyncio"
+  "speed": "Make Python Fast: Profiling, Sets, Generators, Threads and the GIL, Processes and asyncio",
+  "ship": "Ship a Python Project: argparse CLIs, Configuration and Secrets, Wheels, cron and Exit Codes"
 }

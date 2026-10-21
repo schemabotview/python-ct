@@ -1,0 +1,9 @@
+$ pytest -q && mypy pipeline && ruff check
+............                                                             [100%]
+12 passed in 0.06s
+Success: no issues found in 9 source files
+All checks passed!
+$ roastery-etl run --month 2026-10
+INFO    2026-10: 5,797 rows, 79 rejected
+INFO    2026-10: 31 days, $401,430.14 revenue
+INFO    2026-10: 5,797 rows in warehouse.db

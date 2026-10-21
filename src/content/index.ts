@@ -9,6 +9,7 @@ import { loadCourse } from './load'
 import { structureCourse } from './structure'
 import { trustCourse } from './trust'
 import { speedCourse } from './speed'
+import { shipCourse } from './ship'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. One course per chapter of PYTHON-COURSE-PLAN.md; a course is
@@ -25,6 +26,7 @@ export const COURSES: Record<string, Course> = {
   [structureCourse.id]: structureCourse,
   [trustCourse.id]: trustCourse,
   [speedCourse.id]: speedCourse,
+  [shipCourse.id]: shipCourse,
 }
 
 export type { Course, Section }

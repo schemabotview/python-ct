@@ -1,0 +1,6 @@
+$ roastery-etl config
+Settings(raw=data/raw, out=data/out, shop_token=not set)
+$ ROASTERY_OUT=/srv/roastery ROASTERY_SHOP_TOKEN=s3cr3t roastery-etl config
+Settings(raw=data/raw, out=/srv/roastery, shop_token=set)
+$ paste -sd' ' .gitignore
+.venv/ __pycache__/ data/out/ dist/ logs/ .env

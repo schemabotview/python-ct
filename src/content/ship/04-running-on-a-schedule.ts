@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const runningOnASchedule: Section = {
+  id: 'running-on-a-schedule',
+  title: "Running on a schedule: cron, exit codes and alerts",
+  scene: 'ship-schedule',
+  narration:
+    "The roastery wants last month's reports on the second of every month, without anyone remembering to run them. On a Linux server, cron is the standard way to run a command on a schedule. The crontab line, written in the comment at the top of the script, has five time fields: minute seventeen, hour six, day of the month two, any month, any weekday. So at six seventeen in the morning on the second of each month, cron runs deploy slash run dot sh with no arguments, and the pipeline falls back to last month. A job that runs unattended needs a way to say whether it worked, and that is the exit code. It is the number main returns: zero for success, one when the job ran and failed, here because a month has no order files, and two, which argparse uses for a command it could not understand. The script in the editor turns those codes into an alert. It moves to the project folder, so relative paths behave as they do by hand, then runs the installed command and appends everything it logs to logs slash run dot log. The two vertical bars mean: only if the command failed. Cron emails whatever a job prints to the address in MAILTO, so this design keeps quiet on success and sends exactly one line, with the exit code, on failure, while the full detail waits in the log. The terminal shows the three codes. The wrapper processes October and exits zero, printing nothing at all. November has no files: the error is logged and the exit code is one. A month of thirteen is refused by argparse with code two. A scheduler, a monitoring service or another script can act on that number without reading a word of the output. Next: the finished pipeline, every file and the course that built it.",
+}

@@ -1,0 +1,9 @@
+$ sh deploy/run.sh --month 2026-10; echo "exit $?"
+exit 0
+$ roastery-etl run --month 2026-11; echo "exit $?"
+ERROR   no orders for 2026-11
+exit 1
+$ roastery-etl run --month 13; echo "exit $?"
+usage: roastery-etl run [-h] [--month YYYY-MM]
+roastery-etl run: error: argument --month: '13' is not a month (YYYY-MM)
+exit 2

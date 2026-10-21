@@ -1,0 +1,9 @@
+$ pip wheel -q --no-deps -w dist .
+$ python -m venv ~/clean
+$ ~/clean/bin/pip install -q dist/roastery_etl-1.0.0-py3-none-any.whl
+$ ~/clean/bin/roastery-etl --version
+roastery-etl 1.0.0
+$ ~/clean/bin/roastery-etl run --month 2026-10
+INFO    2026-10: 5,797 rows, 79 rejected
+INFO    2026-10: 31 days, $401,430.14 revenue
+INFO    2026-10: 5,797 rows in warehouse.db
