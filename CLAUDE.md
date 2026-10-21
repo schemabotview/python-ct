@@ -66,9 +66,11 @@ machine); a different interpreter changes the banner, `pyvenv.cfg` and some erro
 check reports exactly that.
 
 IDE frames are built with `ideFrame()` in `src/scenes/ide.ts`: ONE fixed template — explorer
-(300) | editor (80 columns — PEP 8's limit — × 500) over terminal (280) | side pane (520) — so every panel sits at the
+(300) | editor (80 columns — PEP 8's limit — × 544, 21 rows) over terminal (302, 10 lines) | side pane (520) — so every panel sits at the
 same pixels in every section (`@graphlearning/flow` ^2.2.0 `minW` / `minH`). A file longer than the
-editor is folded with `show`, never allowed to grow the pane, and two versions of a file are two
+editor is folded with `show`, never allowed to grow the pane. The whole template is 1632 × 856, 1.91:1 —
+the shape of the scene area under the header at 16:9 — so it is fitted edge to edge with no slack band
+above it, and every side card is stretched to the full 520. Two versions of a file are two
 sections, never two editors in one frame. `check-render.mjs` fails any IDE frame whose explorer,
 editor, terminal or side pane moves.
 
