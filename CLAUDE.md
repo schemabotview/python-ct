@@ -38,7 +38,8 @@ Courses 1–2, IDE frames (`@graphlearning/flow` ^2.2.0: tree, terminal, folded 
 | 5 | `process` | Process the data | 11 | authored, awaiting owner review (no narration audio yet) |
 | 6 | `extract` | Read the data | 7 | authored, awaiting owner review (no narration audio yet) |
 | 7 | `aggregate` | Aggregate it | 7 | authored, awaiting owner review (no narration audio yet) |
-| 8–12 | | see the plan | 35 | not started |
+| 8 | `load` | Write the results | 6 | authored, awaiting owner review (no narration audio yet) |
+| 9–12 | | see the plan | 29 | not started |
 
 Every number on a Course 1 and Course 2 frame was produced here on **CPython 3.14.6** (x86-64, 4
 CPUs), installed with `uv python install 3.14` (and `3.14t` for the free-threaded build): the

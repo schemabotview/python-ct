@@ -1,14 +1,16 @@
 import type { Scene, SceneNode } from '@graphlearning/flow'
 
-// The CSV is the sample day the course builds on; the report table is what a real run over it
-// printed (CPython 3.14.6): order 1004's quantity is "three", so it is rejected and the rest is priced.
+// The CSV is the real first day of spine/extract (data/raw/orders-2026-10-01.csv); the report table is what
+// Course 8's pipeline computes for that day on CPython 3.14.6: two rows rejected, the rest priced with
+// Course 5's discounts.
 const ORDERS = [
-  'order_id,date,customer,sku,qty',
-  '1001,2026-10-01,ana@example.com,ETH-250,2',
-  '1002,2026-10-01,ben@example.com,COL-500,1',
-  '1003,2026-10-01,ana@example.com,BRA-1K,1',
-  '1004,2026-10-01,cara@example.com,ETH-250,three',
-  '1005,2026-10-01,ben@example.com,ETH-250,1',
+  'order_id,date,customer,sku,quantity',
+  'ORD-1001,2026-10-01,maya,ETH-250,3',
+  'ORD-1002,2026-10-01,omar,COL-500,12',
+  'ORD-1003,2026-10-01,lena,KEN-1000,2',
+  'ORD-1004,2026-10-01,raj,ETH-250,three',
+  'ORD-1005,2026-10-01,maya,PER-250,1',
+  'ORD-1006,2026-10-01,"Luna Café, Ltd",BRA-500,4',
 ].join('\n')
 
 const step = (id: string, label: string, sub: string, icon: string, pattern: SceneNode['pattern']): SceneNode => ({ id, label, sub, icon, pattern })
@@ -28,7 +30,7 @@ export const pipeline: Scene = {
       flow: 'LR',
       align: 'start',
       children: [
-        { id: 'raw', kind: 'code', filename: 'data/raw/orders-2026-10-01.csv', hug: true, pattern: 'warn', highlight: [5], label: ORDERS },
+        { id: 'raw', kind: 'code', filename: 'data/raw/orders-2026-10-01.csv', hug: true, pattern: 'warn', highlight: [5, 6], label: ORDERS },
         {
           id: 'stages',
           label: 'Stages',
@@ -44,7 +46,7 @@ export const pipeline: Scene = {
             ]),
             stage('load', '8', 'Load', 'write the results', 'storage', [
               step('db', 'SQLite database', 'every priced line', 'database', 'storage'),
-              step('csv', 'Daily report', 'one row per product', 'file', 'storage'),
+              step('csv', 'Daily report', 'one row per day', 'file', 'storage'),
             ]),
           ],
           edges: [
@@ -60,16 +62,17 @@ export const pipeline: Scene = {
             {
               id: 'report',
               kind: 'table',
-              label: 'daily_report.csv',
+              label: 'October 1st, per product',
               headers: ['sku', 'bags', 'revenue'],
               values: [
-                ['ETH-250', '3', '28.50'],
-                ['BRA-1K', '1', '27.00'],
-                ['COL-500', '1', '16.00'],
-                ['total', '5', '71.50'],
+                ['ETH-250', '3', '29.85'],
+                ['COL-500', '12', '178.50'],
+                ['KEN-1000', '2', '58.90'],
+                ['BRA-500', '4', '61.75'],
+                ['total', '21', '329.00'],
               ],
             },
-            { id: 'rejected', kind: 'note', pattern: 'warn', label: 'Rejected: order 1004 — quantity "three" is not a number' },
+            { id: 'rejected', kind: 'note', pattern: 'warn', label: 'Rejected, with reasons: ORD-1004, quantity "three"; ORD-1005, unknown product PER-250' },
           ],
         },
       ],

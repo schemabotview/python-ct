@@ -1,0 +1,7 @@
+$ python main.py
+5797 rows in the table
+$ python main.py
+5797 rows in the table
+$ ls data/out
+order_lines.csv
+warehouse.db

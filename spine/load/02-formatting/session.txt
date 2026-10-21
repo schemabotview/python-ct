@@ -1,0 +1,10 @@
+$ python main.py
+date        orders   bags     revenue  top
+2026-10-01       4     21      329.00  COL-500
+2026-10-02       3      4       75.95  COL-500
+2026-10-03       3      9      214.10  KEN-1000
+2026-10-04     192    761   13,739.95  KEN-1000
+October       5797         401,430.14
+79 rows rejected: 1.3% of the month
+total = Decimal('401430.14')
+[$$$$401,430.14] [  COL-500  ]
