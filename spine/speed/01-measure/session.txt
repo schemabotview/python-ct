@@ -1,0 +1,7 @@
+$ python -m timeit -n 1 -r 3 -s "from main import main" "main()" 2>/dev/null
+1 loop, best of 3: 204 msec per loop
+$ python -m bench.profile 2>/dev/null
+ 0.18 s          1 calls  drop_duplicates  (transform.py:26)
+ 0.01 s       5797 calls  line_total  (transform.py:14)
+ 0.01 s       5907 calls  __next__  (csv.py:173)
+ 0.01 s       5938 calls  <built-in method builtins.next>  (~:0)

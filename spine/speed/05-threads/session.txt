@@ -1,0 +1,8 @@
+$ python -m bench.threads
+GIL enabled: True
+fetch_day      1 thread 0.80 s   4 threads 0.20 s
+summarise_day  1 thread 0.30 s   4 threads 0.35 s
+$ python3.14t -m bench.threads
+GIL enabled: False
+fetch_day      1 thread 0.80 s   4 threads 0.20 s
+summarise_day  1 thread 0.31 s   4 threads 0.09 s

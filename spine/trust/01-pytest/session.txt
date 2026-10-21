@@ -6,4 +6,4 @@ tests/test_transform.py::test_no_discount_under_fifty_dollars
 tests/test_transform.py::test_fifty_dollars_or_more_is_five_percent_off
 tests/test_transform.py::test_ten_bags_or_more_is_fifteen_percent_off
 
-3 tests collected in 0.00s
+3 tests collected in 0.01s

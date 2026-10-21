@@ -1,0 +1,3 @@
+$ python -m bench.bound
+fetch_day      wall 0.20 s   cpu 0.00 s
+summarise_day  wall 0.08 s   cpu 0.08 s

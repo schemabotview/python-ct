@@ -7,4 +7,4 @@ tests/test_extract.py::test_a_bad_row_is_rejected[unknown-sku] PASSED    [ 50%]
 tests/test_extract.py::test_a_bad_row_is_rejected[a-word] PASSED         [ 75%]
 tests/test_extract.py::test_a_bad_row_is_rejected[zero] PASSED           [100%]
 
-============================== 4 passed in 0.02s ===============================
+============================== 4 passed in 0.01s ===============================

@@ -1,0 +1,4 @@
+$ python -m bench.memory
+the month in a list: 4,281 KiB peak
+streamed, one day:   207 KiB peak
+same 31 summaries: True

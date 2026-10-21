@@ -8,6 +8,7 @@ import { aggregateCourse } from './aggregate'
 import { loadCourse } from './load'
 import { structureCourse } from './structure'
 import { trustCourse } from './trust'
+import { speedCourse } from './speed'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. One course per chapter of PYTHON-COURSE-PLAN.md; a course is
@@ -23,6 +24,7 @@ export const COURSES: Record<string, Course> = {
   [loadCourse.id]: loadCourse,
   [structureCourse.id]: structureCourse,
   [trustCourse.id]: trustCourse,
+  [speedCourse.id]: speedCourse,
 }
 
 export type { Course, Section }

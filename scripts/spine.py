@@ -148,7 +148,7 @@ def replay(step: Path) -> tuple[str, dict[str, str]]:
 def masked(text: str, step: Path) -> str:
     """For a volatile step, hide the numbers that legitimately change from run to run."""
     config = json.loads((step / 'step.json').read_text()) if (step / 'step.json').exists() else {}
-    return re.sub(r'\d+', '#', text) if config.get('volatile') else text
+    return re.sub(r'\d+(?:[.,]\d+)*', '#', text) if config.get('volatile') else text
 
 
 def main() -> int:

@@ -39,7 +39,7 @@ def retry(times):
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format=FORMAT)
-    calls = []
+    calls: list[int] = []
 
     @retry(times=3)
     def fetch_orders():
