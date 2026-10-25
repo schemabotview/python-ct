@@ -30,20 +30,20 @@ leaves a section frame headerless and exports `SCENE_ASPECT`). This repo's own s
 around one ETL pipeline (`roastery-etl`); courses are named by what we build. Concept frames for
 Courses 1–2, IDE frames (`@graphlearning/flow` ^2.2.0: tree, terminal, folded code, min sizes) from Course 3.
 
-| # | Course id | Course | Sections | Status |
-| --- | --- | --- | --- | --- |
-| 1 | `why-python` | Why Python | 5 | authored, awaiting owner review (no narration audio yet) |
-| 2 | `how-python-runs` | How Python runs your code | 9 | authored, awaiting owner review (no narration audio yet) |
-| 3 | `start` | Start the project | 6 | authored, awaiting owner review (no narration audio yet) |
-| 4 | `hold` | Hold the data | 10 | authored, awaiting owner review (no narration audio yet) |
-| 5 | `process` | Process the data | 11 | authored, awaiting owner review (no narration audio yet) |
-| 6 | `extract` | Read the data | 7 | authored, awaiting owner review (no narration audio yet) |
-| 7 | `aggregate` | Aggregate it | 7 | authored, awaiting owner review (no narration audio yet) |
-| 8 | `load` | Write the results | 6 | authored, awaiting owner review (no narration audio yet) |
-| 9 | `structure` | Structure the pipeline | 9 | authored, awaiting owner review (no narration audio yet) |
-| 10 | `trust` | Make it trustworthy | 7 | authored, awaiting owner review (no narration audio yet) |
-| 11 | `speed` | Make it fast | 7 | authored, awaiting owner review (no narration audio yet) |
-| 12 | `ship` | Ship it | 6 | authored, awaiting owner review (no narration audio yet; §1 uses `--month`, not the plan's `--date`: the job is monthly) |
+| # | Course id | Course | Sections | Video | Status |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `why-python` | Why Python | 5 | 8:50 | narrated and rendered, awaiting owner review |
+| 2 | `how-python-runs` | How Python runs your code | 9 | 12:57 | narrated and rendered, awaiting owner review |
+| 3 | `start` | Start the project | 6 | 8:19 | narrated and rendered, awaiting owner review |
+| 4 | `hold` | Hold the data | 10 | 15:17 | narrated and rendered, awaiting owner review |
+| 5 | `process` | Process the data | 11 | 17:10 | narrated and rendered, awaiting owner review |
+| 6 | `extract` | Read the data | 7 | 10:59 | narrated and rendered, awaiting owner review |
+| 7 | `aggregate` | Aggregate it | 7 | 11:09 | narrated and rendered, awaiting owner review |
+| 8 | `load` | Write the results | 6 | 10:01 | narrated and rendered, awaiting owner review |
+| 9 | `structure` | Structure the pipeline | 9 | 14:38 | narrated and rendered, awaiting owner review |
+| 10 | `trust` | Make it trustworthy | 7 | 11:16 | narrated and rendered, awaiting owner review |
+| 11 | `speed` | Make it fast | 7 | 11:05 | narrated and rendered, awaiting owner review |
+| 12 | `ship` | Ship it | 6 | 9:14 | narrated and rendered, awaiting owner review (§1 uses `--month`, not the plan's `--date`: the job is monthly) |
 
 Every number on a Course 1 and Course 2 frame was produced here on **CPython 3.14.6** (x86-64, 4
 CPUs), installed with `uv python install 3.14` (and `3.14t` for the free-threaded build): the
@@ -99,7 +99,11 @@ Source layout per course: `src/content/<course>/NN-<section-id>.ts` plus `index.
 - **Timings, races and profiles are not deterministic.** Round them, tie them to the build they were
   measured on, and make no universal speedup claim. Free-threaded behaviour that was not measured is
   labelled as documentation, not measurement.
-- **No narration audio exists.** `.wav` files come only from the Colab + Chatterbox pass.
+- **Narration audio is complete** — one `.wav` per section for all 90, produced by the Colab +
+  Chatterbox pass (2026-10-21, the same day as the reset) and committed under `public/audio/<course>/<section-id>.wav`.
+  Chatterbox is not deterministic, so re-running it on an unchanged `.tts` yields a different
+  take and a different duration. Re-generate only the sections whose narration text changed, or
+  every chapter timestamp downstream of it moves.
 
 ## Authoring conventions
 
