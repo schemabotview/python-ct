@@ -1,0 +1,9 @@
+$ pip install -q mypy==2.4.0
+$ mypy
+pipeline/transform.py:82: error: Incompatible types (expression has type "Decimal | Literal[0]", TypedDict item "total" has type "Decimal")  [typeddict-item]
+Found 1 error in 1 file (checked 6 source files)
+$ python -q
+>>> from decimal import Decimal
+>>> sum([]), sum([], Decimal("0"))
+(0, Decimal('0'))
+>>> exit()

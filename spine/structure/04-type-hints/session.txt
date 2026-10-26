@@ -1,0 +1,13 @@
+$ python -q
+>>> from pipeline.transform import to_cents; to_cents.__annotations__
+{'amount': <class 'decimal.Decimal'>, 'return': <class 'decimal.Decimal'>}
+>>> to_cents("9.95")
+Traceback (most recent call last):
+  File "<python-input-1>", line 1, in <module>
+    to_cents("9.95")
+    ~~~~~~~~^^^^^^^^
+  File "/home/ana/roastery-etl/pipeline/transform.py", line 35, in to_cents
+    return amount.quantize(CENT)
+           ^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'quantize'
+>>> exit()

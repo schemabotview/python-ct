@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const dependenciesAndMypy: Section = {
+  id: 'dependencies-and-mypy',
+  title: 'Dependencies and a type checker',
+  scene: 'structure-mypy',
+  narration:
+    "Everything so far has come from Python's standard library. A type checker does not, so this is the moment the project gets a proper description of itself. pyproject dot toml is the standard file for that. Its project table gives the name, a version, a description, and the Python it needs: three fifteen or later. A dependency group lists the tools a developer needs but the job does not, here mypy, pinned to an exact version, so everyone checks with the same rules. And a tool dot mypy table tells mypy which files to check: main dot py and the pipeline package. The flow on the right follows the chain. pip install, with the virtual environment active, puts mypy inside dot venv, never in the system's Python. Then mypy runs. It reads six files, and every hint in them, and executes nothing. It reports one error, in transform dot py, line eighty two. The TypedDict says the total is a Decimal. But the total comes from sum of totals, and mypy says that expression is a Decimal or the literal zero. Why? sum starts adding from the integer zero. The REPL shows it: the sum of an empty list is the int zero, not a Decimal. Our months have never been empty, so no run has shown it. But a month where every row was rejected would put an int into the summary where every other part of the pipeline expects exact money. The fix is a single argument: give sum a Decimal starting value, as the second REPL line does, and the answer is a Decimal zero. Course nine opens with that fix. This is what a type checker is for: it reads every path through the code, including the ones the test data never takes. The pipeline now has structure and contracts. Next, objects.",
+}

@@ -48,7 +48,9 @@ export const trim = (text: string) => text.replace(/\n+$/, '')
  * A spine session.txt as a terminal pane. graphl-flow draws `$ cmd` as a command and `! text` as an
  * error; the replay (scripts/spine.py) writes plain output, so a traceback is marked here: from its
  * header — `Traceback (most recent call last):`, or the `  File "…", line N` a SyntaxError starts
- * with — through the exception line that ends it.
+ * with — through the exception line that ends it. A line longer than the pane's 80 columns WRAPS at
+ * column 80, as it does in a real 80-column terminal (mypy's one-line reports run to ~130), and each
+ * wrapped piece is a row that check-content counts against TERMINAL_ROWS.
  */
 export function terminal(session: string): string {
   const out: string[] = []
@@ -56,10 +58,11 @@ export function terminal(session: string): string {
   for (const line of trim(session).split('\n')) {
     if (line.startsWith('$ ') || line.startsWith('>>> ') || line.startsWith('... ')) inError = false
     else if (!inError && (line === 'Traceback (most recent call last):' || /^ {2}File ".*", line \d+/.test(line))) inError = true
+    const rows = line.match(new RegExp(`.{1,${EDITOR_COLS}}`, 'g')) ?? ['']
     if (inError) {
-      out.push(`! ${line}`)
+      out.push(...rows.map((row) => `! ${row}`))
       if (/^[A-Za-z_][\w.]*(Error|Exception|Warning|Interrupt|Exit)\b/.test(line)) inError = false
-    } else out.push(line)
+    } else out.push(...rows)
   }
   return out.join('\n')
 }

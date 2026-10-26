@@ -1,0 +1,13 @@
+$ python main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+October: 11578.88 | priced: 163 | rejected: 13
+wrote daily_report.csv, summary.json and warehouse.db
+$ python -q
+>>> import sys, extract; sys.modules["extract"]
+<module 'extract' from '/home/ana/roastery-etl/extract.py'>
+>>> lazy import sqlite3
+>>> "sqlite3" in sys.modules
+False
+>>> sqlite3.sqlite_version, "sqlite3" in sys.modules
+('3.53.1', True)
+>>> exit()

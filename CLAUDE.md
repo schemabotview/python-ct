@@ -37,7 +37,7 @@ infra step's temporary template course is gone.
 | 5 | `extract` | Read the data | 7 | authored, awaiting owner review; no audio yet |
 | 6 | `transform` | Transform and aggregate | 7 | authored, awaiting owner review; no audio yet |
 | 7 | `load` | Write the results | 6 | authored, awaiting owner review; no audio yet |
-| 8 | `structure` | Structure the pipeline | 5 | not started |
+| 8 | `structure` | Structure the pipeline | 5 | authored, awaiting owner review; no audio yet (§5's mypy bug, `sum(totals)` without a Decimal start, is fixed in Course 9 §1) |
 | 9 | `model` | Model the domain | 10 | not started |
 | 10 | `trust` | Make it trustworthy | 7 | not started |
 | 11 | `speed` | Make it fast | 7 | not started |
@@ -128,7 +128,9 @@ name `editor.L12` or any side-pane id.
   the side pane.
 - `terminal()` marks a traceback (from `Traceback (most recent call last):`, or the `  File "…"` a
   SyntaxError starts with, through the exception line) with graphl-flow's `! ` error prefix, so
-  errors read red while `session.txt` stays the raw replay.
+  errors read red while `session.txt` stays the raw replay. A line longer than 80 columns WRAPS at
+  column 80, as in a real 80-column terminal (mypy's one-line reports), and each piece counts as a
+  row against the 13.
 - Two versions of a file are two sections, never two editors in one frame.
 
 ### The side pane is a diagram

@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const packages: Section = {
+  id: 'packages',
+  title: 'Packages: pipeline/ and __init__.py',
+  scene: 'structure-packages',
+  narration:
+    'One module out of main dot py was a start. The pipeline has five stages, and each deserves a file of its own. When modules belong together, Python lets you put them in a folder and import them as a package. The new folder is called pipeline, and the file that marks it as a package is init dot py, with two underscores on each side. Here it holds only a docstring, but whatever it contains runs when the package is first imported. Inside are four modules, one per stage group. extract reads the files. validate holds the catalogue, InvalidOrder and parse row. transform prices lines and summarises the month. And load writes the three outputs. The old extract dot py at the top level is gone. main dot py shrinks to its imports, the two folder paths, and the main function. Its imports now name the package and the module, as in from pipeline dot load import write report. Inside the package, modules import each other with a leading dot. transform says from dot validate import, meaning the validate module next to me, so the package still works if it is renamed or moved. The REPL shows what one import pulls in. Importing pipeline dot transform loads three modules: the package itself first, then transform, then validate, because transform imports it. That is the graph drawn on the right. Now look at the first command in the terminal. We only asked Python to import main, to look at it, and the whole job ran: it read the month, and wrote all three outputs. Importing a file runs it, and main dot py still ends by calling main. A file that can be both run and imported needs one more line. That is next.',
+}

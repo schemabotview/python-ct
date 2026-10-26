@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const typeHints: Section = {
+  id: 'type-hints',
+  title: "Type hints: the pipeline's contracts",
+  scene: 'structure-type-hints',
+  narration:
+    "Each function in the pipeline has a contract: what it expects, and what it gives back. So far those contracts lived in docstrings and in our heads. Type hints write them into the code. A hint follows a parameter after a colon, and the return type follows an arrow after the parentheses. to cents takes an amount, a Decimal, and returns a Decimal. Hints can describe containers too. iter rows takes an iterable of paths and returns an iterator of dictionaries mapping strings to strings. Long or repeated types get names. In validate, the type statement defines Row as a dictionary of strings, and Line as a dictionary of strings to any value. In transform, the summary gets something more precise: a TypedDict, which lists the eight keys a summary dictionary has, and the type of each. The pane on the right shows summarise as a typed box, lines in, Summary out, and the table beneath lists the contracts across the pipeline. Local variables can carry hints too, where Python cannot guess, like an empty Counter that will count strings. Here is the part that surprises people. Python itself does not check hints. It records them, and the REPL shows to cents' annotations: Decimal in, Decimal out. But calling to cents with a string is not stopped at the door. The call goes ahead, and fails one line later, inside the function, with an AttributeError, because a string has no quantize method. Hints are documentation that tools can read. Editors use them to complete names and to flag mistakes as you type. And a type checker reads every hint in the project, and compares it with how the code is actually used, without running anything. Next, we install one, and it finds a bug.",
+}

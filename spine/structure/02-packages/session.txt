@@ -1,0 +1,9 @@
+$ python -c "import main"
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+October: 11578.88 | priced: 163 | rejected: 13
+wrote daily_report.csv, summary.json and warehouse.db
+$ python -q
+>>> import sys, pipeline.transform
+>>> sorted(name for name in sys.modules if name.startswith("pipeline"))
+['pipeline', 'pipeline.transform', 'pipeline.validate']
+>>> exit()

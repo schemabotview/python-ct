@@ -1,0 +1,10 @@
+$ python main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+October: 11578.88 | priced: 163 | rejected: 13
+wrote daily_report.csv, summary.json and warehouse.db
+$ python -c "import main; print('imported:', main.__name__)"
+imported: main
+$ python -q
+>>> __name__
+'__main__'
+>>> exit()
