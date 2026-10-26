@@ -1,0 +1,10 @@
+$ python -q
+>>> def add_reason(reason, reasons=[]):
+...     reasons.append(reason)
+...     return reasons
+...
+>>> add_reason("bad quantity")
+['bad quantity']
+>>> add_reason("unknown product")
+['bad quantity', 'unknown product']
+>>> exit()

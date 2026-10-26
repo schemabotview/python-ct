@@ -1,0 +1,4 @@
+$ python main.py
+roastery-etl: starting
+line: ORD-1002 210.00 0.15 178.50
+cannot price: ORD-1005 quantity 'three'

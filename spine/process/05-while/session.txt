@@ -1,0 +1,7 @@
+$ python main.py
+ORD-1001 ETH-250 3 29.85
+ORD-1002 COL-500 12 178.50
+ORD-1003 KEN-1000 2 58.90
+ORD-1004 ETH-250 1 9.95
+day total: 277.20 | skipped: 1
+first wholesale order: ORD-1002

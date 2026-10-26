@@ -1,0 +1,11 @@
+$ python -q
+>>> 2 + 3 * 4
+14
+>>> (2 + 3) * 4
+20
+>>> 7 // 2, 7 % 2, 2 ** 3
+(3, 1, 8)
+>>> exit()
+$ python main.py
+roastery-etl: starting
+line: ORD-1002 210.00 178.50

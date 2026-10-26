@@ -1,0 +1,7 @@
+$ python -q
+>>> rate = "global"
+>>> def show(): rate = "local"; return rate
+...
+>>> show(), rate
+('local', 'global')
+>>> exit()

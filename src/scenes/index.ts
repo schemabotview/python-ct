@@ -3,12 +3,13 @@ import { pipelineMap } from './map'
 import { pictureScenes } from './picture'
 import { startScenes } from './start'
 import { holdScenes } from './hold'
+import { processScenes } from './process'
 
 // Scene registry. Sections reference scenes by id; a graphl-flow scene carries no id of its own, so
 // the id is the key here. Scenes are grouped by course (one folder each, mirroring src/content),
 // each folder exporting a Record; ids are globally unique, and a duplicate THROWS rather than
 // letting one course's scene shadow another's.
-const GROUPS: Record<string, SceneModel>[] = [{ 'pipeline-map': pipelineMap }, pictureScenes, startScenes, holdScenes]
+const GROUPS: Record<string, SceneModel>[] = [{ 'pipeline-map': pipelineMap }, pictureScenes, startScenes, holdScenes, processScenes]
 
 export const SCENES: Record<string, SceneModel> = {}
 for (const group of GROUPS)

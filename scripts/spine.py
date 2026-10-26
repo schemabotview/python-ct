@@ -13,7 +13,8 @@ so a frame can only show what this script has verified.
 Each step is replayed in a fresh temp copy named roastery-etl, inside a temp "home" directory, by
 ONE bash process, so `cd` and `source .venv/bin/activate` carry from command to command as they do
 in a real terminal. A command followed by `>>> ` (or `(Pdb) `) lines is an interactive session: it is run in a
-pseudo-terminal and fed those lines. Temp paths are rewritten to /home/ana/roastery-etl, the path the
+pseudo-terminal and fed those lines; `... ` continuation lines are typed without their indentation (the
+3.13+ REPL indents for you) and a bare `...` ends a block. Temp paths are rewritten to /home/ana/roastery-etl, the path the
 frames show. Run it with the course's pinned interpreter first on PATH as `python` (see CLAUDE.md).
 
 THE SPINE IS CUMULATIVE. Every step is the step before it plus the changes it declares, and this
@@ -77,8 +78,13 @@ def commands(session: str) -> list[tuple[str, list[str]]]:
     for line in session.splitlines():
         if line.startswith('$ '):
             out.append((line[2:], []))
-        elif out and (line.startswith('>>> ') or line == '>>>' or line.startswith('... ')):
+        elif out and (line.startswith('>>> ') or line == '>>>'):
             out[-1][1].append(line[4:])
+        elif out and (line.startswith('... ') or line == '...'):
+            # A continuation line. Python 3.13+'s REPL indents a block for you, so the line is typed
+            # WITHOUT the indentation the transcript shows (or it would be indented twice); a bare
+            # `...` types the empty line that ends the block.
+            out[-1][1].append(line[4:].lstrip())
         elif out and line.startswith('(Pdb) '):
             out[-1][1].append(line[6:])
     return out

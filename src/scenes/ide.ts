@@ -105,3 +105,24 @@ export function ideFrame({ project = 'roastery-etl', tree, editor, session, side
     edges,
   }
 }
+
+/**
+ * The 1-based number of the first line of `code` containing `text`, searching from line `from`.
+ * Highlights and folds are found by TEXT, never typed as numbers: a file grows a line upstream and
+ * a typed number silently highlights the wrong line (Course 3's did, three times). A missing text
+ * throws, which check-render reports as a page error naming the scene.
+ */
+export function lineOf(code: string, text: string, from = 1): number {
+  const lines = code.split('\n')
+  for (let i = from - 1; i < lines.length; i++) if (lines[i].includes(text)) return i + 1
+  throw new Error(`ide.ts: no line containing ${JSON.stringify(text)} from line ${from}`)
+}
+
+/** Every line number from the line containing `first` through the next line containing `last`. */
+export function linesFrom(code: string, first: string, last = first): number[] {
+  const a = lineOf(code, first), b = lineOf(code, last, a)
+  return Array.from({ length: b - a + 1 }, (_, i) => a + i)
+}
+
+/** The last line number of `code` (ignoring a trailing newline). */
+export const lastLine = (code: string) => trim(code).split('\n').length

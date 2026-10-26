@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const expressions: Section = {
+  id: 'expressions',
+  title: 'Expressions and operators',
+  scene: 'process-expressions',
+  narration:
+    'Holding data is half the job; this course processes it, and processing starts with expressions. An expression is anything Python can evaluate to a value, and the order it evaluates the parts in matters. In the REPL, two plus three times four is fourteen, not twenty, because multiplication binds more tightly than addition. Brackets change the order, so two plus three, in brackets, times four, is twenty. Three more operators complete the arithmetic we need. Double slash is floor division, so seven divided this way by two is three. Percent gives the remainder, which is one. And double star raises to a power, so two to the power three is eight. The table on the right collects those answers. main dot py now computes something real: the second order line, twelve bags of Colombian. Its subtotal is the price times the quantity, two hundred and ten. Then the line at the bottom of the editor applies a fifteen percent discount: the subtotal, minus the subtotal times nought point one five. The tree at the top of the pane draws how Python reads that. Because multiplication binds more tightly, the right hand multiplication happens first, giving thirty one and a half, and only then is it subtracted from two hundred and ten. No brackets are needed, though you may add them whenever a reader might doubt the order. The result is then rounded to whole cents with quantize, using a constant called CENT, a Decimal of one hundredth, now defined at the top of the file. The terminal shows the line coming to one hundred seventy eight fifty. Fifteen percent is not always right, though. Next, the program decides.',
+}

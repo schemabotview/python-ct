@@ -33,7 +33,7 @@ infra step's temporary template course is gone.
 | 1 | `picture` | The picture: why Python, and how it runs your code | 11 | authored, awaiting owner review; no audio yet |
 | 2 | `start` | Start the project | 5 | pilot authored, awaiting owner review; no audio yet |
 | 3 | `hold` | Hold the data | 9 | authored, awaiting owner review; no audio yet |
-| 4 | `process` | Process the data | 11 | not started |
+| 4 | `process` | Process the data | 11 | authored, awaiting owner review; no audio yet |
 | 5 | `extract` | Read the data | 7 | not started |
 | 6 | `transform` | Transform and aggregate | 7 | not started |
 | 7 | `load` | Write the results | 6 | not started |
@@ -96,6 +96,12 @@ normalised to `/home/ana/roastery-etl`.
 
 This is what v1 lacked: its Courses 4–5 rewrote one `main.py` from scratch every step. **Experiments
 go in the REPL** (in the session), never into `main.py`; `main.py` only gains pipeline code.
+
+REPL blocks: Python 3.13+'s REPL indents a block for you, so `... ` lines are typed WITHOUT their
+indentation, and a bare `...` types the empty line that ends the block (`spine.py` does both).
+
+Highlights and folds are found by TEXT — `lineOf(code, 'def price_line')`, `linesFrom(code, a, b)`,
+`lastLine(code)` from `ide.ts` — never typed as numbers; a missing text throws and check-render names it.
 
 Other `step.json` keys: `venv`, `start: "home"`, `capture`, `project`, `volatile` (digits masked),
 `setup` — documented in `scripts/spine.py`. From Course 8 on, steps `pip install` pinned dev tools,

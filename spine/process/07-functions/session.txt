@@ -1,0 +1,11 @@
+$ python -q -i main.py
+ORD-1001 ETH-250 3 29.85
+ORD-1002 COL-500 12 178.50
+ORD-1003 KEN-1000 2 58.90
+ORD-1004 ETH-250 1 9.95
+ORD-1007 COL-500 1 17.50
+total: 294.70 | bags: 19 | skipped: 1
+customers: ['lena', 'maya', 'omar']
+>>> price_line("COL-500", 12)
+Decimal('178.50')
+>>> exit()

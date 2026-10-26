@@ -1,0 +1,6 @@
+$ python -q -i main.py
+roastery-etl: starting
+line: ORD-1002 210.00 0.15 178.50
+>>> "wholesale" if quantity >= 10 else "retail"
+'wholesale'
+>>> exit()
