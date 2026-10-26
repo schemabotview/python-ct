@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const memory: Section = {
+  id: 'memory',
+  title: 'Memory: tracemalloc, a list against a stream',
+  scene: 'speed-memory',
+  narration:
+    'Time is one cost of a program. Memory is the other, and it decides whether a job runs at all when the data grows. Course five made the extract stage a generator, reading one row at a time, and claimed that this keeps memory flat. Now we can measure that claim. tracemalloc, in the standard library, tracks every block of memory Python allocates. After start, get traced memory returns the current total and the peak, the most that was in use at any one moment. bench slash memory dot py pretends to have more data by reading October several times over: one month, three months, and twelve. For each, it measures the peak twice. Once when every row is collected into a list. And once when the rows are only counted as they stream past, each one forgotten as soon as the next arrives. The plot and table on the right show the result. For one month, the list peaks at around three hundred and forty kilobytes, and the stream at around a hundred and fifty, most of which is the reading machinery itself. For twelve months, the list peak passes a megabyte, and it would keep growing with every month added. The stream stays at about a hundred and sixty kilobytes. It does not matter how much data flows through; only one row is held at a time. That is the trade the pipeline makes. Orders does keep its lines in a list, because the summary and the warehouse both need them, and a month is small. But the reading itself streams, and a year of files would not change that. When memory is the problem, measure with tracemalloc, and look for a list that only needs to be a stream. Next, a question that decides which tool can make code faster.',
+}

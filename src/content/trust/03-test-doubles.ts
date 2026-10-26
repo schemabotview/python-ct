@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const testDoubles: Section = {
+  id: 'test-doubles',
+  title: 'Test doubles: a fake source and a fixed clock',
+  scene: 'trust-test-doubles',
+  narration:
+    'Testing the whole pipeline the obvious way would mean thirty one CSV files, a SQLite database and a folder of outputs, for every test. The protocols from the last course make that unnecessary. A test double is an object that stands in for a real part during a test. FakeSource has a rows method that serves rows from a list, so it fits the Source protocol exactly as CsvDays does, with no base class and no change to the pipeline. ListSink has a write method that keeps every result it is handed, so it fits Sink. The diagram on the right shows the two sources, one real and one fake, both fitting the same shape. There is one more part that makes runs hard to test: time. This step adds a generated timestamp to every summary, so the JSON records when it was made. Read from the real clock, it changes on every run, and no test could assert it. So Pipeline takes the clock as a part too. By default it is utc now, which reads the real time. The test passes a small lambda that always answers noon on the thirty first of October. The test builds a pipeline from a fake source holding one good row and one refused row, a list sink, and the fixed clock, then runs it. It asserts that the sink received exactly the result, that there is one line and one rejection, that the total is fifty eight ninety, and that the timestamp is noon. No file was read and nothing was written. The terminal runs the suite, twelve passed, then the real job, which writes a real timestamp, and mypy confirms the new clock part is typed correctly. Use doubles only at the edges like this: files, networks, clocks. Next, telling the operator what happened.',
+}

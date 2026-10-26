@@ -387,3 +387,23 @@ Course ids change (`why-python` + `how-python-runs` → `picture`, `aggregate` �
 5. **Folding**: show a file whole under ~30 lines, fold beyond that.
 6. **Side pane**: a diagram in every IDE section; lists only as captions.
 7. **Re-author all**: every scene, every narration, every wav.
+
+## As built (2026-10-26)
+
+All 12 courses are authored. Where the build departs from the tables above, and why:
+
+- **Model §5**: the container is `Orders` (the month's lines), not `Order`: every CSV row is its own
+  order, so there is no multi-line order to model. It has `from_rows`, `__len__`, `__iter__` and
+  `__contains__` as planned.
+- **Model §3**: `subtotal` and `total` are both properties; the invariant is a quantity of 1 or more.
+- **Model §10**: `Pipeline(source, sinks)`, with the discount rules in `RULES`; a `clock` part joins it
+  in Trust §3 (the fixed clock that section needed).
+- **Structure §5 and Trust §6** each end on a real bug (`sum()` without a Decimal start; a median of
+  half a cent in `Money`); the fix opens the next section or course, and the narration says so.
+- **Speed**: the measurements are `bench/*.py`, run as `python -m bench.<name>`. Section 1 shows the
+  month is already fast (start-up dominates), so nothing is optimised blindly. Threads are measured on
+  jobs that share no data: jobs sharing one row list got no faster on `python3.15t` either.
+- **Speed §7**: the API stub runs inside `bench/api.py` (a `ThreadingHTTPServer` on a free port), so
+  the replay needs no background process.
+- **Ship §1** removes `main.py`: the job is `python -m pipeline` and, from §3, the `roastery-etl`
+  entry point. **Ship §5–6** are full-frame scenes with no spine step.

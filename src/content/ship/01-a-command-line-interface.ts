@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const aCommandLineInterface: Section = {
+  id: 'a-command-line-interface',
+  title: 'A command-line interface: argparse',
+  scene: 'ship-cli',
+  narration:
+    "Until now the job has been python main dot py, always for October, because the month was written into the code. A tool other people run needs a proper interface. The standard library's argparse builds one. cli dot py, inside the package, defines a parser for a program called roastery etl, with one subcommand, run, and one required option, dash dash month. The option's type is a small function, month, which accepts text only if it parses as a year and a month, and otherwise raises an argument type error with a clear message. argparse calls it for us, so a bad month never reaches the pipeline. The run function does the job for one month. It asks CsvDays for only that month's files, and if there are none, it logs an error and returns one. Otherwise it builds the pipeline, runs it, logs the totals, and returns zero. The summary's month now comes from the argument too, instead of being fixed at October. main returns that number, and a new file, dunder main dot py, calls it inside sys dot exit, so python dash m pipeline runs the package like a program. main dot py is gone. The terminal tries three runs. The real month works, and the log line now starts with the month. A month written in words is refused by argparse before anything runs: it prints the usage line and the reason, and exits with two. And November, which has no files yet, logs an error and exits with one. Those numbers are the exit code, the program's one word answer to whoever started it: zero for success, anything else for failure. The table on the right lists all three. A new test checks both failure paths. Next, the settings that should not be in the code either.",
+}

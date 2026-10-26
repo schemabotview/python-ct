@@ -1,0 +1,5 @@
+$ python -m bench.processes 2>/dev/null
+31 files, one process          0.00s  163
+31 files, 4 processes          0.08s  163
+the month x200, one process    0.38s  1
+the month x200, 4 processes    0.14s  1

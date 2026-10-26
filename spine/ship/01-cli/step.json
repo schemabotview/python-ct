@@ -1,0 +1,1 @@
+{"from": "speed/07-asyncio", "changes": ["main.py", "pipeline/__main__.py", "pipeline/cli.py", "pipeline/extract.py", "pipeline/load.py", "pyproject.toml", "tests/test_cli.py"], "venv": true, "volatile": true, "setup": ["pip install -q --group dev"]}

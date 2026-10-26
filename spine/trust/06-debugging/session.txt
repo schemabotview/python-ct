@@ -1,0 +1,10 @@
+$ pytest -q tests/test_transform.py
+>>>>>>>>>>>>>>>>>>> PDB set_trace (IO-capturing turned off) >>>>>>>>>>>>>>>>>>>>
+> /home/ana/roastery-etl/pipeline/transform.py(45)summarise()
+-> breakpoint()
+(Pdb) p statistics.median(amounts)
+Decimal('20.475')
+(Pdb) up
+> /home/ana/roastery-etl/tests/test_transform.py(12)test_the_median_of_two_lines_is_whole_cents()
+-> summary = summarise(lines)
+(Pdb) q

@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const packaging: Section = {
+  id: 'packaging',
+  title: 'Packaging: a wheel and an entry point',
+  scene: 'ship-packaging',
+  narration:
+    "Running the job still means cloning the project and knowing to type python dash m pipeline. Packaging turns it into something you install, with a command of its own. pyproject dot toml gets three new tables. build system says how to build the package, here with setuptools at an exact version, which pip downloads into a temporary, isolated environment just for the build. project dot scripts declares an entry point: a command called roastery etl that calls the main function in pipeline dot cli. And tool dot setuptools names the one package to include, pipeline, so the tests and the benchmarks stay out. The flow on the right follows it through. pip wheel builds a wheel: a single zip file with a standard name, roastery etl, version zero point one point zero, for any Python three platform. Then the real test of packaging: a brand new virtual environment, outside the project, with nothing in it. pip installs the wheel there, and the environment's bin folder now holds a roastery etl command. Asking it for its version prints zero point one point zero. That version is not typed in the code: the CLI asks importlib dot metadata for the installed package's version, so pyproject is the only place it is written. Running the installed command for October, from the project folder where the data lives, does the whole job. The terminal shows only the Latin one warning, because roastery dot toml says warning, and the outputs are all there in data slash out. Notice that the installed command has never seen the source folder. Everything it needed was in the wheel. The same wheel can go to the shop's server, or to a package index, and install the same way. Next, running it on a schedule.",
+}

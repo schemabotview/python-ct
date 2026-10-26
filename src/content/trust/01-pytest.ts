@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const pytestSection: Section = {
+  id: 'pytest',
+  title: 'pytest: the first tests',
+  scene: 'trust-pytest',
+  narration:
+    "Every course so far has checked the pipeline the same way: run it, and look at the October total. That catches a lot, but only for October, and only when someone looks. A test is code that checks code, and runs in a second, every time anything changes. pytest is the standard tool, so it joins mypy in the project's development dependencies, pinned to an exact version, and pip install with the group option installs everything that group lists. pytest's rules are simple. It looks in the tests folder for files whose names start with test, and inside them, for functions whose names start with test. Each test is an ordinary function that uses a plain assert. If every assert holds, the test passes. If one fails, pytest reports which, and shows the values involved. The first file, test model dot py, checks the model from the last course. Adding two Money values gives a new value and leaves the first unchanged. Multiplying rounds to the cent. And each discount rule is checked at its edge. Ten bags of Kenyan coffee get the bulk rule, and come to two hundred sixty three fifty. Two bags come to sixty two, which earns the wholesale discount, fifty eight ninety. One bag pays full price. Every one of those numbers can be worked out by hand, which is the point. The flow on the right shows the shape of a good test: arrange the inputs, act by calling the code under test, and assert what must be true. pytest dash q runs all five: five dots, five passed. Collect only lists the tests it found, by file and name, and the names read like a specification of the rules. Next, sharing set up between tests, and running one test many times.",
+}

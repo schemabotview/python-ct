@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const loggingSection: Section = {
+  id: 'logging',
+  title: 'Logging instead of print',
+  scene: 'trust-logging',
+  narration:
+    "The pipeline talks to its operator with print. That is fine on a laptop, but a scheduled job runs with nobody watching, and print has no way to say how important a message is, or to be switched off. The logging module does both. Each module asks for its own logger with getLogger of dunder name, so every message carries where it came from. extract now logs the Latin one notice as a warning instead of printing it. validate logs each refused row at debug level, the lowest. And main logs the month's total and the files written at info level. Messages travel through a small chain, drawn on the right. The logger creates a record. A handler decides where records go, and drops those below its level. A formatter turns a record into a line of text. You rarely build that chain by hand. One call to basicConfig, at the start of main, creates a single handler that writes to standard error, with the format level, logger name, colon, message. Its level comes from an environment variable, LOG LEVEL, and defaults to info. The first run shows three lines, each labelled with its level and its source: a warning from pipeline dot extract, and two info lines from main. The debug records were created but dropped, because debug is below info. The second run sets LOG LEVEL to debug, and the refused rows appear, each with its reason, interleaved with the warning in the order they happened. The operator chooses how much to see, without anyone editing the code. The tests still pass, because the library code only creates records, and only main decides what happens to them. That split matters: a library should log, and only the application configures. Next, functions that wrap functions.",
+}

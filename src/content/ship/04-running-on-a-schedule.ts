@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const runningOnASchedule: Section = {
+  id: 'running-on-a-schedule',
+  title: 'Running on a schedule: cron and exit codes',
+  scene: 'ship-schedule',
+  narration:
+    "The job should run on the first of every month, for the month just ended, with nobody at a keyboard. On Linux and macOS, cron runs commands on a schedule. A crontab line has five time fields, then the command: minute, hour, day of the month, month, and day of the week, where a star means any. crontab dot txt says five, six, one, star, star: at five past six on the first day of every month. The table on the right takes it apart. cron runs a command with almost no environment, from an unknown folder, and throws its output away, so the command it runs is a small wrapper script, run dot sh. It changes to its own folder, where the data and roastery dot toml live. It takes a month if one is given, and otherwise asks date for last month. It makes sure the logs folder exists, and runs the installed roastery etl command from the project's virtual environment, appending all its output to a log file. Then it uses the exit code from the first section. If the command fails, the script writes a dated line to logs slash ALERT, a file the shop checks, or that a monitoring tool could watch, and exits with one itself, so cron, or whatever replaces it, also knows. The flow on the right shows both paths. The terminal runs the script by hand, as cron would. October succeeds: exit zero. November has no files yet, so the job fails, and the script exits with one. logs slash ALERT now holds today's date and the failed month, and the last line of the log says exactly why: no day files for November. A failure that someone finds out about, with the reason written down, is what makes a job safe to leave alone. Next, the whole picture.",
+}

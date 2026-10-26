@@ -1,0 +1,11 @@
+$ cat crontab.txt
+# m h dom mon dow   command: 06:05 on the 1st of every month
+5 6 1 * * /home/ana/roastery-etl/run.sh
+$ ./run.sh 2026-10; echo "exit $?"
+exit 0
+$ ./run.sh 2026-11; echo "exit $?"
+exit 1
+$ cat logs/ALERT
+2026-10-26 roastery-etl failed for 2026-11
+$ tail -1 logs/roastery.log
+ERROR pipeline.cli: no day files for 2026-11 in data/raw

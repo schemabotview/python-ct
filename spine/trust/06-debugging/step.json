@@ -1,0 +1,1 @@
+{"from": "trust/05-decorators", "changes": ["pipeline/transform.py", "tests/conftest.py", "tests/test_transform.py"], "venv": true, "volatile": true, "setup": ["pip install -q --group dev"]}

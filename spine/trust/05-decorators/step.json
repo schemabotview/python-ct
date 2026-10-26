@@ -1,0 +1,1 @@
+{"from": "trust/04-logging", "changes": ["pipeline/decorators.py", "pipeline/run.py", "tests/test_decorators.py"], "venv": true, "volatile": true, "setup": ["pip install -q --group dev"]}

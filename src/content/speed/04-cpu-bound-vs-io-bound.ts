@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const cpuBoundVsIoBound: Section = {
+  id: 'cpu-bound-vs-io-bound',
+  title: 'CPU-bound or I/O-bound?',
+  scene: 'speed-cpu-or-io',
+  narration:
+    "When a job is too slow, the next question is not how do I make it faster, but what is it doing while it is slow. There are two very different answers. A CPU bound job spends its time computing: the processor is busy the whole time. An I O bound job spends its time waiting, for a disk, a database or a network, while the processor sits idle. The difference is easy to measure. bench slash cpu or io dot py times two pieces of work with two clocks. perf counter measures wall clock time, what a stopwatch would show. process time measures CPU time, how long this process actually kept the processor busy. The first piece of work prices the month fifty times from rows already in memory. Its wall time and CPU time are the same, a few hundredths of a second each: every moment was spent computing. That is CPU bound. The second piece stands in for a network call, by sleeping for half a second. Its wall time is half a second, and its CPU time is zero: the program did nothing but wait. That is I O bound. The chart on the right shows the four bars, and the table beneath turns the measurement into a choice. Waiting can be overlapped: while one request waits, another can be sent, using threads or asyncio, and a single processor is plenty. Computing cannot be overlapped by waiting. It needs more processors working at the same moment, which in Python means separate processes, or the new free threaded build. Our month is CPU bound, and small. The shop's orders API, which the last section of this course reads from, will be almost entirely waiting. Next, threads, and the lock that has shaped Python's answer to this question for thirty years.",
+}

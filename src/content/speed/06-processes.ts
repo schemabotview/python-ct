@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const processes: Section = {
+  id: 'processes',
+  title: 'Processes: concurrent.futures',
+  scene: 'speed-processes',
+  narration:
+    "If one interpreter can only run one thread of Python at a time, the classic answer is to run several interpreters. A process is a separate running program with its own memory, and in Python, its own GIL. ProcessPoolExecutor has exactly the same interface as the thread pool: map a function over some jobs, and get the results back in order. Behind it, the pool starts worker processes, sends each job across by pickling its arguments, runs it, and pickles the result back. The flow on the right shows that round trip. bench slash processes dot py tries two kinds of work. The first is the plan you might try first: one process per day file, thirty one jobs, each pricing a single small file. In one process, all thirty one take almost no time at all. In four processes, they take several hundredths of a second, far longer. Starting workers and moving data between them costs more than the work itself. The second kind is the same heavy job as the threads section: pricing the whole month two hundred times. In one process it takes a third of a second or so. With four processes, it takes less than half of that, on the standard build, GIL and all. Each worker had its own interpreter and its own lock, so all four ran at once. Note the main guard at the bottom of the script. On some systems, each worker starts by importing the main module, and without the guard, every worker would start a pool of its own. So: processes are the standard build's tool for CPU bound work, and they pay off only when each job is big enough to be worth sending. Measure that too. Next, the opposite case, where all the time is spent waiting.",
+}
