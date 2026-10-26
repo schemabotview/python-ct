@@ -1,0 +1,6 @@
+id,date,customer,sku,quantity
+ORD-1103,2026-10-19,"smith, kim",KEN-1000,6
+ORD-1104,2026-10-19,maya,KEN-1000,6
+ORD-1105,2026-10-19,jo,COL-500,6
+ORD-1106,2026-10-19,lena,KEN-1000,1
+ORD-1107,2026-10-19,zoé,KEN-1000,6

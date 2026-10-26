@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const polymorphism: Section = {
+  id: 'polymorphism',
+  title: 'Polymorphism: DiscountRule',
+  scene: 'model-polymorphism',
+  narration:
+    "The discount rules have lived in one function since course four, as an if, an elif and a default. Every new promotion would mean another branch in the same function. Polymorphism offers another shape: many classes that answer the same question, each in its own way. DiscountRule is the base class. It has a rate, zero by default, and a method, applies, that takes a line and answers yes or no. On the base class, applies just raises NotImplementedError: it is a promise that subclasses must keep. Bulk keeps it by answering yes for ten or more bags, at fifteen percent. Wholesale answers yes for a line worth fifty or more, at five percent. And NoDiscount always answers yes, at zero. RULES lists one of each, in priority order. LineItem gets a new property, rule, which asks each rule in turn and takes the first one that says yes. And total simply multiplies the subtotal by one minus that rule's rate. Look at what total no longer knows. It does not know how many rules exist, or what any of them check. It calls applies on each, and each object runs its own version. That is polymorphism: one call, many behaviours, chosen by the object's class. The if and elif from course four are gone. A new promotion is a new class with its own applies, added to RULES, and nothing else changes. The REPL counts which rule priced each October line: eighty four lines paid full price, forty five got the wholesale discount, and thirty four got the bulk discount. The diagram on the right shows one question and three answers. The October total is still eleven thousand five hundred seventy eight eighty eight, to the cent. Next, two ways to describe what a class must provide.",
+}

@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const composition: Section = {
+  id: 'composition',
+  title: 'Composition: the Pipeline',
+  scene: 'model-composition',
+  narration:
+    "The model is complete: products, lines, money, orders, errors, rules, sources and sinks. The last step puts them together, and the way it does so matters. Pipeline, in run dot py, is a dataclass with two fields: a source, and a list of sinks. Its run method is the whole job in four lines. It builds the orders from the source's rows, summarises them into a result, hands the result to every sink, and returns it. Pipeline inherits from nothing. It has a source and has sinks, rather than being a kind of either. That is composition: building behaviour by combining parts, instead of extending parents. The REPL confirms it: Pipeline's method resolution order is Pipeline, then object, the root of every class, and nothing else. The diagram on the right draws the has a edges. main dot py now reads like a description of the job. Open the warehouse. Build a Pipeline from the day files in the raw folder, and three sinks: the CSV report, the JSON summary, and the warehouse. Run it, read the warehouse totals, and print. The terminal shows the same October as ever, eleven thousand five hundred seventy eight eighty eight, a hundred and sixty three lines and thirteen rejected, and mypy checks all ten files without an issue. Why prefer composition? Because parts can be swapped without touching anything else. A test can give Pipeline a fake source holding three made up rows, and a plain list as its sink, and check exactly what arrived. Next month's job could add a fourth sink, or read from the shop's web API, and Pipeline would not change a line. That swapping is exactly what the next course does. The pipeline is modelled. Now we make it trustworthy.",
+}

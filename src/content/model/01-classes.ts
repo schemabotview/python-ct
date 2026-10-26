@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const classes: Section = {
+  id: 'classes',
+  title: 'Classes: from a dict to a type',
+  scene: 'model-classes',
+  narration:
+    "First, the fix from the end of the last course: summarise now gives sum a Decimal zero to start from, so an empty month is still exact money. Now, objects. Until now every piece of data in the pipeline has been a dictionary or a number. That works, but nothing stops a typo in a key, and the code that belongs to the data lives somewhere else. A class fixes both. It defines a new type: what data each object of that type carries, and what it can do. The new module, model dot py, holds the roastery's domain, and its first class is Product. The class statement names the type. Inside it, init, with two underscores on each side, is the method Python calls to fill in a new object. Its first parameter, self, is that new object, and the three assignments store the code, the name and the price on it. Those are attributes. The second method, cost, multiplies the price by a quantity. When you call kenya dot cost of three, Python passes kenya as self, so the method knows whose price to use. read catalogue now builds a Product for each coffee, and price line asks the product for its cost. The job still prints the same October total. The REPL looks at one product. Its name is Kenya Nyeri, its price is thirty one, and three bags cost ninety three. type of kenya is the class, pipeline dot model dot Product, and vars shows the attributes stored on the object itself. The diagram on the right draws that split: the name kenya points to an object holding its own data, and the object points to its class, which holds the methods every product shares. Data on the object, behaviour on the class. Next, a shorter way to write classes like this.",
+}

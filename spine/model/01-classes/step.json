@@ -1,0 +1,1 @@
+{"from": "structure/05-mypy", "changes": ["pipeline/model.py", "pipeline/transform.py", "pipeline/validate.py"], "venv": true}

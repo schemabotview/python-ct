@@ -38,7 +38,7 @@ infra step's temporary template course is gone.
 | 6 | `transform` | Transform and aggregate | 7 | authored, awaiting owner review; no audio yet |
 | 7 | `load` | Write the results | 6 | authored, awaiting owner review; no audio yet |
 | 8 | `structure` | Structure the pipeline | 5 | authored, awaiting owner review; no audio yet (§5's mypy bug, `sum(totals)` without a Decimal start, is fixed in Course 9 §1) |
-| 9 | `model` | Model the domain | 10 | not started |
+| 9 | `model` | Model the domain | 10 | authored, awaiting owner review; no audio yet (`Orders` is the month's lines, not one order: every CSV row is its own order) |
 | 10 | `trust` | Make it trustworthy | 7 | not started |
 | 11 | `speed` | Make it fast | 7 | not started |
 | 12 | `ship` | Ship it | 6 | not started |

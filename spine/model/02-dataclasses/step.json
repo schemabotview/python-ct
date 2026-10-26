@@ -1,0 +1,1 @@
+{"from": "model/01-classes", "changes": ["pipeline/load.py", "pipeline/model.py", "pipeline/transform.py", "pipeline/validate.py"], "venv": true}

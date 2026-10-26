@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const inheritanceAndSuper: Section = {
+  id: 'inheritance-and-super',
+  title: 'Inheritance and super()',
+  scene: 'model-inheritance',
+  narration:
+    'Every refused row so far has been one kind of error, InvalidOrder, with a message. But the shop treats them differently. A row with a missing customer is a typing slip at the till. A row naming a product the catalogue does not sell may mean the catalogue is out of date. A program that wants to react differently needs different types, and inheritance lets them share a parent. The new module errors dot py starts with PipelineError, a subclass of Exception: the parent of everything the pipeline refuses. InvalidRow inherits from it, for missing and malformed fields, and adds nothing but its name and docstring. UnknownProduct inherits from it too, and adds something: the product code that was not found. Its init takes the row id and the code, builds the message, and hands that message to the parent with super dot init. super means: the same method, in my parent class. So Exception still stores the message as it always does, and UnknownProduct only adds what is new, the sku attribute. validate now raises the specific type, and Orders catches PipelineError, so it still collects both kinds. The diagram on the right is the family tree, and the table beside it is the rule that makes it useful: an except clause catches the class it names, and every subclass of it. Catching PipelineError catches both. Catching UnknownProduct catches only the missing coffees. The REPL counts the October rejections by type: nine invalid rows, and four unknown products, all of them GUA two fifty, a Guatemalan coffee the catalogue does not list yet. Now the shop can tell the two apart, and fix each at its source. Next, inheritance for behaviour, not just for names.',
+}

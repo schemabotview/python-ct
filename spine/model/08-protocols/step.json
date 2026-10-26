@@ -1,0 +1,1 @@
+{"from": "model/07-polymorphism", "changes": ["main.py", "pipeline/extract.py", "pipeline/load.py", "pipeline/model.py", "pipeline/ports.py"], "venv": true, "setup": ["pip install -q mypy==2.4.0"]}

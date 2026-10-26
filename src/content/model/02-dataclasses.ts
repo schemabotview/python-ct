@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const dataclassesSection: Section = {
+  id: 'dataclasses',
+  title: 'Dataclasses: LineItem',
+  scene: 'model-dataclasses',
+  narration:
+    "Product's init method did nothing but copy its arguments onto self, and most classes that hold data look exactly like that. The dataclasses module writes that code for you. Put the dataclass decorator above a class, list its fields with their types, and Python generates the init method, a readable repr, and an equality test that compares field by field. Product shrinks to three typed fields and its cost method. And the pipeline gets its most important type: LineItem, one valid order line. It has five fields: the order's id, its date, the customer, the Product, and the quantity. And it has one method of its own, total, which applies the discount rules and rounds to the cent. Those rules, and the rounding helper, moved into model dot py beside it. parse row now returns a LineItem instead of a dictionary, and the rest of the pipeline follows. Where summarise said line, square bracket, quoted quantity, it now says line dot quantity. That is more than tidier. A misspelt key in a dictionary is only found when that line runs; a misspelt attribute is flagged by an editor or by mypy before anything runs. The REPL builds a line by hand: four bags of the Brazilian coffee for Ana. Typing line alone shows the generated repr, every field by name, including the product inside it. Its total is sixty one seventy five: four bags at sixteen twenty five is sixty five, and that earns the five percent discount. And a line compares equal to a new LineItem built from the same fields, because the generated equality compares values, not identity. The pane on the right lists what the decorator wrote, and what you still write yourself. Next, rules a LineItem must never break.",
+}

@@ -5,7 +5,7 @@ import { venvClosed } from '../start/tree'
 // is what grows. `files` are project paths; those under pipeline/ draw inside the package folder.
 export function codeTree(files: string[], { active, fresh = [] }: { active: string; fresh?: string[] }): TreeEntry[] {
   const entry = (path: string, name = path): TreeEntry => ({ name, state: path === active ? 'active' : fresh.includes(path) ? 'new' : undefined })
-  const pkg = files.filter((f) => f.startsWith('pipeline/'))
+  const pkg = files.filter((f) => f.startsWith('pipeline/')).sort()
   return [
     venvClosed,
     { name: 'data', folder: true, state: 'muted', note: 'raw and out' },

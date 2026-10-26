@@ -1,0 +1,1 @@
+{"from": "model/08-protocols", "changes": ["main.py", "pipeline/load.py"], "venv": true, "setup": ["python main.py"]}

@@ -1,0 +1,12 @@
+$ python main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+October: 11578.88 | priced: 163 | rejected: 13
+wrote daily_report.csv, summary.json and warehouse.db
+$ python -q
+>>> from decimal import Decimal; from pipeline.model import Money
+>>> a, b = Money(Decimal("9.95")), Money(Decimal("17.50"))
+>>> a + b, a * 3, a
+(Money(amount=Decimal('27.45')), Money(amount=Decimal('29.85')), Money(amount=Decimal('9.95')))
+>>> a == Money(Decimal("9.95")), len({a, Money(Decimal("9.95"))})
+(True, 1)
+>>> exit()

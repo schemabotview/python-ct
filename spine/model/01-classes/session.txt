@@ -1,0 +1,12 @@
+$ python main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+October: 11578.88 | priced: 163 | rejected: 13
+wrote daily_report.csv, summary.json and warehouse.db
+$ python -q
+>>> from pipeline.validate import CATALOGUE
+>>> kenya = CATALOGUE["KEN-1000"]
+>>> kenya.name, kenya.price, kenya.cost(3)
+('Kenya Nyeri', Decimal('31.00'), Decimal('93.00'))
+>>> type(kenya), vars(kenya)
+(<class 'pipeline.model.Product'>, {'sku': 'KEN-1000', 'name': 'Kenya Nyeri', 'price': Decimal('31.00')})
+>>> exit()

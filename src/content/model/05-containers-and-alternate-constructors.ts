@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const containersAndConstructors: Section = {
+  id: 'containers-and-alternate-constructors',
+  title: 'Containers and alternate constructors',
+  scene: 'model-containers',
+  narration:
+    "The valid lines and the rejected rows have travelled through the pipeline as two separate things: a generator, and a list passed in to be filled. They belong together, so they become one object, Orders, in validate dot py. Its init takes the lines and the rejected rows. But nobody wants to build those lists by hand. They want to say: here are the rows, give me the orders. That is an alternate constructor, written as a class method. The classmethod decorator passes the class itself as the first argument, called cls, instead of an object. from rows loops over the rows, parses each one, collects the lines and the rejections, and finishes by calling cls with both lists. Why cls and not Orders by name? Because a subclass of Orders would then build itself correctly too. The other three methods let Orders work with Python's own syntax. len of orders calls dunder len. A for loop over orders calls dunder iter, which hands back an iterator over the lines. And the in operator calls dunder contains, which checks the order ids. The table on the right pairs each piece of syntax with the method it calls. The REPL asks all three. There are a hundred and sixty three lines. ORD one thousand and one is in the orders. ORD one thousand and thirteen is not, because it was rejected for having no customer. main dot py shrinks to match: Orders from rows, then summarise the orders, then write them out. The priced lines generator is gone, and so is the rejected list that had to be passed in. Special methods like these are how a class of your own becomes as natural to use as a list. Next, the errors get a family.",
+}

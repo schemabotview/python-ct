@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const protocolsAndAbcs: Section = {
+  id: 'protocols-and-abcs',
+  title: 'Protocols and ABCs',
+  scene: 'model-protocols',
+  narration:
+    'The pipeline reads from one place and writes to three. If those were described by what they can do, rather than what they are, any of them could be replaced: a test could read from a list, or write into memory. Python offers two ways to describe such a contract. The first is a Protocol, from the typing module. ports dot py defines two. A Source is anything with a rows method that returns an iterator of rows. A Sink is anything with a write method that takes a result. The three dots are the whole body: a protocol only describes a shape. The classes that fit it do not inherit from it, or even import it. CsvDays in extract has a rows method, so it is a Source. CsvReport and JsonSummary in load have write methods, so they are Sinks. This is structural typing, and the dashed edges on the right show it: they match the shape, without any family tie. Result is a small dataclass bundling the orders and the summary, which is what every sink receives. main dot py now names its source and its list of sinks, and mypy checks that each really fits: nine files, no issues. The second way is an abstract base class, an ABC. DiscountRule now inherits from ABC, and its applies method is marked abstractmethod. That is nominal typing: subclasses must inherit from it, and they must fill in every abstract method. Python enforces it when an object is made. The REPL tries to create a bare DiscountRule, and gets a TypeError: it cannot instantiate an abstract class without an implementation for applies. Use an ABC when you own a family of classes and want each to finish the job. Use a Protocol when you only care that something has the right methods. Next, the warehouse cleans up after itself.',
+}

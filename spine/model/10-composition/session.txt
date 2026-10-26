@@ -1,0 +1,10 @@
+$ python main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+October: 11578.88 | priced: 163 | rejected: 13
+wrote daily_report.csv, summary.json and warehouse.db
+$ mypy
+Success: no issues found in 10 source files
+$ python -q
+>>> from pipeline.run import Pipeline; Pipeline.__mro__
+(<class 'pipeline.run.Pipeline'>, <class 'object'>)
+>>> exit()

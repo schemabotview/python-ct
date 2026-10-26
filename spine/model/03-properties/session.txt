@@ -1,0 +1,12 @@
+$ python -q
+>>> from pipeline.validate import CATALOGUE, LineItem
+>>> LineItem("ORD-9002", "2026-10-31", "ana", CATALOGUE["BRA-500"], 0)
+Traceback (most recent call last):
+  File "<python-input-1>", line 1, in <module>
+    LineItem("ORD-9002", "2026-10-31", "ana", CATALOGUE["BRA-500"], 0)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 8, in __init__
+  File "/home/ana/roastery-etl/pipeline/model.py", line 49, in __post_init__
+    raise ValueError(f"quantity must be 1 or more, got {self.quantity}")
+ValueError: quantity must be 1 or more, got 0
+>>> exit()

@@ -6,6 +6,7 @@ import { extractCourse } from './extract'
 import { transformCourse } from './transform'
 import { loadCourse } from './load'
 import { structureCourse } from './structure'
+import { modelCourse } from './model'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. One course per chapter of PYTHON-COURSE-PLAN.md; a course is
@@ -19,6 +20,7 @@ export const COURSES: Record<string, Course> = {
   [transformCourse.id]: transformCourse,
   [loadCourse.id]: loadCourse,
   [structureCourse.id]: structureCourse,
+  [modelCourse.id]: modelCourse,
 }
 
 export type { Course, Section }

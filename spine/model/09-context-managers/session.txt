@@ -1,0 +1,13 @@
+$ python -q
+>>> from pathlib import Path; from pipeline.load import SqliteWarehouse
+>>> with SqliteWarehouse(Path("data/out/warehouse.db")) as w:
+...     _ = w.conn.execute("DELETE FROM order_lines")
+...     raise RuntimeError(w.totals())
+...
+Traceback (most recent call last):
+  File "<python-input-1>", line 3, in <module>
+    raise RuntimeError(w.totals())
+RuntimeError: (0, None)
+>>> exit()
+$ python -m sqlite3 data/out/warehouse.db "SELECT COUNT(*) FROM order_lines"
+(163,)

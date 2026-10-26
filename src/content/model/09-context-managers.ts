@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const contextManagers: Section = {
+  id: 'context-managers',
+  title: 'Context managers: SqliteWarehouse',
+  scene: 'model-context-managers',
+  narration:
+    "In course seven, a with block around a database connection gave us a transaction: commit if the block finished, roll back if it raised. Any class can offer that, by being a context manager. SqliteWarehouse in load dot py is the warehouse as a Sink, and it has the two methods that make with work. dunder enter runs when the block begins. It makes sure the output folder exists, connects, creates the table if needed, and returns the warehouse, which with binds to the name after as. That folder line matters: main now opens the warehouse first, before the report has created data slash out, and without it a first run on a clean checkout fails, unable to open the database file. dunder exit runs when the block ends, however it ends. Python passes it three arguments describing an exception, or three Nones if there was none. So exit commits if the kind is None, rolls back otherwise, and closes the connection either way. Because it returns nothing, an exception carries on outwards after the rollback, and the program still learns about it. The flow on the right draws both paths. The terminal proves the bad one. The warehouse already holds October from a run of main. Inside a with block, the REPL deletes every row, and asks for the totals: zero rows. Then it raises an error, on purpose, carrying that count as its message. Exit sees the exception and rolls back. Afterwards, Python's own sqlite3 command line counts the rows again: a hundred and sixty three, all still there. The deletion never happened, as far as anyone outside the block can tell. That is the guarantee a context manager gives: setup and cleanup, paired, on every path. Next, the parts become one pipeline.",
+}

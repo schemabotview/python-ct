@@ -1,0 +1,12 @@
+$ python main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+October: 11578.88 | priced: 163 | rejected: 13
+wrote daily_report.csv, summary.json and warehouse.db
+$ python -q
+>>> from pipeline.validate import CATALOGUE, LineItem
+>>> line = LineItem("ORD-9001", "2026-10-31", "ana", CATALOGUE["BRA-500"], 4)
+>>> line
+LineItem(id='ORD-9001', date='2026-10-31', customer='ana', product=Product(sku='BRA-500', name='Brazil Cerrado', price=Decimal('16.25')), quantity=4)
+>>> line.total(), line == LineItem(**vars(line))
+(Decimal('61.75'), True)
+>>> exit()

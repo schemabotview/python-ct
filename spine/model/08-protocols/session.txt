@@ -1,0 +1,11 @@
+$ mypy
+Success: no issues found in 9 source files
+$ python -q
+>>> from pipeline.model import DiscountRule
+>>> DiscountRule()
+Traceback (most recent call last):
+  File "<python-input-1>", line 1, in <module>
+    DiscountRule()
+    ~~~~~~~~~~~~^^
+TypeError: Can't instantiate abstract class DiscountRule without an implementation for abstract method 'applies'
+>>> exit()

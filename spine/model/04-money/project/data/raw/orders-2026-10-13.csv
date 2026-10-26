@@ -1,0 +1,5 @@
+id,date,customer,sku,quantity
+ORD-1069,2026-10-13,omar,ETH-250,5
+ORD-1070,2026-10-13,tom,BRA-500,1
+ORD-1071,2026-10-13,ana,ETH-250,1
+ORD-1072,2026-10-13,tom,COL-500,5

@@ -1,0 +1,12 @@
+$ python main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+October: 11578.88 | priced: 163 | rejected: 13
+wrote daily_report.csv, summary.json and warehouse.db
+$ python -q
+>>> from collections import Counter; from pipeline.validate import Orders
+>>> from pathlib import Path; from pipeline.extract import iter_rows
+>>> orders = Orders.from_rows(iter_rows(sorted(Path("data/raw").glob("o*"))))
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+>>> Counter(type(error).__name__ for error in orders.rejected)
+Counter({'InvalidRow': 9, 'UnknownProduct': 4})
+>>> exit()
