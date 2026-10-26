@@ -1,0 +1,13 @@
+$ python -q -i main.py
+roastery-etl: starting
+lines: 4
+line: ORD-1001 ETH-250 29.85
+>>> len({"maya", "omar", "lena", "maya"})
+3
+>>> CATALOGUE["ETH-250"] = Decimal("0")
+Traceback (most recent call last):
+  File "<python-input-1>", line 1, in <module>
+    CATALOGUE["ETH-250"] = Decimal("0")
+    ~~~~~~~~~^^^^^^^^^^^
+TypeError: 'frozendict' object does not support item assignment
+>>> exit()

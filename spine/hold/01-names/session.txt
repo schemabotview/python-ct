@@ -1,0 +1,10 @@
+$ python main.py
+roastery-etl: starting
+line: ETH-250 3 29.849999999999998
+$ python -q
+>>> quantity = 3
+>>> bags = quantity
+>>> quantity = quantity + 1
+>>> quantity, bags
+(4, 3)
+>>> exit()

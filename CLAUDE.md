@@ -32,7 +32,7 @@ infra step's temporary template course is gone.
 | --- | --- | --- | --- | --- |
 | 1 | `picture` | The picture: why Python, and how it runs your code | 11 | authored, awaiting owner review; no audio yet |
 | 2 | `start` | Start the project | 5 | pilot authored, awaiting owner review; no audio yet |
-| 3 | `hold` | Hold the data | 9 | not started |
+| 3 | `hold` | Hold the data | 9 | authored, awaiting owner review; no audio yet |
 | 4 | `process` | Process the data | 11 | not started |
 | 5 | `extract` | Read the data | 7 | not started |
 | 6 | `transform` | Transform and aggregate | 7 | not started |

@@ -1,0 +1,13 @@
+$ python -q -i main.py
+roastery-etl: starting
+days: 1 | lines on 2026-10-01: 4
+line: ORD-1001 ETH-250 29.85
+>>> import copy
+>>> shallow = copy.copy(ORDERS)
+>>> deep = copy.deepcopy(ORDERS)
+>>> ORDERS[0]["quantity"] = 4
+>>> DAYS["2026-10-01"][0]["quantity"], shallow[0]["quantity"]
+(4, 4)
+>>> deep[0]["quantity"]
+3
+>>> exit()

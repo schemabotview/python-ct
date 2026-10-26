@@ -1,0 +1,12 @@
+$ python -q
+>>> NOT_GIVEN = sentinel("NOT_GIVEN")
+>>> NOT_GIVEN is None
+False
+>>> bool(None), bool(NOT_GIVEN)
+(False, True)
+>>> exit()
+$ python main.py
+roastery-etl: starting
+line: ETH-250 3 29.85
+product: ETH 250 g
+wholesale: False | code: None

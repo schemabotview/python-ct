@@ -1,0 +1,13 @@
+$ python -q
+>>> skus = ["ETH-250", "COL-500"]
+>>> skus.append("BRA-500")
+>>> skus
+['ETH-250', 'COL-500', 'BRA-500']
+>>> skus[1]
+'COL-500'
+>>> exit()
+$ python main.py
+roastery-etl: starting
+lines: 4 | bags: 18
+line: ETH-250 3 29.85
+wholesale: False | code: None

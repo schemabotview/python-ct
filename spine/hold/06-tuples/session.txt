@@ -1,0 +1,12 @@
+$ python -q -i main.py
+roastery-etl: starting
+lines: 4
+line: ORD-1001 ETH-250 3 29.85
+wholesale: False | code: None
+>>> lines[0][2] = 4
+Traceback (most recent call last):
+  File "<python-input-0>", line 1, in <module>
+    lines[0][2] = 4
+    ~~~~~~~~^^^
+TypeError: 'tuple' object does not support item assignment
+>>> exit()

@@ -1,0 +1,11 @@
+$ python -q
+>>> sku = "ETH-250"
+>>> sku[-3:]
+'250'
+>>> sku.split("-")
+['ETH', '250']
+>>> exit()
+$ python main.py
+roastery-etl: starting
+line: ETH-250 3 29.85
+product: ETH 250 g

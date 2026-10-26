@@ -1,0 +1,13 @@
+$ python -q -i main.py
+roastery-etl: starting
+lines: 4
+line: ORD-1001 ETH-250 29.85
+>>> CATALOGUE["COL-500"]
+Decimal('17.50')
+>>> CATALOGUE["BRA-500"]
+Traceback (most recent call last):
+  File "<python-input-1>", line 1, in <module>
+    CATALOGUE["BRA-500"]
+    ~~~~~~~~~^^^^^^^^^^^
+KeyError: 'BRA-500'
+>>> exit()
