@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const sqlite3Section: Section = {
+  id: 'sqlite3',
+  title: 'sqlite3: loading the warehouse',
+  scene: 'load-sqlite',
+  narration:
+    'Files are fine for one month. But the shop will want to ask questions across many months, like how much Kenyan sold since spring, and that is what a database is for. Python ships with SQLite, a complete database stored in one file, in the sqlite3 module, so no server and no install are needed. At the top of the new code are three SQL statements kept as constants. The schema creates a table called order lines, if it does not already exist, with a column for each field, and the pane on the right lists them. The id is the primary key, so no two rows can share one. And the total is stored as whole cents in an integer column. Eleven thousand five hundred seventy eight point eight eight becomes one million one hundred fifty seven thousand eight hundred eighty eight cents, which every database stores exactly. load warehouse builds one tuple per line, then opens a connection. Used in a with block, a sqlite3 connection is a transaction. If the block finishes, everything is committed together, and if anything raises, everything is rolled back, so the table never holds half a month. Note that the with block does not close the connection, so the function closes it afterwards. executemany runs the insert once for each tuple, with question marks as placeholders. Never build SQL by pasting values into the string: placeholders let the database handle quoting, which is also what stops SQL injection. The first run prints a hundred and sixty three lines, and the total in cents. The second run fails, with an IntegrityError: the unique constraint on id. Every order is already there, so inserting it again is refused. The database is right to refuse, but the pipeline must be able to run twice. That is next.',
+}

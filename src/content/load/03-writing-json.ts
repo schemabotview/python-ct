@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const writingJson: Section = {
+  id: 'writing-json',
+  title: 'Writing JSON: Decimal as a string',
+  scene: 'load-json',
+  narration:
+    "A report is for people. The second output is for other programs: a summary the shop's website or another script can read. JSON is the standard for that, and the json module that read the catalogue can write too. json dot dumps turns Python values into JSON text. The diagram on the right shows how the types map. A dictionary becomes a JSON object, a string stays a string, integers and floats become numbers, lists and tuples become arrays, and None and True become null and true. Then there is one type JSON has no answer for: Decimal. Asked to dump a Decimal, json raises a TypeError, saying the object is not JSON serializable. That is a decision we have to make, and it matters. We could convert to float, but floats are exactly what the money has avoided since course four. And most programs read a JSON number back as a float, so even a correct number would be read inexactly. So write summary converts every amount to a string, with str, which writes the exact digits. The reader knows these fields are money and turns them back into Decimal. The function builds one dictionary: the month, the total, how many rows were rejected, and the revenue for each product, already ranked. A dictionary comprehension converts the revenue amounts. Then json dot dumps, with an indent of two to make the file readable, and write text saves it with UTF eight encoding. The terminal shows the start of the file. The total is in quotes, eleven thousand five hundred seventy eight point eight eight, exactly, and the rejected count is a plain number, because a count of rows is a whole number and needs no protecting. Next, a real database.",
+}

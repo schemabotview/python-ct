@@ -1,0 +1,9 @@
+$ python main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+October: 11578.88 | rejected: 13
+wrote data/out/daily_report.csv
+$ head -4 data/out/daily_report.csv
+date,revenue
+2026-10-01,309.70
+2026-10-02,37.40
+2026-10-03,261.40

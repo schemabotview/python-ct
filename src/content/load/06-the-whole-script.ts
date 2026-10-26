@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const theWholeScript: Section = {
+  id: 'the-whole-script',
+  title: 'The whole script: extract, transform, load',
+  scene: 'load-whole-script',
+  narration:
+    "Five courses ago, main dot py was two print calls. Now it is a complete pipeline, and this step gives it a front door. A function called main runs the whole job, in order. It finds the day files, sorted by date. It builds the priced lines, rejecting the bad rows, and keeps them in a list, because two steps need them: the summary and the warehouse. It summarises. Then it loads: the report, the summary and the warehouse. And it prints three facts: October's total, eleven thousand five hundred seventy eight eighty eight, a hundred and sixty three priced lines, and thirteen rejected rows. The last line of the file simply calls main. Wrapping the job in a function is a small change with a big reason: the file now defines things, and only the last line does anything, which course eight will build on. The side pane is the pipeline map from the first course, with every stage now lit, each one paired with the functions that do it. Extract is iter rows and read text, which read every day file one row at a time and survive the Latin one file. Validate is parse row and InvalidOrder, which refuse a line and say why. Transform is price line and priced lines, which apply the catalogue and the discount rules to the cent. Aggregate is summarise, one pass that answers every question. And load is write report, write summary and load warehouse, three outputs that are safe to write twice. Every one of those is plain Python from the standard library. That completes part one. The pipeline works. Part two makes it real: structured into a package, modelled with classes, tested, made fast and shipped on a schedule.",
+}

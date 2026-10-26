@@ -1,0 +1,13 @@
+$ python main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+product        revenue  bags
+KEN-1000      4,460.90   160
+COL-500       3,196.39   203
+ETH-250       2,420.90   264
+BRA-500       1,500.69   101
+total        11,578.88
+$ head -4 data/out/summary.json
+{
+  "month": "2026-10",
+  "total": "11578.88",
+  "rejected": 13,

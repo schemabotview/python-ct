@@ -3,11 +3,17 @@ import { venvClosed } from '../start/tree'
 
 // The explorer from Course 5 on: data/raw appears and grows. `fresh` marks files this step added or
 // changed; `more` collapses the rest of the month into one muted line (31 files do not fit a pane).
-export function dataTree(raw: string[], { fresh = [], more, active = 'main.py' }: { fresh?: string[]; more?: string; active?: string } = {}): TreeEntry[] {
+// `out` (Course 7 on) lists data/out, the files the pipeline writes.
+export function dataTree(raw: string[], { fresh = [], more, active = 'main.py', out }: { fresh?: string[]; more?: string; active?: string; out?: string[] } = {}): TreeEntry[] {
   const file = (name: string): TreeEntry => ({ name, state: name === active ? 'active' : fresh.includes(name) ? 'new' : undefined })
   return [
     venvClosed,
-    { name: 'data', children: [{ name: 'raw', children: [...raw.map(file), ...(more ? [{ name: more, state: 'muted' as const }] : [])] }] },
+    {
+      name: 'data', children: [
+        { name: 'raw', children: [...raw.map(file), ...(more ? [{ name: more, state: 'muted' as const }] : [])] },
+        ...(out ? [{ name: 'out', children: out.map(file) }] : []),
+      ],
+    },
     file('main.py'),
   ]
 }

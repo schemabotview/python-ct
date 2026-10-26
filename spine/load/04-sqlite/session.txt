@@ -1,0 +1,13 @@
+$ python main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+warehouse: 163 lines, 1157888 cents
+$ python main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+Traceback (most recent call last):
+  File "/home/ana/roastery-etl/main.py", line 170, in <module>
+    count, cents = load_warehouse(lines, OUT / "warehouse.db")
+                   ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ana/roastery-etl/main.py", line 158, in load_warehouse
+    conn.executemany(INSERT, rows)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: order_lines.id

@@ -1,0 +1,10 @@
+$ python main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+warehouse: 163 lines, 1157888 cents
+$ python main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+warehouse: 163 lines, 1157888 cents
+$ ls data/out
+daily_report.csv
+summary.json
+warehouse.db

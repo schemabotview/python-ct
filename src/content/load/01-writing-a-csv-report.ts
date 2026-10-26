@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const writingACsvReport: Section = {
+  id: 'writing-a-csv-report',
+  title: 'Writing a CSV report',
+  scene: 'load-csv-report',
+  narration:
+    "The pipeline can now answer the shop's questions, but every answer disappears when the program ends. The last stage, load, writes the results somewhere they last. The first output is for people: a daily report the owner can open in a spreadsheet. CSV is the obvious format, and the csv module that read the orders can write them too. main dot py has a new function, write report. It takes the daily totals and a path. First it makes sure the output folder exists: mkdir with parents equals True creates data and out if they are missing, and exist ok equals True means a second run is not an error. Then it opens the file for writing, with newline set to an empty string. That looks odd, but it hands the line endings to the csv module, which writes them correctly on every operating system. csv dot writer wraps the open file, and each call to writerow turns one Python list into one row: a header first, then one row per day, with the date in ISO form and the day's revenue. The writer also takes care of quoting: if a value ever holds a comma, like the customer smith comma kim from day three, it is wrapped in quotes so it stays one column. The diagram on the right shows the move from a dictionary of dates to the rows of a file, and the terminal shows the result: head prints the first four lines, the header and the first three days, with the same totals the last course printed. The explorer shows the new folder, data slash out, with the report inside. Raw data comes in through data slash raw, and results go out through data slash out, and the program never writes into its own input. Next, making the numbers readable on screen.",
+}
