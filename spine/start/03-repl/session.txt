@@ -1,0 +1,12 @@
+$ python -q
+>>> 9.95
+9.95
+>>> 9.95 * 3
+29.849999999999998
+>>> "ETH-250"[:3]
+'ETH'
+>>> exit()
+$ python main.py
+roastery-etl: starting
+ETH-250 costs 9.95 a bag
+3 bags cost 29.849999999999998

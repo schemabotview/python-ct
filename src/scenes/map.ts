@@ -1,16 +1,13 @@
-import type { Edge, Group, Item, SceneModel } from '@graphlearning/graphl-flow'
+import type { Edge, Item, SceneModel } from '@graphlearning/graphl-flow'
 
 // The pipeline map — the course's one picture of the application it builds (PYTHON-COURSE-PLAN.md,
-// "The pipeline map"). Two drawings of the same stages:
+// "The pipeline map"): sources over five stages over outputs, each stage with the course that builds
+// it and the Python it is built from, and Part II as a rail underneath. Shown in picture §5, load §6
+// and ship §5 — never as a side-pane column in every course opener (owner's call, 2026-10-26: the
+// course names already say where we are; the side pane carries the section's own diagram).
 //
-//   pipelineMap   the full concept scene: sources over five stages over outputs, each stage with the
-//                 course that builds it and the Python it is built from, and Part II as a rail
-//                 underneath (introduced in picture §5)
-//   mapPane(at)   a compact column for an IDE side pane with the stage `at` lit — every course's FIRST
-//                 section opens with it, so a learner always knows where in the application they are
-//
-// The stage list is shared, so the two cannot disagree about what the pipeline is. Stage cards keep
-// their icon on the left: a stacked card centres its bullets' text but not their markers. The full map
+// Stage cards keep their icon on the left: a stacked card centres its bullets' text but not their
+// markers. The full map
 // flows TOP to bottom (sources → stages → outputs, stages left to right inside): a single left-to-right
 // strip was 4:1 and left two thirds of the 16:9 frame empty.
 
@@ -66,32 +63,4 @@ export const pipelineMap: SceneModel = {
     ...chain(STAGES.map((s) => s.id)),
     { from: 'stages', to: 'sinks' },
   ],
-}
-
-/**
- * The map as a column for an IDE side pane: every stage a card with its icon and course, the stage
- * `at` lit in its own tone and the rest muted; sources and outputs are chips at either end. Returns the group and its edges; ids are prefixed `map-` so the
- * pane's own diagram can sit beside it.
- */
-export function mapPane(at?: Stage): { node: Group; edges: Edge[] } {
-  const ids = ['map-sources', ...STAGES.map((s) => `map-${s.id}`), 'map-sinks']
-  const chip = (id: string, title: string): Item => ({ type: 'item', id, title, chip: true, tone: 'neutral' })
-  return {
-    node: {
-      type: 'group', id: 'map', title: 'The pipeline', icon: 'workflow', tone: 'neutral', children: [
-        chip('map-sources', 'sources'),
-        // The lit stage sits in its own toned group: a group that sets its OWN tone draws its tint and
-        // coloured border (graphl-flow's `data-toned`), where a toned item only recolours its icon.
-        ...STAGES.map((s): Item | Group => {
-          const card: Item = { type: 'item', id: `map-${s.id}`, title: s.title, sub: s.course, icon: s.icon, tone: 'neutral' }
-          return s.id === at
-            ? { type: 'group', id: `map-${s.id}-here`, title: 'you are here', tone: 'store', children: [{ ...card, tone: 'store' }] }
-            : card
-        }),
-        chip('map-sinks', 'outputs'),
-      ],
-    },
-    // The chain runs through the lit stage's GROUP, so the arrows meet its frame, not the card inside.
-    edges: chain(ids.map((id) => (id === `map-${at}` ? `map-${at}-here` : id))),
-  }
 }

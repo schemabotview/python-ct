@@ -1,9 +1,0 @@
-$ python -q -i main.py
-roastery-etl: starting
-one line: 29.85
->>> alias is order
-True
->>> alias["quantity"] = 6
->>> order
-{'sku': 'ETH-250', 'quantity': 6}
->>> exit()

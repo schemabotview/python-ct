@@ -58,6 +58,12 @@ ROOT = Path(__file__).resolve().parent.parent / 'spine'
 # version"). A different `python` changes the banner, pyvenv.cfg and error text, so it is refused up
 # front rather than reported as a hundred transcript differences.
 PINNED = 'Python 3.15.1'
+# Sessions call the interpreter by all of these names, and a venv records where it came from
+# (pyvenv.cfg `home`, sys.base_prefix) — so every name must be the SAME install, in /usr/local as on a
+# learner's machine. Checking `python` alone once let `python3.15` resolve to a uv link elsewhere and
+# put a scratch path into a transcript.
+INTERPRETERS = ('python', 'python3.15', 'python3.15t')
+PREFIX = '/usr/local'
 IGNORED = {'__pycache__', '.venv'}
 SHOWN_HOME = '/home/ana'
 PROJECT = 'roastery-etl'
@@ -214,10 +220,16 @@ def lineage(step: Path) -> list[str]:
 
 def main() -> int:
     write = '--write' in sys.argv
-    version = subprocess.run(['python', '--version'], capture_output=True, text=True).stdout.strip()
-    if version != PINNED:
-        print(f'✗ `python` is {version or "missing"}, not {PINNED}: put the pinned interpreter first on PATH (CLAUDE.md)')
-        return 1
+    for name in INTERPRETERS:
+        probe = 'import sys, platform; print("Python " + platform.python_version(), sys.base_prefix)'
+        try:
+            version, _, prefix = subprocess.run([name, '-c', probe], capture_output=True, text=True).stdout.strip().partition(' /')
+        except FileNotFoundError:
+            version, prefix = '', ''
+        prefix = '/' + prefix if prefix else ''
+        if version != PINNED or prefix != PREFIX:
+            print(f'✗ `{name}` is {version or "missing"} from {prefix or "?"}, not {PINNED} from {PREFIX}: install the pin into {PREFIX} (CLAUDE.md)')
+            return 1
     only = [a for a in sys.argv[1:] if not a.startswith('--')]
     steps = sorted(p.parent for p in ROOT.glob('*/*/session.txt'))
     steps = [s for s in steps if not only or any(str(s.relative_to(ROOT)).startswith(o) for o in only)]

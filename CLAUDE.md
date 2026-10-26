@@ -21,17 +21,17 @@ The render engine is `@graphlearning/graphl-flow` (^0.2.0); the app shell is `@g
 
 **v2 re-authoring, 2026-10-26.** v1 (12 courses, 90 sections on `@graphlearning/flow` + shell 0.14,
 Python 3.14) was removed whole — content, scenes, spine and wavs; it is in git history before the
-v2 infra commit. Done so far: the plan (approved) and the **infra step** — Python 3.15.1, graphl-flow
-+ shell 1.0, the IDE template, the pipeline map, the cumulative spine check, and the v2 checks.
+v2 infra commit. Done: the plan (approved), the **infra step** (Python 3.15.1, graphl-flow + shell
+1.0, the IDE template, the pipeline map, the cumulative spine check, the v2 checks) and the **pilot**,
+Course 2 `start` — authored, replayed, rendered and captured, awaiting the owner's review. The
+infra step's temporary template course is gone.
 
-`src/content/template`, `src/scenes/template` and `spine/template` are a TEMPORARY course of
-template frames (the map, and one IDE frame per kind of side pane) that give the infra something
-real to render. **Delete all three when Course 2 (`start`, the pilot) lands.**
+`pipelineMap` is registered as scene `pipeline-map` with no section yet: picture §5 will use it.
 
 | # | Course id | Course | Sections | Status |
 | --- | --- | --- | --- | --- |
 | 1 | `picture` | The picture: why Python, and how it runs your code | 11 | not started (after the pilot) |
-| 2 | `start` | Start the project | 5 | next — the pilot |
+| 2 | `start` | Start the project | 5 | pilot authored, awaiting owner review; no audio yet |
 | 3 | `hold` | Hold the data | 9 | not started |
 | 4 | `process` | Process the data | 11 | not started |
 | 5 | `extract` | Read the data | 7 | not started |
@@ -61,7 +61,9 @@ pin — move it deliberately, and re-replay the whole spine when you do.
 Install: `uv python install 3.15.1 3.15.1+freethreaded --install-dir <dir>` with a uv new enough to
 list them (0.13.5 does; 0.11.32 stopped at 3.15.0b4), copy each tree into `/usr/local`, and link
 `/usr/local/bin/python` → `python3.15`, so a venv's `pyvenv.cfg` reads `home = /usr/local/bin` as on a
-learner's machine. `scripts/spine.py` refuses to run on any other `python --version`.
+learner's machine. uv also links `python3.15` into `~/.local/bin`, AHEAD of `/usr/local/bin` on PATH —
+delete those links (a replay once wrote a scratch path into pyvenv.cfg through one). `scripts/spine.py`
+refuses to run unless `python`, `python3.15` and `python3.15t` are all 3.15.1 from `/usr/local`.
 
 Verified on 3.15.1 at setup, so a section may rely on them: UTF-8 mode on by default (PEP 686),
 `frozendict` (item assignment raises `TypeError`), `sentinel('MISSING')`, unpacking in
@@ -142,9 +144,14 @@ Authoring notes from the template frames:
 - An edge into a node inside a titled group crosses the group's heading — edge to the GROUP
   (check-render fails a heading crossing). The pipeline map feeds `stages`, not `extract`.
 - A toned item only recolours its icon; a group that sets its OWN tone draws a tinted, bordered box.
-  Use that to light something (the map pane's "you are here").
+  Use that to light something.
 - A stacked item (`stack: true`) centres its bullets' text but not their markers: keep bulleted
   cards icon-left.
+- **Never converge three or more arrows on one node across one gap.** The channel slots share the
+  32px gap, the last run shrinks below graphl-flow's 6px HEAD_TRIM, and the arrowhead FLIPS (0.2 bug,
+  raised with the owner; check-render fails it). A breakdown of parts is a table, not a fan-in.
+- There is no error glyph in graphl-flow's icon set: `shield` draws a TICK, so an error card uses
+  `bell`.
 - Table rows are addressable as `<table>.<row>` when the first cell is a plain word; give a row an
   `id` when it is not (`"ETH-250"`).
 - An `icon` key graphl-flow does not know draws NOTHING, silently — check-render fails it. Valid keys
@@ -153,8 +160,9 @@ Authoring notes from the template frames:
 ### The pipeline map (`src/scenes/map.ts`)
 
 `pipelineMap` is the full concept scene (sources → five stages, each with its course and the Python
-it is built from → outputs, Part II as a rail); `mapPane(stage)` is the side-pane column every
-course's first section opens with, the stage lit. One stage list feeds both.
+it is built from → outputs, Part II as a rail), shown in picture §5, load §6 and ship §5. It is NOT a
+side-pane column in each course's first section (owner's call, 2026-10-26): every side pane carries
+its own section's diagram.
 
 ## Checks — before handing over
 
@@ -175,15 +183,15 @@ with esbuild, `?raw` included) — never regexes over source.
   at 4K; edges off-face / not orthogonal / < 24px / crossing a node or a heading / labels colliding;
   icons that drew nothing; a `focus` that marked nothing; IDE same-fit and same-pane-pixels; side
   pane fill. graphl-flow's own check, ported, plus this repo's rules.
-- Each check loads every section in a FRESH page. ui-shell 1.0 renders `<Scene>` without a `key`,
-  so hash navigation reuses one Scene: the new scene is measured under the previous one's fit (a
-  sub-pixel drift that failed the face check) and `data-fit` can read `ready` before it settles.
-  Raised with the owner as a shell fix (`key` on `<Scene>`); the recorders' 700ms settle masks it.
+- Each check loads every section in a FRESH page. ui-shell 1.0.0 rendered `<Scene>` without a `key`,
+  so hash navigation reused one Scene: the new scene was measured under the previous one's fit (a
+  sub-pixel drift that failed the face check) and `data-fit` read `ready` before it settled. Fixed in
+  shell 1.0.1 (keyed by scene id); the fresh page stays so a check never depends on it.
 
 All are a **floor, not proof**: the first map passed every check with an arrow through a heading.
 When a capture shows a defect a check missed, add the assertion and confirm it FAILS on the old
 frame before trusting it (done for the heading crossing, the crossing arrow, unknown icons, focus
-misses, cross-pane edges and list-only side panes).
+misses, cross-pane edges, list-only side panes and the flipped arrowhead).
 
 ## Authoring conventions
 

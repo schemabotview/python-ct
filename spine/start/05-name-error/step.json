@@ -1,0 +1,1 @@
+{ "from": "start/04-syntax-error", "changes": ["main.py"], "venv": true }

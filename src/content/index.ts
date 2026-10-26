@@ -1,10 +1,10 @@
-import { template } from './template'
+import { start } from './start'
 import type { Course, Section } from './types'
 
 // Course registry, in syllabus order. One course per chapter of PYTHON-COURSE-PLAN.md; a course is
 // registered here only once it is authored.
 export const COURSES: Record<string, Course> = {
-  [template.id]: template,
+  [start.id]: start,
 }
 
 export type { Course, Section }

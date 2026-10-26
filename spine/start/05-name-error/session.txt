@@ -1,0 +1,7 @@
+$ python main.py
+roastery-etl: starting
+Traceback (most recent call last):
+  File "/home/ana/roastery-etl/main.py", line 4, in <module>
+    prnt("ETH-250 costs", 9.95, "a bag")
+    ^^^^
+NameError: name 'prnt' is not defined. Did you mean: 'print'?

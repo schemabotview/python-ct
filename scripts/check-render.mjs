@@ -8,7 +8,7 @@
 //   text        text leaving its node; anything overflowing (sideways or downwards); plot text clipped;
 //               body text under BODY_MIN_PX or an item icon under ICON_MIN_PX in the 4K frame
 //   edges       off its node's face, not orthogonal, shorter than 24px, crossing an unrelated node or
-//               any group's heading, a
+//               any group's heading, an arrowhead flipped by an end run shorter than the head, a
 //               row's arrow starting inside its table; labels overlapping, on a node, or over
 //               another edge. There is no obstacle avoidance — the first template frame drew an
 //               arrow straight through a card and passed everything else.
@@ -120,6 +120,14 @@ try {
         if (!ps.every((q, i) => i === 0 || q.x === ps[i - 1].x || q.y === ps[i - 1].y)) out.push(`${tag} is not orthogonal`)
         if (!onFace(ps[0], R(a)) || !onFace(ps.at(-1), R(z))) out.push(`${tag} ends off its node's face`)
         if (len(ps) < 24 - 0.01) out.push(`${tag} is shorter than 24px`)
+        // The DRAWN shaft (`d`, trimmed short of each head by graphl-flow's HEAD_TRIM) must run the same
+        // way as the route at both ends. A final run shorter than the trim reverses it and the arrowhead
+        // flips: three edges converging through one 32px gap left a 4px last run, and one arrow pointed
+        // back up into the gap while every face assertion passed (graphl-flow 0.2, raised with the owner).
+        const drawn = e.getAttribute('d').slice(2).split(' L ').map((q) => q.split(',').map(Number)).map(([x, y]) => ({ x, y }))
+        const dir = (p0, p1) => [Math.sign(Math.round((p1.x - p0.x) * 100)), Math.sign(Math.round((p1.y - p0.y) * 100))].join()
+        if (dir(ps.at(-2), ps.at(-1)) !== dir(drawn.at(-2), drawn.at(-1)) || dir(ps[0], ps[1]) !== dir(drawn[0], drawn[1]))
+          out.push(`${tag} has a flipped arrowhead — its end run is shorter than the head`)
         for (const [el, pt] of [[a, ps[0]], [z, ps.at(-1)]]) {
           const t = el.tagName === 'TR' && el.closest('.gf-table')
           if (t) { const r = R(t); if (pt.x > r.x && pt.x < r.x + r.w) out.push(`${tag} ends inside table '${t.dataset.id}'`) }

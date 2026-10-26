@@ -180,9 +180,9 @@ list may appear only as a short caption under the diagram, never as the pane's c
 
 One concept scene: **sources** (day CSVs, catalogue, later the API) → **extract** → **validate** →
 **transform** → **aggregate** → **load** → **sinks** (report, summary, warehouse). It is introduced in
-1.5, and every course's FIRST section shows a vertical version of it in the side pane with `focus`
-on the stage that course builds — so a learner always knows where in the application they are.
-7.6 lights every stage; 12.5 shows the finished classes on it.
+1.5, 7.6 lights every stage, and 12.5 shows the finished classes on it. It is NOT repeated in the
+side pane of every course's first section (owner's call, 2026-10-26: the course names already say
+where we are), so every side pane carries that section's own diagram.
 
 ## The courses — 12 courses, 91 sections
 
@@ -214,7 +214,7 @@ Columns: **Step** is what changes in the spine (Course 1: the lab shown); **Side
 
 | # | Section | Step | Side pane / diagram |
 | --- | --- | --- | --- |
-| 1 | An empty folder and a venv | `python3.15 -m venv .venv`, activate | pipeline map (focus: nothing yet) + Flow: system Python ← `.venv/bin/python`, separate `site-packages` |
+| 1 | An empty folder and a venv | `python3.15 -m venv .venv`, activate | Flow: system Python ← `.venv/bin/python`, separate `site-packages` |
 | 2 | `main.py` | the banner and one priced bag; `python main.py` | Flow: file → interpreter → stdout, the terminal line it produced |
 | 3 | The REPL beside the editor | try `9.95 * 3` in the REPL, then write the line down | Flow: read → evaluate → print → loop |
 | 4 | A `SyntaxError` | a missing bracket; the traceback | Flow: the parser stops the file — every line greyed, none ran; traceback anatomy |
@@ -224,7 +224,7 @@ Columns: **Step** is what changes in the spine (Course 1: the lab shown); **Side
 
 | # | Section | Step | Side pane / diagram |
 | --- | --- | --- | --- |
-| 1 | Names and objects | `SHOP`, `sku`, `quantity` in `main.py`; rebinding in the REPL | map (focus: the data) + Memory: names → objects, a rebind moves an arrow |
+| 1 | Names and objects | `SHOP`, `sku`, `quantity` in `main.py`; rebinding in the REPL | Memory: names → objects, a rebind moves an arrow |
 | 2 | Numbers, and why money is a `Decimal` | `0.1 + 0.2` in the REPL; prices become `Decimal("9.95")` | Result: what `0.1` really stores vs `Decimal("0.1")`; `int` / `float` / `Decimal` side by side |
 | 3 | Strings | the SKU's origin and size by slicing; a name, formatted | Memory: the string as indexed cells, a slice's edges |
 | 4 | Booleans, `None` and sentinels | `discount_code = None` vs the `sentinel` for "not given" | Flow: three states of a value, three branches |
@@ -238,7 +238,7 @@ Columns: **Step** is what changes in the spine (Course 1: the lab shown); **Side
 
 | # | Section | Step | Side pane / diagram |
 | --- | --- | --- | --- |
-| 1 | Expressions and operators | a line total; precedence | map (focus: transform) + Flow: the expression tree, evaluated bottom up |
+| 1 | Expressions and operators | a line total; precedence | Flow: the expression tree, evaluated bottom up |
 | 2 | Decisions | `if` / `elif` / `else` discount rules | Flow: the decision chart, one path lit for a 12-bag line |
 | 3 | `match` | dispatch on a row's shape | Flow: one row, the case patterns it is tried against, the one that matched |
 | 4 | `for` loops | price every line of the day | Memory: the iterator's cursor moving down the list, the name rebound each pass |
@@ -254,7 +254,7 @@ Columns: **Step** is what changes in the spine (Course 1: the lab shown); **Side
 
 | # | Section | Step | Side pane / diagram |
 | --- | --- | --- | --- |
-| 1 | Files and `with` | `data/raw/` appears; the hard-coded day is read from a file | map (focus: extract) + Flow: open → read → close, `with` guaranteeing the close on an error |
+| 1 | Files and `with` | `data/raw/` appears; the hard-coded day is read from a file | Flow: open → read → close, `with` guaranteeing the close on an error |
 | 2 | Text and encodings | 3.15 reads UTF-8 by default; the Latin-1 day fails, then is read correctly | Memory: bytes → decode → `str`, the byte `0xE9` two ways |
 | 3 | `pathlib` | every day's file in `data/raw/` | Flow: a `Path`, its parts, the glob's matches |
 | 4 | CSV | `csv.DictReader`: lines become records | Flow: header cells → dict keys, one line → one dict |
@@ -266,7 +266,7 @@ Columns: **Step** is what changes in the spine (Course 1: the lab shown); **Side
 
 | # | Section | Step | Side pane / diagram |
 | --- | --- | --- | --- |
-| 1 | Grouping with a dict | revenue per product | map (focus: aggregate) + Flow: rows dropping into per-SKU buckets |
+| 1 | Grouping with a dict | revenue per product | Flow: rows dropping into per-SKU buckets |
 | 2 | `Counter` and `defaultdict` | the same, in less code | Memory: the missing key created on first touch |
 | 3 | Sorting | `sorted`, `key=`, `lambda`: top products | Plot: revenue by product, bars in sorted order |
 | 4 | `math` and `statistics` | mean and median order value; what to round, when | Plot: order values, mean and median marked |
@@ -278,7 +278,7 @@ Columns: **Step** is what changes in the spine (Course 1: the lab shown); **Side
 
 | # | Section | Step | Side pane / diagram |
 | --- | --- | --- | --- |
-| 1 | Writing a CSV report | `csv.writer` into `data/out/` | map (focus: load) + Result: the report's first rows |
+| 1 | Writing a CSV report | `csv.writer` into `data/out/` | Result: the report's first rows |
 | 2 | Formatting | f-string format specs for a readable report | Result: one spec taken apart — fill, align, width, precision |
 | 3 | Writing JSON | the summary, `Decimal` as a string | Flow: Python types → JSON, the one that needs a decision |
 | 4 | `sqlite3` | the warehouse schema; loading in a transaction | Result: warehouse tables, a foreign-key edge from line to order |
@@ -291,7 +291,7 @@ Columns: **Step** is what changes in the spine (Course 1: the lab shown); **Side
 
 | # | Section | Step | Side pane / diagram |
 | --- | --- | --- | --- |
-| 1 | Modules | `extract.py` leaves `main.py`; what `import` executes; lazy imports (3.15) | map (focus: all) + Flow: the import graph and `sys.modules` |
+| 1 | Modules | `extract.py` leaves `main.py`; what `import` executes; lazy imports (3.15) | Flow: the import graph and `sys.modules` |
 | 2 | Packages | `pipeline/` and `__init__.py` | Flow: the package tree, import edges between modules |
 | 3 | `if __name__ == "__main__"` | a module that is also a script | Flow: two ways in, one guard |
 | 4 | Type hints | the pipeline's contracts written down | Flow: functions as boxes with typed in/out edges |
@@ -301,7 +301,7 @@ Columns: **Step** is what changes in the spine (Course 1: the lab shown); **Side
 
 | # | Section | Step | Side pane / diagram |
 | --- | --- | --- | --- |
-| 1 | Classes | `Product`: from a dict to a type — `__init__`, `self` | map (focus: transform) + Memory: instance → class, attributes on the instance, methods on the class |
+| 1 | Classes | `Product`: from a dict to a type — `__init__`, `self` | Memory: instance → class, attributes on the instance, methods on the class |
 | 2 | Dataclasses | `LineItem` as a dataclass | Class: what `@dataclass` generated, shown as methods on the class |
 | 3 | Properties and invariants | a `LineItem` that cannot have a quantity below 1; `total` as a property | Flow: construction → `__post_init__` → accepted / `ValueError` |
 | 4 | A value object | `Money`: frozen, `__add__`, `__mul__`, `__eq__`, `__hash__`, `__repr__` | Memory: `a + b` makes a new object; neither operand changes |
@@ -316,7 +316,7 @@ Columns: **Step** is what changes in the spine (Course 1: the lab shown); **Side
 
 | # | Section | Step | Side pane / diagram |
 | --- | --- | --- | --- |
-| 1 | `pytest` | `tests/`; the first tests of `Money` and the rules | map (focus: all) + Flow: test → unit under test → assert |
+| 1 | `pytest` | `tests/`; the first tests of `Money` and the rules | Flow: test → unit under test → assert |
 | 2 | Fixtures and parametrisation | one test, every bad row | Flow: the fixture graph; one test fanned out into cases |
 | 3 | Test doubles | a fake `Source` (the protocol pays off) and a fixed clock — and only those | Class: the real and fake sources, both satisfying `Source` |
 | 4 | Logging | `logging` instead of `print`; levels, one handler | Flow: logger → handler → formatter → file / stderr |
@@ -328,7 +328,7 @@ Columns: **Step** is what changes in the spine (Course 1: the lab shown); **Side
 
 | # | Section | Step | Side pane / diagram |
 | --- | --- | --- | --- |
-| 1 | Measure first | `cProfile` on a month; the slow line | map (focus: all) + Result: the profile's top rows |
+| 1 | Measure first | `cProfile` on a month; the slow line | Result: the profile's top rows |
 | 2 | The right data structure | a set lookup instead of a list scan | Plot: lookup time vs n, list vs set |
 | 3 | Memory | `tracemalloc`: a list of the month vs a generator | Plot: peak memory, list vs streaming |
 | 4 | CPU-bound vs I/O-bound | the question that picks the tool | Flow: where the time goes in each case |
@@ -343,7 +343,7 @@ the pipeline stays dependency-free.
 
 | # | Section | Step | Side pane / diagram |
 | --- | --- | --- | --- |
-| 1 | A command-line interface | `argparse`: `roastery-etl run --month 2026-10` | map (focus: all) + Flow: argv → parser → the call it makes |
+| 1 | A command-line interface | `argparse`: `roastery-etl run --month 2026-10` | Flow: argv → parser → the call it makes |
 | 2 | Configuration and secrets | env vars and a TOML file (`tomllib`); never in code | Flow: the precedence chain — default ← file ← env ← flag |
 | 3 | Packaging | a wheel, an entry point, a clean install in a fresh venv | Flow: `pyproject.toml` → wheel → installed `roastery-etl` command |
 | 4 | Running on a schedule | cron, exit codes, an alert on failure | Flow: cron → `run.sh` → exit code → alert / done |

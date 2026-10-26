@@ -1,0 +1,5 @@
+$ python main.py
+  File "/home/ana/roastery-etl/main.py", line 5
+    print("3 bags cost", 9.95 * 3
+         ^
+SyntaxError: '(' was never closed

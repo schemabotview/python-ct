@@ -1,3 +1,3 @@
 $ python main.py
 roastery-etl: starting
-one line: 29.85
+ETH-250 costs 9.95 a bag
