@@ -1,0 +1,10 @@
+$ python -m pipeline config
+raw = data/raw
+out = data/out
+log_level = WARNING
+api_token = (not set)
+$ ROASTERY_LOG_LEVEL=INFO ROASTERY_API_TOKEN=abc python -m pipeline config --out x
+raw = data/raw
+out = x
+log_level = INFO
+api_token = (set)

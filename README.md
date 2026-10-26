@@ -6,7 +6,7 @@ roastery's order pipeline, built from an empty folder to a scheduled, tested, pa
 section is a `(scene, narration)` pair — one full-screen frame — that is one segment of the course
 video. Scenes render with `@graphlearning/graphl-flow`; the app shell is `@graphlearning/shell`.
 
-**v2 is being authored** (re-authoring began 2026-10-26): 12 courses, 91 sections, on Python 3.15.
+**v2 is authored** (2026-10-26): 12 courses, 91 sections, on Python 3.15, awaiting review and narration.
 Scope, the spine's growth, the side-pane diagram for every section and the build order are in
 [`PYTHON-COURSE-PLAN.md`](PYTHON-COURSE-PLAN.md); status per course is in [`CLAUDE.md`](CLAUDE.md).
 
@@ -32,7 +32,7 @@ These are a floor, not proof — capture the section at 4K and look at it.
 src/content/<course>/    one file per section + the course index
 src/scenes/<course>/     declarative scenes (groups, items, tables, code, plots — never x/y)
 src/scenes/ide.ts        the one IDE frame template every IDE section uses
-src/scenes/map.ts        the pipeline map: the full scene and the side-pane column
+src/scenes/map.ts        the pipeline map (picture §5)
 spine/<course>/<step>/   roastery-etl as real files, one cumulative snapshot per step
 src/theme.css            --brand
 public/audio/<course>/   narration wavs (Colab + Chatterbox only)

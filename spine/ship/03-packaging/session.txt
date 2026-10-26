@@ -1,0 +1,12 @@
+$ pip wheel -q --no-deps -w dist .
+$ ls dist
+roastery_etl-0.1.0-py3-none-any.whl
+$ python -m venv ../clean && ../clean/bin/pip install -q dist/*.whl
+$ ../clean/bin/roastery-etl --version
+0.1.0
+$ ../clean/bin/roastery-etl run --month 2026-10
+WARNING pipeline.extract: orders-2026-10-02.csv is not UTF-8: read as Latin-1
+$ ls data/out
+daily_report.csv
+summary.json
+warehouse.db

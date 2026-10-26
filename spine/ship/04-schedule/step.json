@@ -1,0 +1,1 @@
+{"from": "ship/03-packaging", "changes": ["crontab.txt", "run.sh"], "venv": true, "volatile": true, "setup": ["pip install -q --group dev", "pip install -q -e ."]}

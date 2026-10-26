@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const theFinishedPipeline: Section = {
+  id: 'the-finished-pipeline',
+  title: 'The finished pipeline',
+  scene: 'ship-finished',
+  narration:
+    "This is the map from the very first course, now complete, and every box on it is code you have written. At the top is what starts it. cron, at five past six on the first, calls run dot sh, which runs the installed roastery etl command, which reads its settings and its month, then builds a Pipeline from its parts and runs it. Below that, the five stages, each now named by the classes and functions that do the work. Extract is CsvDays, reading the day files one row at a time and surviving the old till's Latin one, with ApiSource ready to fetch the same rows from the shop's API, all at once, with asyncio. Validate is parse row, refusing a bad row with a reason from the PipelineError family, and Orders collecting the good lines and the refused rows together. Transform is LineItem, which will not exist with zero bags, priced in Money, which is always whole cents, by the first DiscountRule that applies. Aggregate is summarise: one pass, grouping by day, counting, ranking, and the mean and median of the month. Load is three sinks: the CSV report for people, the JSON summary for programs, and the SQLite warehouse, in one transaction, safe to run twice. Underneath it all, the checks that run on every change: pytest with its fixtures and fakes, mypy reading every hint, ruff for mistakes and layout, and logging so a run explains itself. Look at how far the code has come from two print calls in one file. Yet every piece of it is ordinary Python: functions, classes, the standard library, and three tools for checking. Nothing on this map is magic, and you could rebuild any box of it from what these courses showed. One question remains: what happens when the data gets much bigger?",
+}

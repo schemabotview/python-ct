@@ -1,3 +1,15 @@
 {
-  "_comment": "Curated publish titles (YouTube title + thumbnail header) per course, keyed by course id. Search-first: what someone would actually type, never 'Course 4'. One entry per course in src/content/index.ts. v1's titles were removed with its course ids (2026-10-26); each v2 course adds its own when it is authored."
+  "_comment": "Curated publish titles (YouTube title + thumbnail header) per course, keyed by course id. Search-first: what someone would actually type, never 'Course 4'. One entry per course in src/content/index.ts.",
+  "picture": "Python Explained: What It Is, How It Runs Your Code, Bytecode, Memory and the GIL (Python 3.15)",
+  "start": "Start a Python Project the Right Way: Virtual Environments, main.py, the REPL and Your First Errors",
+  "hold": "Python Data Types for Beginners: Numbers, Decimal for Money, Strings, Lists, Tuples, Dicts and Sets",
+  "process": "Python Control Flow and Functions: if, match, Loops, Comprehensions, Exceptions and Generators",
+  "extract": "Reading Files in Python: open and with, Encodings, pathlib, CSV, JSON and Streaming Rows",
+  "transform": "Python Data Aggregation: Grouping, Counter, Sorting, Statistics, Dates and itertools",
+  "load": "Writing Data in Python: CSV Reports, f-strings, JSON, SQLite Transactions and Safe Re-runs",
+  "structure": "Structure a Python Project: Modules, Packages, __main__, Type Hints, pyproject.toml and mypy",
+  "model": "Object-Oriented Python: Classes, Dataclasses, Properties, Inheritance, Protocols and Context Managers",
+  "trust": "Testing Python Code: pytest, Fixtures, Test Doubles, Logging, Decorators, pdb and ruff",
+  "speed": "Make Python Fast: Profiling, Sets, tracemalloc, Threads and the GIL, Free-Threading, Processes and asyncio",
+  "ship": "Ship a Python Project: argparse CLIs, Configuration and Secrets, Wheels, cron and Exit Codes"
 }

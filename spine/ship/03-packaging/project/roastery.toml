@@ -1,0 +1,6 @@
+# roastery-etl's settings. Never a secret here: the API token comes from
+# the ROASTERY_API_TOKEN environment variable.
+[roastery]
+raw = "data/raw"
+out = "data/out"
+log_level = "WARNING"

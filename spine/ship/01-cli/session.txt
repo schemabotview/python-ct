@@ -1,0 +1,11 @@
+$ python -m pipeline run --month 2026-10
+WARNING pipeline.extract: orders-2026-10-02.csv is not UTF-8: read as Latin-1
+INFO pipeline.decorators: Pipeline.run took 0.01s
+INFO pipeline.cli: 2026-10: 11578.88 | priced: 163 | rejected: 13
+INFO pipeline.cli: wrote daily_report.csv, summary.json and warehouse.db
+$ python -m pipeline run --month october
+usage: roastery-etl run [-h] --month MONTH
+roastery-etl run: error: argument --month: 'october' is not YYYY-MM
+$ python -m pipeline run --month 2026-11; echo "exit $?"
+ERROR pipeline.cli: no day files for 2026-11 in data/raw
+exit 1

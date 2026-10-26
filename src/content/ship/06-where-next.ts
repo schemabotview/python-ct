@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const whereNext: Section = {
+  id: 'where-next',
+  title: 'Where next',
+  scene: 'ship-where-next',
+  narration:
+    'October had a hundred and seventy six rows. A large shop might have millions a day, and then the tools change, but the ideas do not. The table pairs each stage we built with the tools built for that scale. Extract: we read CSV one row at a time. pandas, Polars and DuckDB read whole folders of files at once, and the Parquet format stores columns compressed and typed, so reading is far faster. Validate: we refused rows one by one with parse row. At scale, libraries such as pandera or Great Expectations check whole columns against a schema, and report every failure together. Transform and aggregate: we used dictionaries, Counter and groupby. A DataFrame, in pandas or Polars, does the same grouping and summing over millions of rows in a single expression, running in fast compiled code, and DuckDB does it in SQL, right inside your Python process. When one machine is not enough, Spark spreads the same kind of work across many. Load: we wrote CSV, JSON and SQLite. At scale, the outputs become Parquet files, and a data warehouse, built for exactly the kinds of questions the shop will ask across years. Schedule: we used cron and a shell script. Orchestrators such as Airflow and Dagster run pipelines as graphs of tasks, with retries, dependencies between jobs, and a dashboard showing every run. The four names in the middle are the ones you will meet first. And the note at the bottom is the real lesson of these twelve courses. Stream what you can. Keep money exact. Refuse a bad row with a reason. Make every run safe to repeat. And test all of it. Every one of those tools assumes you already think that way, and now you do.',
+}

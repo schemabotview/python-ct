@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const configurationAndSecrets: Section = {
+  id: 'configuration-and-secrets',
+  title: 'Configuration and secrets',
+  scene: 'ship-config',
+  narration:
+    "The folders and the log level are still fixed in the code. On the shop's server they may differ, and a password must never be in the code at all, because code is shared, copied and kept in version control forever. So settings get their own module, config dot py, and a precedence chain, drawn on the right. Each layer can override the one before it. First the defaults, in a frozen dataclass called Config. Then a file, roastery dot toml, read with tomllib from the standard library. TOML is the same format as pyproject, simple and readable, and this file sets the log level to warning, so a scheduled run stays quiet unless something is wrong. Then environment variables, each named ROASTERY and the setting's name in capitals. Last, a flag on the command line, dash dash out, for a one off change. merged builds a new Config from an old one and any settings given, and load config applies the file, then the environment. One setting is different: the API token, a secret. ENV ONLY lists it, so load config ignores it in the file even if someone writes it there. It can only come from the environment, which the server's operator sets, outside the code and outside version control. A new subcommand, config, prints the settings, with the token shown only as set or not set: a secret is never printed, not even to the log. The first run shows the file at work: the log level is warning. The second sets two environment variables for one command, and passes dash dash out. Now the log level is info, the environment beating the file. The output folder is x, from the flag. And the token is set, and still not shown. Next, a command anyone can install.",
+}
