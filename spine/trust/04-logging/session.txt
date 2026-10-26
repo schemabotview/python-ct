@@ -1,0 +1,12 @@
+$ python main.py
+WARNING pipeline.extract: orders-2026-10-02.csv is not UTF-8: read as Latin-1
+INFO __main__: October: 11578.88 | priced: 163 | rejected: 13
+INFO __main__: wrote daily_report.csv, summary.json and warehouse.db
+$ LOG_LEVEL=DEBUG python main.py 2>&1 | head -4
+DEBUG pipeline.validate: refused ORD-1005: quantity 'three'
+WARNING pipeline.extract: orders-2026-10-02.csv is not UTF-8: read as Latin-1
+DEBUG pipeline.validate: refused ORD-1013: no customer
+DEBUG pipeline.validate: refused ORD-1014: quantity '-1'
+$ pytest -q
+............                                                             [100%]
+12 passed in 0.03s

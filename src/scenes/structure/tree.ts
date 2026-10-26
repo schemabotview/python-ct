@@ -2,16 +2,22 @@ import type { TreeEntry } from '@graphlearning/graphl-flow'
 import { venvClosed } from '../start/tree'
 
 // The explorer from Course 8 on: data/ folds to one line (Course 7 showed raw and out), and the code
-// is what grows. `files` are project paths; those under pipeline/ draw inside the package folder.
+// is what grows. `files` are project paths; those under pipeline/ or tests/ draw inside that folder
+// (sorted, as an editor lists them), and `fresh` may name a folder ('pipeline/') to mark it new.
 export function codeTree(files: string[], { active, fresh = [] }: { active: string; fresh?: string[] }): TreeEntry[] {
   const entry = (path: string, name = path): TreeEntry => ({ name, state: path === active ? 'active' : fresh.includes(path) ? 'new' : undefined })
-  const pkg = files.filter((f) => f.startsWith('pipeline/')).sort()
+  const folder = (dir: string): TreeEntry[] => {
+    const inside = files.filter((f) => f.startsWith(`${dir}/`)).sort()
+    return inside.length ? [{ name: dir, state: fresh.includes(`${dir}/`) ? 'new' : undefined, children: inside.map((f) => entry(f, f.slice(dir.length + 1))) }] : []
+  }
   return [
     venvClosed,
     { name: 'data', folder: true, state: 'muted', note: 'raw and out' },
-    ...(pkg.length ? [{ name: 'pipeline', state: fresh.includes('pipeline/') ? 'new' as const : undefined, children: pkg.map((f) => entry(f, f.slice('pipeline/'.length))) }] : []),
-    ...files.filter((f) => !f.startsWith('pipeline/')).map((f) => entry(f)),
+    ...folder('pipeline'),
+    ...folder('tests'),
+    ...files.filter((f) => !f.includes('/')).map((f) => entry(f)),
   ]
 }
 
 export const PACKAGE = ['pipeline/__init__.py', 'pipeline/extract.py', 'pipeline/load.py', 'pipeline/transform.py', 'pipeline/validate.py']
+export const MODEL = ['pipeline/model.py', 'pipeline/errors.py', 'pipeline/ports.py', 'pipeline/run.py']

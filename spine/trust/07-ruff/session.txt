@@ -1,0 +1,10 @@
+$ ruff check --output-format concise --quiet
+main.py:26:16: RUF059 Unpacked variable `cents` is never used
+pipeline/load.py:88:9: PYI034 `__enter__` methods in classes like `SqliteWarehouse` usually return `self` at runtime
+pipeline/model.py:51:20: FURB157 [*] Verbose expression in `Decimal` constructor
+pipeline/transform.py:7:21: F401 [*] `decimal.Decimal` imported but unused
+$ ruff format
+9 files reformatted, 8 files left unchanged
+$ pytest -q
+...............                                                          [100%]
+15 passed in 0.04s

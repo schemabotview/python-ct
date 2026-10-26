@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const lintingAndFormatting: Section = {
+  id: 'linting-and-formatting',
+  title: 'Linting and formatting with ruff',
+  scene: 'trust-ruff',
+  narration:
+    "First, the fix from the debugger. The breakpoint is gone, and Money has a post init method that rounds its amount to the cent, whatever it was given. Because the dataclass is frozen, it sets the field with object dot setattr, the one sanctioned way round frozen during construction. Multiply no longer rounds by itself, because every Money now does, and the median test passes. Tests check behaviour. Two more kinds of check cover what tests do not: mistakes visible in the code itself, and its layout. ruff does both, and joins the development dependencies. ruff check is a linter. It reads the code, without running it, against hundreds of rules, each with a code. Here it finds four real problems, listed on the right by rule. F four oh one: transform still imports Decimal, which nothing there uses since Money took over. RUF oh five nine: main unpacks the warehouse's cents and never uses them. PYI oh three four: SqliteWarehouse's enter method should be typed as returning Self, so subclasses keep their type. And FURB one five seven: Decimal of the string zero is just Decimal of zero. ruff marks the ones it can fix itself, and the others are a moment's work by hand; they are done before the next course begins. ruff format is a formatter. pyproject sets the line length to seventy nine, the limit from Python's style guide, and the formatter rewrites nine files to one consistent layout. Nobody argues about where a bracket goes, because the tool decides. The tests still pass, fifteen of them, because formatting changes layout and never behaviour. Linter, formatter, type checker and tests: four checks, all automatic, run on every change. The pipeline is now trustworthy. Next, we make it fast.",
+}

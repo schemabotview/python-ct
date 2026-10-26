@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const fixturesAndParametrisation: Section = {
+  id: 'fixtures-and-parametrisation',
+  title: 'Fixtures and parametrisation',
+  scene: 'trust-fixtures',
+  narration:
+    "Tests repeat themselves. Every rule test built the same Kenyan product, and the validation tests will all need a valid row to start from. pytest's answer is a fixture: a function marked with the fixture decorator, which builds something a test needs. A test asks for a fixture simply by naming it as a parameter, and pytest calls the fixture and passes in the result, fresh for every test, so no test can spoil another's data. Fixtures that many test files share live in conftest dot py, which pytest loads automatically. There are two so far: kenya, a product at thirty one a bag, and good row, a valid CSV row for two bags of it. The rule tests now take kenya instead of a module constant. test validate dot py starts with the happy path: a good row becomes a line of two bags. Then the interesting part. There are five ways the October data was refused, and writing five near identical tests would bury the idea in repetition. parametrize runs one test once for each set of arguments. Each case names a field to break, the bad value, and the error it must raise: no customer, a quantity in words, a negative quantity, zero bags, and an unknown product. The test copies the good row, changes that one field, and uses pytest dot raises to assert that parse row refuses it with exactly that kind of error. Each case gets a readable id, and collect only lists them, one test fanned out into five. The diagram on the right draws that: the fixture flows into the test, and the test into its cases. The whole suite is now eleven tests, all passing. Next, testing the pipeline without its files.",
+}

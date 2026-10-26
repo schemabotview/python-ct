@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const debugging: Section = {
+  id: 'debugging',
+  title: 'Debugging with breakpoint() and pdb',
+  scene: 'trust-debugging',
+  narration:
+    "A new test checks summarise on two lines simple enough to work out by hand: one bag of Ethiopian at nine ninety five, and one bag of Kenyan at thirty one. The total should be forty ninety five, and the median, halfway between the two, is twenty point four seven five, which rounds to twenty forty eight. The test fails. Rather than scattering print calls, put one line where you want to look: breakpoint. It is built into Python, and when execution reaches it, it opens pdb, the Python debugger, right there, with every local variable available. The line goes into summarise, just after the amounts are collected, and pytest runs the new test. pytest notices the breakpoint, turns off its output capturing, and pdb shows where it stopped: transform dot py, in summarise, at the breakpoint. At the pdb prompt, p prints any expression. The median of the amounts is Decimal twenty point four seven five: three decimal places. Up moves one frame towards the caller, into the test, at the line that called summarise. Down would move back. The stack on the right shows those two frames. Now the bug is clear, and it is not in summarise at all. Money promises whole cents, but only its multiply method rounded. The median of two amounts is their average, and that half a cent slipped straight into a Money, which then compares unequal to twenty forty eight. On October's real data the median happened to be a single line, so every run looked right. A breakpoint is temporary: q quits the debugger, and the line must not stay in the code. The note at the bottom says where the fix belongs: in Money itself, so that no caller, now or later, can make one with part of a cent. That fix comes next, with one more kind of check.",
+}
