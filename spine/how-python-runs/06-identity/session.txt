@@ -1,5 +1,0 @@
-$ python identity.py
-True
-False
-140345977201600 140345975280448
-<class 'list'> <class 'int'>

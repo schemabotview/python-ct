@@ -1,9 +1,0 @@
-$ python main.py
-wrote 31 days to data/out/daily_report.csv
-$ head -n 4 data/out/daily_report.csv
-date,orders,bags,revenue,top_product
-2026-10-01,4,21,329.00,COL-500
-2026-10-02,3,4,75.95,COL-500
-2026-10-03,3,9,214.10,KEN-1000
-$ wc -l data/out/daily_report.csv
-32 data/out/daily_report.csv

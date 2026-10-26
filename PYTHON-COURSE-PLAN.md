@@ -46,15 +46,14 @@ review unit, and a 30-minute chapter is worse at both.
 
 ## Python version: 3.15
 
-**Python 3.15.0 shipped on 2026-10-09; 3.15.2 (2026-10-25) is current.** Every number, banner,
-traceback and output in v2 is produced on the latest 3.15.x at authoring time (and `3.15t`, the
-free-threaded build, where threads are measured), and the exact patch version is recorded here
-when the first step is replayed. `uv python list` in the authoring container still stops at
-`3.15.0b4`, so installing a final 3.15 build is the first task of the infra step — never author
-against the beta.
+**Python 3.15.0 shipped on 2026-10-09; 3.15.2 (2026-10-25) is current.** The course is pinned to
+**CPython 3.15.1** (and `3.15.1t`, the free-threaded build, where threads are measured): 3.15.2 had no
+python-build-standalone build when the infra step ran, and the pin moves only deliberately, with a
+full re-replay of the spine. `scripts/spine.py` refuses any other interpreter.
 
-3.15 features the course uses, **each to be verified by running it before a line of narration
-claims it** (from the 3.15 release notes, not yet run here):
+3.15 features the course uses — **each run on 3.15.1 in the infra step** (UTF-8 mode on by default,
+`frozendict` refusing item assignment, `sentinel`, unpacking in comprehensions, `lazy import`
+deferring the load, the GIL off on `3.15t`); what a section says about them is still run first:
 
 | Feature | Where |
 | --- | --- |
@@ -365,7 +364,7 @@ the pipeline stays dependency-free.
 ## Build order
 
 1. **Owner review of this plan.**
-2. **Infra** — install a final 3.15.x; move to `@graphlearning/graphl-flow` + `@graphlearning/shell`
+2. **Infra** *(done 2026-10-26)* — install a final 3.15.x; move to `@graphlearning/graphl-flow` + `@graphlearning/shell`
    ^1.0 (drop `@graphlearning/flow`, `react-markdown`, `remark-gfm`); rebuild `ide.ts` on graphl-flow
    and measure its panes; the pipeline-map scene; `spine.py` cumulative check; `check-content`
    side-pane rule; `check-render` on `data-fit="ready"`, same-fit across IDE frames, fail on
@@ -381,7 +380,7 @@ Course ids change (`why-python` + `how-python-runs` → `picture`, `aggregate` �
 ## Decisions (resolved)
 
 1. **Spine**: `roastery-etl`, kept from v1 — now cumulative and checked.
-2. **Version**: Python 3.15 (final shipped 2026-10-09); the exact patch is recorded at first replay.
+2. **Version**: Python 3.15, pinned to 3.15.1 (final shipped 2026-10-09).
 3. **Courses**: 12; Courses 1–2 of v1 merged into `picture`; OOP is its own course (`model`).
 4. **Third-party dependencies**: the pipeline itself stays standard-library only; mypy, pytest and
    ruff are dev tools from Course 8 on.

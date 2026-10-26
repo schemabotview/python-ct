@@ -1,7 +1,0 @@
-$ python main.py
-bytes of length 145
-b'ORD-1009,2026-10-02,zo\xeb,KEN-1000,1'
-not UTF-8: byte 0xe9 at 60
-str of length 145
-ORD-1009,2026-10-02,zoë,KEN-1000,1
-b'ORD-1009,2026-10-02,zo\xc3\xab,KEN-1000,1'

@@ -1,9 +1,0 @@
-import type { Section } from '../types'
-
-export const namesAndObjects: Section = {
-  id: 'names-and-objects',
-  title: "Names and objects",
-  scene: 'hold-names',
-  narration:
-    "The pipeline has to hold data before it can do anything with it: a product code, a quantity, a price. This course is about the shapes that data can take, and it starts with the most basic idea of all, which you already met inside the interpreter: a variable is a name for an object. On line three, sku is bound to the text E T H dash two fifty. On line four, quantity is bound to the whole number two, and on line five, price to nine ninety-five. The first line of output prints all three, and the second asks each one its type: a str, an int, and a float. Notice where the type lives. It is not on the name. Nothing in the code says sku is text; the object it refers to is text, and the object carries its own type. That is what people mean when they say Python is dynamically typed. Now the important part. Line nine says bag price equals price. That does not copy nine ninety-five into a new box. It gives the same float object a second name, and line ten proves it: bag price is price prints True, one object, two names. Then line eleven sets price to ten ninety-five. Python creates a new float, and moves the name price onto it. Nothing happens to the old object, and nothing happens to bag price, which still refers to nine ninety-five. The picture on the right shows the state after line eleven: four names above, four objects below, an arrow from each name to its object. Keep this picture in mind for the rest of the course. Every value you will meet, a number, a string, a list or a whole order, is an object somewhere, and every variable is only an arrow pointing at one. Next, the numbers themselves, and why one of them cannot be trusted with money.",
-}

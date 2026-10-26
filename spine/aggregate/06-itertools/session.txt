@@ -1,6 +1,0 @@
-$ python main.py
-2026-10-01 4 orders
-2026-10-02 3 orders
-2026-10-03 3 orders
-with the late order: 5798 rows
-row 4,000: ORD-5056 2026-10-23

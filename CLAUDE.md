@@ -6,182 +6,215 @@
 ## What this repo is
 
 A GraphL concept app for **Python — from first program to production**: one course path from
-absolute beginner to working professional, built around one spine application (`roastery`, a coffee
-roastery's order service) shown in real code. A **section** is `(scene, narration)` — one full-screen
-frame and one segment of the course video. Sections are **scene-only** (no `slide`): the frame
-carries the code, its result and the mental model side by side.
+absolute beginner to working professional, built around one application, `roastery-etl` (a coffee
+roastery's order pipeline), shown in real, executed code. A **section** is `(scene, narration)` —
+one full-screen 16:9 frame and one segment of the course video. Sections are scene-only.
 
-`PYTHON-COURSE-PLAN.md` is the source of truth for scope, audience, courses, sections and the spine.
-Author from it; do not drift from its section lists.
+`PYTHON-COURSE-PLAN.md` (v2) is the source of truth for the courses, every section, the spine's
+growth and the diagram each section's side pane carries. Author from it; do not drift from it.
 
-The render engine is `@graphlearning/flow`; the app shell is `@graphlearning/shell`. Both are
-**published packages pinned by version** (flow ^2.2.0, shell ^0.14.0 — the first release that
-leaves a section frame headerless and exports `SCENE_ASPECT`). This repo's own surface is
-`src/content/`, `src/scenes/`, `src/main.tsx` and `src/theme.css` — nothing else.
+The render engine is `@graphlearning/graphl-flow` (^0.2.0); the app shell is `@graphlearning/shell`
+(^1.0.0). Both are published packages pinned by version. This repo's own surface is `src/content/`,
+`src/scenes/`, `spine/`, `src/main.tsx` and `src/theme.css`.
+
+## Status
+
+**v2 re-authoring, 2026-10-26.** v1 (12 courses, 90 sections on `@graphlearning/flow` + shell 0.14,
+Python 3.14) was removed whole — content, scenes, spine and wavs; it is in git history before the
+v2 infra commit. Done so far: the plan (approved) and the **infra step** — Python 3.15.1, graphl-flow
++ shell 1.0, the IDE template, the pipeline map, the cumulative spine check, and the v2 checks.
+
+`src/content/template`, `src/scenes/template` and `spine/template` are a TEMPORARY course of
+template frames (the map, and one IDE frame per kind of side pane) that give the infra something
+real to render. **Delete all three when Course 2 (`start`, the pilot) lands.**
+
+| # | Course id | Course | Sections | Status |
+| --- | --- | --- | --- | --- |
+| 1 | `picture` | The picture: why Python, and how it runs your code | 11 | not started (after the pilot) |
+| 2 | `start` | Start the project | 5 | next — the pilot |
+| 3 | `hold` | Hold the data | 9 | not started |
+| 4 | `process` | Process the data | 11 | not started |
+| 5 | `extract` | Read the data | 7 | not started |
+| 6 | `transform` | Transform and aggregate | 7 | not started |
+| 7 | `load` | Write the results | 6 | not started |
+| 8 | `structure` | Structure the pipeline | 5 | not started |
+| 9 | `model` | Model the domain | 10 | not started |
+| 10 | `trust` | Make it trustworthy | 7 | not started |
+| 11 | `speed` | Make it fast | 7 | not started |
+| 12 | `ship` | Ship it | 6 | not started |
+
+Each course is authored, replayed, rendered and captured, then the owner reviews its routes before
+the next begins. Narration audio comes after a course's frames are approved.
 
 ## Route contract
 
-`#/` is the catalog. A section is `#/<courseId>-<sectionId>`, e.g. `#/how-python-runs-names-point-to-objects`.
-`?capture=1` and `window.__scene.plan()` are the recorders' hooks and come from the shell.
+`#/` is the catalog. A section is `#/<courseId>-<sectionId>`. `?capture=1` and
+`window.__scene.plan()` are the recorders' hooks and come from the shell.
 
-## Course arc and status
+## Python: 3.15.1, and every output is run
 
-**Reset on 2026-10-21** and restarted from `PYTHON-COURSE-PLAN.md`: 12 courses, 90 sections, built
-around one ETL pipeline (`roastery-etl`); courses are named by what we build. Concept frames for
-Courses 1–2, IDE frames (`@graphlearning/flow` ^2.2.0: tree, terminal, folded code, min sizes) from Course 3.
+Every banner, traceback, timing and printed value in the course is produced on **CPython 3.15.1**
+(x86-64), and `3.15.1t` (free-threaded) where threads are measured. 3.15.0 shipped 2026-10-09;
+3.15.2 (2026-10-25) had no python-build-standalone build yet when this was set up, so 3.15.1 is the
+pin — move it deliberately, and re-replay the whole spine when you do.
 
-| # | Course id | Course | Sections | Video | Status |
-| --- | --- | --- | --- | --- | --- |
-| 1 | `why-python` | Why Python | 5 | 8:50 | narrated and rendered, awaiting owner review |
-| 2 | `how-python-runs` | How Python runs your code | 9 | 12:57 | narrated and rendered, awaiting owner review |
-| 3 | `start` | Start the project | 6 | 8:19 | narrated and rendered, awaiting owner review |
-| 4 | `hold` | Hold the data | 10 | 15:17 | narrated and rendered, awaiting owner review |
-| 5 | `process` | Process the data | 11 | 17:10 | narrated and rendered, awaiting owner review |
-| 6 | `extract` | Read the data | 7 | 10:59 | narrated and rendered, awaiting owner review |
-| 7 | `aggregate` | Aggregate it | 7 | 11:09 | narrated and rendered, awaiting owner review |
-| 8 | `load` | Write the results | 6 | 10:01 | narrated and rendered, awaiting owner review |
-| 9 | `structure` | Structure the pipeline | 9 | 14:38 | narrated and rendered, awaiting owner review |
-| 10 | `trust` | Make it trustworthy | 7 | 11:16 | narrated and rendered, awaiting owner review |
-| 11 | `speed` | Make it fast | 7 | 11:05 | narrated and rendered, awaiting owner review |
-| 12 | `ship` | Ship it | 6 | 9:14 | narrated and rendered, awaiting owner review (§1 uses `--month`, not the plan's `--date`: the job is monthly) |
+Install: `uv python install 3.15.1 3.15.1+freethreaded --install-dir <dir>` with a uv new enough to
+list them (0.13.5 does; 0.11.32 stopped at 3.15.0b4), copy each tree into `/usr/local`, and link
+`/usr/local/bin/python` → `python3.15`, so a venv's `pyvenv.cfg` reads `home = /usr/local/bin` as on a
+learner's machine. `scripts/spine.py` refuses to run on any other `python --version`.
 
-Every number on a Course 1 and Course 2 frame was produced here on **CPython 3.14.6** (x86-64, 4
-CPUs), installed with `uv python install 3.14` (and `3.14t` for the free-threaded build): the
-`import this` text, the `timeit` pair, the sample day's report, and every Course 2 pane — tokens,
-AST, `dis`, `__pycache__`, `inspect.stack()`, ids, ref counts, the traceback, and the GIL timings on
-both builds. Course 2's scripts, and Course 1's two runnable frames, are spine steps (`spine/how-python-runs/`,
-`spine/why-python/`) shown in the same IDE template; `identity.py`, `gil.py` and `sum_two_ways.py` print
-ids or timings, so their steps are `volatile` (compared with digits masked). Bytecode is version-specific, and
-ids and timings change every run: the narration claims only what survives re-running (no speed-up
-on the default build; about half the time on two threads with `python3.14t`). History dates and
-the 3.11 speed-up are from the CPython docs and PEPs, not measured. 3.15 was still a beta
-(3.15.0b4) when this was checked.
+Verified on 3.15.1 at setup, so a section may rely on them: UTF-8 mode on by default (PEP 686),
+`frozendict` (item assignment raises `TypeError`), `sentinel('MISSING')`, unpacking in
+comprehensions (`[*xs for xs in …]`), `lazy import` (the module is not in `sys.modules` until first
+use), and `sys._is_gil_enabled()` False on `python3.15t`. Anything else about 3.15 is run before it is
+written down.
 
-## The spine: code is executed, not pasted
-
-From Course 3 on, every code and terminal pane comes from `spine/<course>/<step>/`: `project/` is a
-snapshot of `roastery-etl/` at that step, `session.txt` is the terminal transcript, `step.json` says
-where it starts, whether a venv exists, and which generated files to `capture`. Scenes import these
-files with Vite's `?raw`, so a frame can only show what was replayed. `npm run check:spine`
-(`scripts/spine.py`) replays every step in a fresh copy — one bash per step so `cd` and `activate`
-carry over, REPL lines typed into a real pty — and fails on any difference; `--write` regenerates
-the transcripts after an edit. Paths are normalised to `/home/ana/roastery-etl`.
-
-From Course 9 on, some steps `pip install` pinned tools (mypy, pytest, ruff) from PyPI, so the replay
-needs network access; pip's date-dependent upgrade notice is switched off in the replay.
-
-**Run it with Python 3.14 as `python` on PATH.** Here that was a python-build-standalone 3.14.6
-copied into `/usr/local` (so a venv's `pyvenv.cfg` reads `home = /usr/local/bin`, as on a learner's
-machine); a different interpreter changes the banner, `pyvenv.cfg` and some error text, and the
-check reports exactly that.
-
-IDE frames are built with `ideFrame()` in `src/scenes/ide.ts`: ONE fixed template — explorer
-(300) | editor (80 columns — PEP 8's limit — × 588, 23 rows) over terminal (320, 11 lines) | side pane (520) — so every panel sits at the
-same pixels in every section (`@graphlearning/flow` ^2.2.0 `minW` / `minH`). A file longer than the
-editor is folded with `show`, never allowed to grow the pane. The whole template is 1632 × 918, 16:9
-exactly — the shape of the WHOLE scene area, because a section frame carries no header (owner's call,
-2026-10-21; the shell stopped drawing one in 0.14.0, `sectionHeader` defaulting to false). TERMINAL_H
-is DERIVED, not typed: `TOTAL_H = width / SCENE_ASPECT`, with `SCENE_ASPECT` imported from the shell,
-so the template follows if the shell ever changes what it reserves above a section. That is the whole
-point — it was 1632 × 856 (1.91:1) while the header took the top 6.5vh, and when the header went that
-hardcoded 856 silently left 111px of slack above and below. Every side card is stretched to the full 520. Two versions of a file are two
-sections, never two editors in one frame. `check-render.mjs` fails any IDE frame whose explorer,
-editor, terminal or side pane moves.
-
-Source layout per course: `src/content/<course>/NN-<section-id>.ts` plus `index.ts`;
-`src/scenes/<course>/` plus `index.ts` exporting `<course>Scenes`; `public/audio/<course>/`.
-
-## Verification notes (read before trusting a number)
-
-- **Every code snippet and printed output is run before it is written down**, on the pinned Python
-  version — `uv python install 3.14` provides it (and `3.14t`, the free-threaded build). Never
-  present an unrun output.
 - **Timings, races and profiles are not deterministic.** Round them, tie them to the build they were
-  measured on, and make no universal speedup claim. Free-threaded behaviour that was not measured is
-  labelled as documentation, not measurement.
-- **Narration audio is complete** — one `.wav` per section for all 90, produced by the Colab +
-  Chatterbox pass (2026-10-21, the same day as the reset) and committed under `public/audio/<course>/<section-id>.wav`.
-  Chatterbox is not deterministic, so re-running it on an unchanged `.tts` yields a different
-  take and a different duration. Re-generate only the sections whose narration text changed, or
-  every chapter timestamp downstream of it moves.
+  measured on, make no universal speed-up claim. Unmeasured free-threaded behaviour is labelled
+  documentation.
+- CPython-specific behaviour (refcounts, `id()` as an address, the GIL) is labelled CPython.
+
+## The spine: cumulative, executed, checked
+
+`spine/<course>/<NN-step>/` holds `project/` (a snapshot of `roastery-etl/` at that step),
+`session.txt` (the terminal transcript) and `step.json`. Scenes import these files with Vite's `?raw`,
+so a frame can only show what was replayed. `npm run check:spine` (`scripts/spine.py`) replays every
+step in a fresh copy — one bash per step so `cd` and `activate` carry over, REPL and pdb lines typed
+into a real pty — and fails on any difference; `--write` regenerates the transcripts. Paths are
+normalised to `/home/ana/roastery-etl`.
+
+**The chain is checked, not trusted.** Every `step.json` has exactly one of:
+
+- `"first": true` — starts the chain (2.1, an empty folder);
+- `"from": "<course>/<step>"` + `"changes": [paths]` — the previous step plus exactly these
+  changes. A file that differs from the parent but is not listed FAILS; a listed path that did not
+  change fails too, so `changes` is the section's real diff. A directory entry covers everything
+  under it. A failure branch (run the wrong version, then the fix) is two steps with the same `from`;
+- `"lab": true` — a standalone lab outside the chain (Course 1 only: the project does not exist yet).
+
+This is what v1 lacked: its Courses 4–5 rewrote one `main.py` from scratch every step. **Experiments
+go in the REPL** (in the session), never into `main.py`; `main.py` only gains pipeline code.
+
+Other `step.json` keys: `venv`, `start: "home"`, `capture`, `project`, `volatile` (digits masked),
+`setup` — documented in `scripts/spine.py`. From Course 8 on, steps `pip install` pinned dev tools,
+so the replay needs network access.
+
+## Frames
+
+### The IDE template (`src/scenes/ide.ts`)
+
+ONE fixed frame for every IDE section: explorer (280) | editor (787 × 603) over terminal (364) |
+side pane (649, fixed). Measured on graphl-flow 0.2: 15px/1.6 Plex Mono, a 9.0px advance and 24px
+rows, so the editor is **80 columns × 23 rows** (PEP 8's limit) and the terminal **13 lines**. The
+frame is 1736 × 977 — 16:9, derived from the shell's `SCENE_ASPECT` — and the fit is 2.03×, so code
+is ~30px in the 4K frame. Fixed ids: `explorer`, `editor`, `terminal`, `side`, so a `focus` can
+name `editor.L12` or any side-pane id.
+
+- **Panes have floors, so content can grow them**, and a grown pane moves the whole template. So
+  check-content fails an editor showing more than 23 rows (fold with `show`), a line wider than 80
+  columns, or a session longer than 13 lines — with a message naming the pane — and check-render
+  fails any IDE frame not on the same fit and pane pixels as the others.
+- **No edge between panes**: it widens the gap it crosses and moves every pane (confirmed: one
+  cross-pane edge shifted the editor 22px). The editor points with `highlight`; edges live INSIDE
+  the side pane.
+- `terminal()` marks a traceback (from `Traceback (most recent call last):`, or the `  File "…"` a
+  SyntaxError starts with, through the exception line) with graphl-flow's `! ` error prefix, so
+  errors read red while `session.txt` stays the raw replay.
+- Two versions of a file are two sections, never two editors in one frame.
+
+### The side pane is a diagram
+
+The v1 gap the owner named: side panes were 79 bullet lists and one edge in 90 sections, a few cards
+at the top of an empty column. In v2 every IDE side pane carries a diagram — memory (names table →
+object tables, edges from rows), stack, flow, class, plot, or result table (PYTHON-COURSE-PLAN.md
+lists which per section). Enforced:
+
+- check-content: a side pane with no edge, plot or table fails; a bulleted card there is a caption
+  (≤ 3 bullets).
+- check-render: the side pane's content must span ≥ 2/3 of its height (`SIDE_FILL`). Fill it with
+  content — another state of the diagram, the REPL answers as a table — not with spacing.
+
+Authoring notes from the template frames:
+
+- graphl-flow has **no obstacle avoidance**. Lay a pointer's target BESIDE its row; an arrow that
+  must pass a third card will cross it (check-render fails it). Before/after states are separate
+  small diagrams, not one tangle.
+- An edge into a node inside a titled group crosses the group's heading — edge to the GROUP
+  (check-render fails a heading crossing). The pipeline map feeds `stages`, not `extract`.
+- A toned item only recolours its icon; a group that sets its OWN tone draws a tinted, bordered box.
+  Use that to light something (the map pane's "you are here").
+- A stacked item (`stack: true`) centres its bullets' text but not their markers: keep bulleted
+  cards icon-left.
+- Table rows are addressable as `<table>.<row>` when the first cell is a plain word; give a row an
+  `id` when it is not (`"ETH-250"`).
+- An `icon` key graphl-flow does not know draws NOTHING, silently — check-render fails it. Valid keys
+  are graphl-flow's `src/icons.tsx` (lucide `file`, `memory`, `workflow`…, brands `python`, `git`…).
+
+### The pipeline map (`src/scenes/map.ts`)
+
+`pipelineMap` is the full concept scene (sources → five stages, each with its course and the Python
+it is built from → outputs, Part II as a rail); `mapPane(stage)` is the side-pane column every
+course's first section opens with, the stage lit. One stage list feeds both.
+
+## Checks — before handing over
+
+```sh
+npm run build && npx tsc --noEmit && npm run check   # check = check-content + check-render
+npm run check:spine                                   # Python 3.15.1 as `python`
+npm run shots -- <slug or course>                     # 4K PNGs in out/shots/ — then LOOK
+```
+
+Both checks read the real registries (`scripts/registry.mjs` bundles `src/content` + `src/scenes`
+with esbuild, `?raw` included) — never regexes over source.
+
+- **check-content**: scene-only, narrated, scene registered; unique node ids; the side-pane diagram
+  rule; IDE edges inside the side pane; pane capacity; every wav once a course has audio.
+- **check-render** (playwright, 3840×2160 at deviceScaleFactor 1, `?capture=1`, waits for
+  `.gf-scene[data-fit="ready"]`): console/page errors; fit moving after ready; content outside the
+  frame; text leaving its node; overflow; plot text clipped; body text < 24px or item icons < 32px
+  at 4K; edges off-face / not orthogonal / < 24px / crossing a node or a heading / labels colliding;
+  icons that drew nothing; a `focus` that marked nothing; IDE same-fit and same-pane-pixels; side
+  pane fill. graphl-flow's own check, ported, plus this repo's rules.
+- Each check loads every section in a FRESH page. ui-shell 1.0 renders `<Scene>` without a `key`,
+  so hash navigation reuses one Scene: the new scene is measured under the previous one's fit (a
+  sub-pixel drift that failed the face check) and `data-fit` can read `ready` before it settles.
+  Raised with the owner as a shell fix (`key` on `<Scene>`); the recorders' 700ms settle masks it.
+
+All are a **floor, not proof**: the first map passed every check with an arrow through a heading.
+When a capture shows a defect a check missed, add the assertion and confirm it FAILS on the old
+frame before trusting it (done for the heading crossing, the crossing arrow, unknown icons, focus
+misses, cross-pane edges and list-only side panes).
 
 ## Authoring conventions
 
-- Teaching method per section: objective → mental model → annotated code and its real result →
-  failure/alternative contrast → bridge. Explain a term before relying on it.
-- Python version claims are pinned to the **current stable release at authoring time** (decided in
-  `PYTHON-COURSE-PLAN.md`); label CPython-specific behaviour and GIL-enabled versus free-threaded
-  builds. Never present a version-specific fact as a language guarantee.
-- **Author wide, not tall.** A section has the whole 16:9 frame, but a scene is fitted to it, so a
-  tall stack is height-limited and gains nothing from the width. Lay frames out left to right
-  (code → result → model) with `flow: 'LR'` or columns.
-- **Fill the frame with content, not spacing.** Scenes show real detail — the actual code, outputs
-  and worked failures — rather than bare labels. What a slide used to say goes into tables, lists,
-  pills and notes in the scene, or into the narration.
-- **One idea per frame.** To walk a big picture, reuse one scene across consecutive sections with a
-  different `focus` each.
-- Narration is flowing prose and never reads code aloud line by line. Code shown must run on the
-  pinned version with exactly the output shown.
+- Teaching method per section: objective → mental model (the side pane) → the code and its real
+  result → failure or alternative → bridge. Explain a term before relying on it.
+- **One step per section**; every IDE section is a spine step. Failure is taught: run the wrong
+  version (its own step), show the real traceback, then fix it.
+- **Author wide, fill the frame with content.** A concept scene is fitted to 16:9: a flat strip
+  wastes the frame (the map's first build was 4:1, two thirds empty) — stack rows.
+- **One idea per frame.** Reuse a scene with a different `focus` to walk a big picture.
+- Narration is flowing prose, never reads code line by line, and may refer to the side pane's
+  diagram by what it shows ("the arrow from alias").
 
 ## Invariants — do not break
 
-
-- **Never write `x` or `y`.** Scenes are declarative: nodes, edges, nesting. `computeLayout` is not
-  exported, so there is no way around this, and that is the point — reproducible frames.
-- **Do not reimplement the shell.** `SectionView`, `CourseIndex`, `SlidePanel` and the hooks are
-  withheld on purpose. The route contract (`#/<courseId>-<sectionId>`, `?capture=1`,
-  `window.__scene.plan()`) is what every recorder drives, and it holds only if every repo composes
-  the pieces identically.
-- **`SiteHeader` goes on the catalog page only** — never on a section. A section is a video frame.
-- **Three stylesheets, in cascade order**, imported in `main.tsx`. The order is load-bearing:
-  1. `@graphlearning/flow/styles.css` — react-flow plus the IBM Plex faces the engine is
-     *calibrated* to. `codeMetrics` sizes code nodes from a measured 9.02px glyph advance, so a
-     different monospace face mis-sizes every code card. Carries the `.tok-*` colours.
-  2. `@graphlearning/shell/styles.css` — the shell paints the canvas (`--bg: #1a1d23`; SceneView
-     draws its dots at `#2a2f38` assuming a dark surface).
-  3. `./theme.css` — this repo's three brand tokens. **Last, or the brand loses to the defaults.**
-- **`file:../ui-flow` / `file:../ui-shell` must never be committed.** Local engine work only; CI has
-  no sibling checkout.
-- **Narration is never hand-produced.** `.tts` → `.wav` via Colab + Chatterbox only.
-
-## Layout rules the frames actually care about
-
-`npm run check` (`check-content.mjs` + `check-render.mjs`) catches silent failures — each builds green and
-breaks only on screen. Its comments carry the measured constants; the short version:
-
-- **Text that leaves its node is caught by rendering, not modelling.** The old 210×96 leaf and
-  slide-height models were removed with Course 1: under flow 2.x cards grow to fit their text.
-  `check-render.mjs` measures the real frame instead. Unbreakable tokens are still the thing to
-  watch — `_`, `.` and `/` are **not** break opportunities in CSS.
-- **A `focus:` that names no node in its scene is a silent no-op** — nothing lights up.
-- **A list is a framed card with bullets, never pills** (owner's call, 2026-10-21: a bordered card with
-  a divider reads better than centred pills). `framed` is inherited, so it is set on the list's PARENT:
-  `ideFrame` frames every side pane, and a concept frame frames the container (or scene) holding its
-  list. Only prose cards and lists read `framed`, so check a parent holds no prose card before framing it.
-- **`icon:` names are NOT guarded.** A wrong name type-checks, passes `check`, builds, and renders
-  the pattern's default glyph. The engine's `icon-gallery` fixture lists every valid key (AWS, Azure,
-  brand marks such as `python`, `git`, `github`, `docker`, and ~75 lucide glyphs). Avoid `monitor`
-  and `users`: Azure tiles shadow those lucide names.
-- **A section with no wav narrates silence** and records a silent segment. Audio resolves purely by
-  convention: `public/audio/<course>/<section-id>.wav`.
-
-What `check` does *not* model: an edge label landing on top of a card. Look at the route.
-
-## Guards before handing over
-
-```sh
-npm run build && npx tsc --noEmit && npm run check
-```
-
-`check` is two scripts: `check-content.mjs` (scene-only, narration, `focus`, wavs) and
-`check-render.mjs`, which boots vite and measures every section at 3840×2160 under `?capture=1` for
-text leaving its node. All three are a **floor, not proof** — they pass on frames that are visually wrong. The rendered
-route is the real bar, and the owner reviews it.
+- **Never write `x` or `y`.** Scenes are declarative; graphl-flow exports no layout.
+- **Do not reimplement the shell.** The route contract holds only if every repo composes it
+  identically.
+- **`SiteHeader` goes on the catalog page only** — never on a section.
+- **Three stylesheets, in cascade order**, imported in `main.tsx`: graphl-flow's `styles.css` (node
+  styles, IBM Plex Sans and Mono), the shell's (`--bg`, which graphl-flow's theme matches), then
+  `./theme.css` (`--brand`) LAST, or the brand loses.
+- **`file:` installs of the engine or the shell must never be committed.** CI has no sibling checkout.
+- **Narration is never hand-produced.** `.tts` → `.wav` via Colab + Chatterbox only. Chatterbox is
+  not deterministic: re-generate only sections whose narration changed.
+- Audio resolves by convention: `public/audio/<course>/<section-id>.wav`. A section with no wav
+  records silence.
 
 ## Working agreement
 
-- **Author the whole unit, then hand over the route.** Scenes and narration together.
-- **No ASCII sketches of scenes.** A sketch cannot show what the layout engine will do, which is the
-  only thing worth looking at.
+- **Author the whole unit, then hand over the route.** Scenes, spine and narration together.
+- **No ASCII sketches of scenes.** Render it and look.
 - **No silent scaffolding**, no work outside the ask. Say plainly what was built, what was verified,
   and what was left out.

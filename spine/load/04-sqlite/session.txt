@@ -1,6 +1,0 @@
-$ python main.py
-rolled back: UNIQUE constraint failed: order_lines.order_id
-BRA-500 1326 lines 5345 bags
-COL-500 1505 lines 5914 bags
-ETH-250 1491 lines 5977 bags
-KEN-1000 1475 lines 6066 bags

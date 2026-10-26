@@ -1,9 +1,0 @@
-$ python main.py
-ORD-1001 ETH-250 3
-3 COL-500
-ORD-1001 2 ('ORD-1003', 'ETH-250', 2)
-Traceback (most recent call last):
-  File "/home/ana/roastery-etl/main.py", line 14, in <module>
-    orders[0][2] = 4
-    ~~~~~~~~~^^^
-TypeError: 'tuple' object does not support item assignment

@@ -1,9 +1,0 @@
-import type { Section } from '../types'
-
-export const decimalForMoney: Section = {
-  id: 'decimal-for-money',
-  title: "Decimal for money",
-  scene: 'hold-decimal',
-  narration:
-    "Python's standard library has a type made for exactly this problem: Decimal, from the decimal module, imported on line three. A Decimal works in base ten, the way an accountant does, so nine ninety-five is exactly nine ninety-five. The one rule is how you create it: from a string, with quotes, as on line ten. Then price times three is exactly twenty-nine eighty-five, and the first line of output shows it. Lines five and six add two constants: the sales tax rate, eight point eight seven five percent, and one cent. The names are in capitals, which is Python's convention for a value that should never change. Python does not enforce it; it is a promise to the reader. Line twelve computes the tax. Twenty-nine eighty-five times the rate is two point six four nine one eight seven five, which is not an amount anyone can pay, so quantize rounds it to the cent. And it says how to round. Decimal's default is to round halves to the nearest even digit, which is a fine rule for statistics but not what a till receipt does, so we name ROUND HALF UP. Tax is two sixty-five, and the total is thirty-two fifty, exactly. Line fifteen asks the old question again, and this time point one plus point two does equal point three. Line sixteen shows the trap: build a Decimal from the float nine point nine five, without quotes, and you get the float's error, faithfully copied, all forty-nine digits of it. Finally line seventeen multiplies the price by the float one point five, and Python refuses, with a TypeError. That is deliberate. Mixing an exact type with an approximate one would quietly reintroduce the error we just removed, so Decimal makes you choose. From here on, every amount in the pipeline is a Decimal, from the moment it is read.",
-}

@@ -1,9 +1,0 @@
-import type { Section } from '../types'
-
-export const packagingSection: Section = {
-  id: 'packaging',
-  title: "Packaging: a wheel, an entry point and a clean install",
-  scene: 'ship-packaging',
-  narration:
-    "Running the pipeline from its own folder proves it works on the machine where it was written. To run on a server it has to be installed, and Python's unit of installation is a wheel: a single file that pip can install anywhere. The editor shows pyproject dot toml, which already describes the project. Three changes make it shippable. The version goes to one point oh. The project dot scripts table says that a command called roastery-etl runs the main function in pipeline dot cli; when pip installs the package, it writes a small launcher with that name into the environment's bin folder, which is how the roastery-etl command has existed since the first section. And package-data names schema dot sql, which brings up the bug this section is really about. Until now schema dot sql sat at the top of the project, and load dot py opened it by a path relative to wherever the job was started. That worked in the project folder and nowhere else, and a wheel holds only the package, so the file would simply have been missing. It now lives inside the pipeline package, and load dot py reads it with importlib dot resources, which finds a file that belongs to the package wherever the package is installed. The terminal is the proof. pip wheel builds the wheel into dist. A brand-new virtual environment, with nothing else in it, installs that one file. Its roastery-etl reports version one point oh, and it processes October with the same numbers as before: the same five thousand seven hundred and ninety-seven rows and the same revenue. The clean install is the test that matters, because the project folder hides every file the package forgot to include. Next: running it on a schedule, without anyone watching.",
-}

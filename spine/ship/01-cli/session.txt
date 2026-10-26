@@ -1,9 +1,0 @@
-$ roastery-etl --version
-roastery-etl 0.1.0
-$ roastery-etl run --month 2026-10
-INFO    2026-10: 5,797 rows, 79 rejected
-INFO    2026-10: 31 days, $401,430.14 revenue
-INFO    2026-10: 5,797 rows in warehouse.db
-$ roastery-etl run --month 2026-13
-usage: roastery-etl run [-h] [--month YYYY-MM]
-roastery-etl run: error: argument --month: '2026-13' is not a month (YYYY-MM)

@@ -1,9 +1,0 @@
-import type { Section } from '../types'
-
-export const exceptions: Section = {
-  id: 'exceptions',
-  title: "Exceptions: one bad row, and the run goes on",
-  scene: 'process-exceptions',
-  narration:
-    "Real input is messy. The table on the right shows four rows as they will arrive from a file, with every value as text. Two of them are fine. One names a product, P E R two fifty, that is not in the catalogue, and one has the quantity spelt out as the word two. In the last course, either of these stopped the whole program, with a KeyError and a ValueError. For a pipeline, that is the wrong behaviour: one bad row out of thousands should be reported, not allowed to stop the day. The tool for this is the try statement. On line nineteen, try marks the line that might fail: the catalogue lookup and the conversion of the quantity to an int. If either raises an exception, Python abandons the rest of the try block and looks at the except clauses in order. Line twenty-one handles a KeyError, an unknown SKU, by recording the row and the reason in the bad list. Line twenty-three handles a ValueError, a quantity that is not a number, the same way. as error binds the exception object, so its message can be kept. Then, on line twenty-five, else runs only if the try block raised nothing at all, and that is where the good row is recorded. Keeping the success path in else, rather than inside try, means the try covers only the line we expect to fail. The output shows the result: two rows priced, at twenty-nine eighty-five and sixty-two dollars, and two rejected, each with its order ID and the reason. The run carried on past both. Notice what is not here: a bare except, with no exception named. That would catch everything, including a typo in our own code, and hide it as if it were a bad row. Always name the exceptions you expect. Anything else is a bug, and it should stop the program loudly. Next, raising exceptions of our own.",
-}

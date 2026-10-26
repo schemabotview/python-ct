@@ -1,9 +1,0 @@
-$ ruff check --output-format concise
-pipeline/transform.py:22:28: FURB157 [*] Verbose expression in `Decimal` constructor
-Found 1 error.
-[*] 1 fixable with `--fix`.
-$ ruff check --fix --quiet
-$ ruff format
-4 files reformatted, 6 files left unchanged
-$ ruff check --quiet && ruff format --check
-10 files already formatted

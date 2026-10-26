@@ -1,9 +1,0 @@
-import type { Section } from '../types'
-
-export const validatingRows: Section = {
-  id: 'validating-rows',
-  title: "Validating rows: keep the good, report the bad",
-  scene: 'extract-validating',
-  narration:
-    "Reading the day's file gave us six rows. Two of them should never be priced: order one thousand and four, whose quantity is the word three, and order one thousand and five, for a product the catalogue does not contain. The pipeline has three choices. It could crash on the first bad row, which loses the whole day for one typo. It could skip bad rows quietly, which is worse, because the report would be wrong and nobody would know. Or it can keep the good rows, set the bad ones aside, and say exactly what it set aside and why. That is the rule for every pipeline in this course: never stop silently, and never drop silently. The function validate, on line fourteen, checks one row against the business rules. If the SKU is not in the catalogue, it raises the InvalidRow error from line sixteen, which, like InvalidOrder in the last course, is a kind of ValueError with our own name. If the quantity is not made only of digits, or is zero, line eighteen raises it too, with the bad value in the message. And if both checks pass, it returns a clean copy of the row, with the quantity converted to a real int, which no later stage will ever need to convert again. The loop on line twenty-six reads the CSV and counts lines as it goes. enumerate, starting at two, gives each row its line number in the file, because the header is line one, so that a rejection can point a person straight at the line to fix. Each row is validated inside a try; good rows go into one list, and rejected ones, with their line number, ID and reason, into another. The output says four good rows and two rejected, then lists each rejection. The table on the right shows the whole day, line by line. Next, reading not one day, but the whole month, without running out of memory.",
-}

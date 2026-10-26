@@ -1,82 +1,107 @@
-import type { Scene, SceneNode, TreeEntry } from '@graphlearning/flow'
+import type { Code, Edge, Group, SceneModel, SceneNode, Tree, TreeEntry } from '@graphlearning/graphl-flow'
 import { SCENE_ASPECT } from '@graphlearning/shell'
 
-// The IDE frame every course from 3 on is built from — ONE fixed template, so every panel sits at the
+// The IDE frame every course from 2 on is built from — ONE fixed template, so every pane sits at the
 // same pixels in every section and a viewer always knows where to look:
 //
-//   explorer (EXPLORER_W, full height) | editor (EDITOR_COLS × EDITOR_H)  | side (SIDE_W, full height)
-//                                       80 columns: PEP 8's line limit, so a well-formatted line always fits
-//                                       | terminal docked underneath (TERMINAL_H)
+//   explorer (EXPLORER_W) | editor (EDITOR_W × EDITOR_H)    | side pane (SIDE_W, fixed)
+//                         | terminal docked under it (TERMINAL_H)
 //
-// The sizes are floors (minW / minH): a file longer than the editor must be folded with `show`, not
-// allowed to grow the pane — check-render.mjs fails any IDE frame whose panels move.
+// Every pane has FLOORS (minW / minH) and the side pane is a FIXED column (`w`): content wider than
+// it overflows (check-render fails it) instead of moving the frame. graphl-flow's fit is a pure
+// function of the natural box, so equal boxes mean equal zoom — check-render asserts every IDE
+// section lands on the same fit, to the pixel. A file longer than the editor is folded with `show`,
+// never allowed to grow the pane.
 //
-// The proportions are the frame's: explorer + editor + side is 1632 wide and editor + terminal is
-// 918 tall — 16:9 exactly, the shape of the whole scene area now that a section frame carries no
-// header (owner's call, 2026-10-21). A composition of that shape is fitted edge to edge; at the old
-// 856 tall (1.91:1, the shape of the scene area *under* a header) the frame filled the width and
-// left 111px of slack above and below it, and at the 790 before that, ~230px. EDITOR_H holds 23 code
-// rows and TERMINAL_H 11 lines (22px each, plus 61px of chrome). Every side card is stretched to SIDE_W, so the
-// column's right edge is a real edge rather than wherever the widest card happens to end. Code and terminal
-// text come from spine/ via `?raw`, so a frame can only show what scripts/spine.py has replayed.
+// The sizes are MEASURED on graphl-flow 0.2 (15px/1.6 Plex Mono, 9.0px advance, 24px rows):
+//   EDITOR_W  80 columns — PEP 8's limit — × 9.0px, plus the 49px line-number gutter, the line's 16px
+//             right padding and the 1px border each side: 720 + 49 + 16 + 2 = 787
+//   EDITOR_H  EDITOR_ROWS rows of 24px plus CHROME (33px tab bar, 8px body padding top and bottom, the
+//             borders): 23 × 24 + 51 = 603
+//   TERMINAL_ROWS  what the terminal's height holds. check-content fails a frame whose editor shows
+//             more rows, or whose session has more lines, than its pane holds: a pane's FLOOR lets
+//             content grow it, and a grown pane moves the whole template.
+// The width is the frame's: explorer + editor + side, and the height follows from SCENE_ASPECT (the
+// shell's — a section frame is the scene alone, 16:9), so the template fills the frame edge to edge.
+// The side pane takes what is left: v2 puts the lesson's diagram there, so it is as wide as the
+// 16:9 frame allows with an 80-column editor beside it.
 
-export const EXPLORER_W = 300
+const ROW = 24 // a code or terminal row
+const CHROME = 51 // a code pane's tab bar, body padding and borders
+export const EXPLORER_W = 280
 export const EDITOR_COLS = 80
-export const EDITOR_W = 792
-export const EDITOR_H = 588
-export const SIDE_W = 520
-const GAP = 10
-// The template is as tall as its width allows in the scene area, so it fits edge to edge with no
-// slack band. SCENE_ASPECT comes from the shell (@graphlearning/shell >=0.14.0), so if the shell
-// ever changes what it reserves above a section the template follows instead of silently drifting.
-const TOTAL_H = Math.round((EXPLORER_W + EDITOR_W + SIDE_W + 2 * GAP) / SCENE_ASPECT)
-export const TERMINAL_H = TOTAL_H - GAP - EDITOR_H
-
-export interface Pane {
-  file: string
-  code: string
-  show?: [number, number][]
-  highlight?: number[]
-  pattern?: SceneNode['pattern']
-  terminal?: string
-  title?: string
-}
+export const EDITOR_W = 787
+export const EDITOR_ROWS = 23
+export const EDITOR_H = EDITOR_ROWS * ROW + CHROME
+export const SIDE_W = 649
+const GAP = 10 // graphl-flow's GAP between siblings
+export const FRAME_W = EXPLORER_W + EDITOR_W + SIDE_W + 2 * GAP
+export const FRAME_H = Math.round(FRAME_W / SCENE_ASPECT)
+export const TERMINAL_H = FRAME_H - GAP - EDITOR_H
+export const TERMINAL_ROWS = Math.floor((TERMINAL_H - CHROME) / ROW)
 
 export const trim = (text: string) => text.replace(/\n+$/, '')
 
-// A bare side group is a column of cards: each one is stretched to the column, not the group.
-const fill = (side: SceneNode): SceneNode =>
-  side.bare && side.children ? { ...side, minW: SIDE_W, children: side.children.map((c) => ({ ...c, minW: SIDE_W })) } : { ...side, minW: SIDE_W }
+/**
+ * A spine session.txt as a terminal pane. graphl-flow draws `$ cmd` as a command and `! text` as an
+ * error; the replay (scripts/spine.py) writes plain output, so a traceback is marked here: from its
+ * header — `Traceback (most recent call last):`, or the `  File "…", line N` a SyntaxError starts
+ * with — through the exception line that ends it.
+ */
+export function terminal(session: string): string {
+  const out: string[] = []
+  let inError = false
+  for (const line of trim(session).split('\n')) {
+    if (line.startsWith('$ ') || line.startsWith('>>> ') || line.startsWith('... ')) inError = false
+    else if (!inError && (line === 'Traceback (most recent call last):' || /^ {2}File ".*", line \d+/.test(line))) inError = true
+    if (inError) {
+      out.push(`! ${line}`)
+      if (/^[A-Za-z_][\w.]*(Error|Exception|Warning|Interrupt|Exit)\b/.test(line)) inError = false
+    } else out.push(line)
+  }
+  return out.join('\n')
+}
 
-export function ideFrame(id: string, project: string, tree: TreeEntry[], pane: Pane | SceneNode, side: SceneNode): Scene {
-  const centre: SceneNode =
-    'code' in pane
-      ? {
-          id: `${id}-centre`,
-          label: pane.file,
-          bare: true,
-          gap: 'tight',
-          children: [
-            {
-              id: `${id}-editor`, kind: 'code', filename: pane.title ?? pane.file, label: trim(pane.code), show: pane.show,
-              highlight: pane.highlight, pattern: pane.pattern ?? 'storage', minCols: EDITOR_COLS, minH: EDITOR_H,
-            },
-            { id: `${id}-terminal`, kind: 'terminal', filename: `Terminal — ${project}`, label: trim(pane.terminal ?? ''), span: 'all', minH: TERMINAL_H },
-          ],
-        }
-      : { ...pane, minW: EDITOR_W, minH: EDITOR_H + GAP + TERMINAL_H }
+export interface Editor {
+  /** The tab label — the file's path in the project. */
+  file: string
+  /** The file's text, imported from the spine with `?raw`. */
+  code: string
+  show?: [number, number][]
+  highlight?: number[]
+  lang?: Code['lang']
+}
+
+export interface IdeFrame {
+  /** The explorer's heading: the project folder. */
+  project?: string
+  tree: TreeEntry[]
+  editor: Editor
+  /** The step's session.txt, raw — marked for the terminal pane by `terminal()`. */
+  session: string
+  /** The side pane: a diagram (check-content fails a side pane with no edge, plot or table). */
+  side: SceneNode[]
+  /** Edges between nodes INSIDE the side pane. An edge between panes would widen a gap and move them. */
+  edges?: Edge[]
+}
+
+// Fixed ids: a section's `focus` can name `editor.L12`, `terminal`, or any id in the side pane.
+export const IDE_IDS = { explorer: 'explorer', editor: 'editor', terminal: 'terminal', side: 'side' } as const
+
+export function ideFrame({ project = 'roastery-etl', tree, editor, session, side, edges = [] }: IdeFrame): SceneModel {
+  const explorer: Tree = { type: 'tree', id: IDE_IDS.explorer, title: project, entries: tree, fill: true, minW: EXPLORER_W }
+  const code: Code = {
+    type: 'code', id: IDE_IDS.editor, filename: editor.file, lang: editor.lang ?? 'python', code: trim(editor.code),
+    show: editor.show, highlight: editor.highlight, tone: 'ingest', fill: true, minW: EDITOR_W, minH: EDITOR_H,
+  }
+  const term: Code = {
+    type: 'code', id: IDE_IDS.terminal, terminal: true, filename: `terminal — ${project}`, code: terminal(session),
+    fill: true, minW: EDITOR_W, minH: TERMINAL_H,
+  }
+  const pane: Group = { type: 'group', id: IDE_IDS.side, bare: true, w: SIDE_W, minH: FRAME_H, children: side }
   return {
-    id,
-    padding: 0.04,
-    flow: 'LR',
-    align: 'start',
-    stretch: true,
-    gap: 'tight',
-    nodes: [
-      { id: `${id}-explorer`, kind: 'tree', label: project, tree, minW: EXPLORER_W },
-      centre,
-      { id: `${id}-side`, label: 'side', bare: true, framed: true, minW: SIDE_W, children: [fill(side)] },
-    ],
-    edges: [],
+    dir: 'row',
+    nodes: [explorer, { type: 'group', id: 'workbench', bare: true, children: [code, term] }, pane],
+    edges,
   }
 }

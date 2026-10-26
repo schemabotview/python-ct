@@ -1,4 +1,0 @@
-$ python -m bench.parallel
-4 CPUs
-31 small files: 1 process 0.02 s, pool 0.12 s, same results
-8 heavy days  : 1 process 0.63 s, pool 0.22 s, same results

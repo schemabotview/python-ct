@@ -1,9 +1,0 @@
-import type { Section } from '../types'
-
-export const forLoops: Section = {
-  id: 'for-loops',
-  title: "for loops: pricing every order",
-  scene: 'process-for',
-  narration:
-    "So far the discount rules have priced one order. A day has many, and the for loop is how Python does the same work for each item in a collection. Line twenty reads almost like English: for order in orders. The list is folded away above, but the table on the right shows its four orders. Python takes the first dictionary, binds the name order to it, and runs the indented block. Then it binds order to the second dictionary and runs the block again, and so on, until the list is exhausted. The block is everything indented under the for line, and inside it you can see the rules from section two, unchanged: the same if, elif and else, now running once per order. Each pass computes the amount, adds it to the day total on line thirty, and prints one line. The terminal shows the result of all four passes, and the table on the right explains each one. Order one thousand and one is three bags of Ethiopian, under fifty dollars, so no discount. One thousand and two is twelve bags, wholesale, fifteen percent off. One thousand and three is two bags of Kenyan at thirty-one dollars, which is sixty-two, so five percent off. And one thousand and four is a single bag. Every branch of the rules has now run, on real orders. Notice where day total lives. It is set to zero on line nineteen, before the loop, so it survives every pass and accumulates. If that line were inside the loop, it would be reset to zero four times, and the total would only ever show the last order. Line thirty-two is not indented, so it runs once, after the loop has finished: a day total of two hundred and seventy-seven dollars twenty. That is the first real number our pipeline has produced. Next, loops that stop early, and loops that skip.",
-}

@@ -1,5 +1,0 @@
-$ python main.py
-generator over 31 files
-first: ORD-1001
-streamed: 23303 bags, peak 162 KiB
-as a list: 5876 rows, peak 2439 KiB

@@ -1,7 +1,0 @@
-order_id,date,customer,sku,quantity
-ORD-1001,2026-10-01,maya,ETH-250,3
-ORD-1002,2026-10-01,omar,COL-500,12
-ORD-1003,2026-10-01,lena,KEN-1000,2
-ORD-1004,2026-10-01,raj,ETH-250,three
-ORD-1005,2026-10-01,maya,PER-250,1
-ORD-1006,2026-10-01,"Luna Café, Ltd",BRA-500,4

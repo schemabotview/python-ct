@@ -1,9 +1,0 @@
-$ python main.py
-9.95 29.85
-3 True None
-['ETH-250', 'COL-500', 'KEN-1000', 'BRA-500']
-Traceback (most recent call last):
-  File "/home/ana/roastery-etl/main.py", line 17, in <module>
-    print(catalogue["PER-250"])
-          ~~~~~~~~~^^^^^^^^^^^
-KeyError: 'PER-250'

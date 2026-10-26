@@ -1,9 +1,0 @@
-import type { Section } from '../types'
-
-export const pathlibSection: Section = {
-  id: 'pathlib',
-  title: "pathlib: finding every day's file",
-  scene: 'extract-pathlib',
-  narration:
-    "A third day's file has arrived, and soon there will be one a day. The pipeline should not need a line of code per file; it should find them. The standard library's pathlib module treats a path as an object rather than a string, and that makes finding and handling files much cleaner. Line five creates RAW, a Path pointing at the data slash raw folder. The first line of output asks whether it exists and whether it is a directory: True and True. Line eight is the important one. glob takes a pattern, orders dash star dot csv, where star matches anything, and returns every matching path in the folder. The catalogue does not match, so it is left out. sorted puts the days in order. That works because the file names use ISO dates, year then month then day, which sort correctly as plain text. If the shop had named them day, month, year, the sort would be wrong, which is one reason to insist on ISO dates whenever you can. The loop prints each file's name and its size in bytes, read from the file system with stat. Then line twelve takes the first path apart. The stem is the name without its extension, the suffix is dot csv, and the parent is the folder it lives in. The table on the right sets these out. Line thirteen pulls the date out of the stem by removing the prefix orders dash, which leaves two thousand and twenty-six, ten, oh one. Line fourteen shows the slash operator: RAW slash catalogue dot json builds a new path, with the right separator for the operating system, so the same code runs on Windows, macOS and Linux. And the last line prints the current working directory. Relative paths like data slash raw are measured from there, which is why the pipeline is always run from the project folder. Next, reading these files properly, as CSV.",
-}

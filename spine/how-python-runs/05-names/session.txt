@@ -1,4 +1,0 @@
-$ python names.py
-['ETH-250', 'COL-500', 'BRA-1K']
-True
-True

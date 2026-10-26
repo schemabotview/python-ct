@@ -1,6 +1,0 @@
-$ python main.py
-dict 4 ['ETH-250', 'COL-500', 'KEN-1000', 'BRA-500']
-{'name': 'Ethiopia Yirgacheffe', 'price': '9.95'}
-29.85
-29.849999999999998
-29.85

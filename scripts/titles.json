@@ -1,15 +1,3 @@
 {
-  "_comment": "Curated publish titles (YouTube title + thumbnail header) per course, keyed by course id. Search-first: what someone would actually type, never 'Course 4'. One entry per course in src/content/index.ts.",
-  "why-python": "Why Python? What It Is, Where It Came From, and What It Is Good At",
-  "how-python-runs": "How Python Runs Your Code: Bytecode, the Call Stack, Memory and the GIL",
-  "start": "Start a Python Project the Right Way: Virtual Environments, main.py, the REPL and Your First Errors",
-  "hold": "Python Data Types for Beginners: Numbers, Decimal for Money, Strings, Lists, Tuples, Dicts and Sets",
-  "process": "Python Control Flow and Functions: if, match, for and while Loops, Comprehensions and Exceptions",
-  "extract": "Reading Files in Python: open and with, Encodings, pathlib, CSV, JSON, Validation and Generators",
-  "aggregate": "Python Data Aggregation: Grouping, Counter, Sorting, Statistics, Dates and itertools",
-  "load": "Writing Data in Python: CSV Reports, f-strings, JSON, SQLite Transactions and Safe Re-runs",
-  "structure": "Structure a Python Project: Modules, Packages, Classes, Dataclasses, Type Hints and pyproject.toml",
-  "trust": "Testing Python Code: pytest, Fixtures, Mocks, Logging, Decorators, pdb and ruff",
-  "speed": "Make Python Fast: Profiling, Sets, Generators, Threads and the GIL, Processes and asyncio",
-  "ship": "Ship a Python Project: argparse CLIs, Configuration and Secrets, Wheels, cron and Exit Codes"
+  "_comment": "Curated publish titles (YouTube title + thumbnail header) per course, keyed by course id. Search-first: what someone would actually type, never 'Course 4'. One entry per course in src/content/index.ts. v1's titles were removed with its course ids (2026-10-26); each v2 course adds its own when it is authored."
 }

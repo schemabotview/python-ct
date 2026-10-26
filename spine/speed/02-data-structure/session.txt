@@ -1,6 +1,0 @@
-$ python -m timeit -s "ids = [f'ORD-{n}' for n in range(6000)]" "'ORD-5999' in ids"
-5000 loops, best of 5: 51.6 usec per loop
-$ python -m timeit -s "ids = {f'ORD-{n}' for n in range(6000)}" "'ORD-5999' in ids"
-20000000 loops, best of 5: 16 nsec per loop
-$ python -m timeit -n 1 -r 3 -s "from main import main" "main()" 2>/dev/null
-1 loop, best of 3: 40.2 msec per loop

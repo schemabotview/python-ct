@@ -1,9 +1,0 @@
-import type { Section } from '../types'
-
-export const refcountAndGc: Section = {
-  id: 'reference-counting-and-gc',
-  title: 'Reference counting and garbage collection',
-  scene: 'refcount-gc',
-  narration:
-    "Python reclaims memory for you, and the main way it does it is surprisingly simple. Every object keeps a count of how many references point at it. When the count drops to zero, nothing can reach the object any more, and CPython frees it immediately. This file watches the count change. Python's sys module has a function, getrefcount, that reports it, with one catch: the act of passing the object to the function adds a temporary reference, so it always reports one more than you might expect. The table on the right shows both numbers. After order is created, there is one real reference and getrefcount says two. Binding a second name, alias, makes it two real references and three reported. Deleting alias brings it back down. Del does not destroy the object, by the way. It removes a name, and the count goes down with it. Reference counting has one blind spot: a cycle. The last lines of the file build a dictionary that contains itself. When its name is deleted, the dictionary still refers to itself, so its count can never reach zero, and counting alone would keep it forever. For that, CPython has a second mechanism, the cycle collector, which periodically looks for groups of objects that only refer to each other. Calling gc dot collect runs it now, and it reports that it freed one object: our self-referencing dictionary. In practice you will almost never call it yourself; it runs automatically. What you should take away is the model: an object lives as long as something refers to it, and the pipeline we build will lean on that when it processes a month of orders without holding them all in memory. Next, the lock that has shaped Python's history.",
-}

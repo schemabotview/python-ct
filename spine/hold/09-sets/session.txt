@@ -1,7 +1,0 @@
-$ python main.py
-6 3
-False True
-['lena', 'maya']
-['raj']
-['lena', 'maya', 'omar', 'raj']
-<class 'dict'> <class 'set'>

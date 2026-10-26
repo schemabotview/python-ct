@@ -1,9 +1,0 @@
-$ python main.py
-['order_id', 'date', 'customer', 'sku', 'quantity']
-ORD-1001 maya '3'
-ORD-1002 omar '12'
-ORD-1003 lena '2'
-ORD-1004 raj 'three'
-ORD-1005 maya '1'
-ORD-1006 Luna Café, Ltd '4'
-6 rows; every value is a str

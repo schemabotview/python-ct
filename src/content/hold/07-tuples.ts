@@ -1,9 +1,0 @@
-import type { Section } from '../types'
-
-export const tuples: Section = {
-  id: 'tuples',
-  title: "Tuples: a fixed record, and unpacking it",
-  scene: 'hold-tuples',
-  narration:
-    "A tuple is Python's way of keeping a few values together as one fixed record. It is written with round brackets, and here each one is a whole order: an order ID, a SKU and a quantity. The list orders holds three of them, one per row, which is exactly the shape the table on the right shows. The record can no longer drift apart: the quantity travels with its SKU. You can index into a tuple like a list. orders one is the second row, and orders one, one is its SKU, C O L five hundred. But the real way to use a tuple is to unpack it. Line nine has three names on the left and one tuple on the right, and Python assigns them position by position: order ID, sku and quantity, which the first line of output shows. When a function in the next course hands back several values at once, this is how you will receive them. Line twelve adds the starred form. first, star rest equals orders puts the first row into first, and collects everything left over into a list called rest. The output shows the first order's ID, then that rest holds two rows, the last being order one thousand and three. The final line tries to change a tuple, setting the first order's quantity to four, and Python refuses: tuple object does not support item assignment. This is the difference between the two. A list is a collection that grows and changes; a tuple is one record whose shape is fixed. That makes tuples safe to pass around, and, as you will see with sets, safe to use as keys. But a tuple has a weakness for our orders. Its fields have positions, not names, and orders zero, two says nothing about what two means. The next section gives every field a name.",
-}

@@ -1,5 +1,0 @@
-$ python main.py
-ETH-250 2 9.95
-<class 'str'> <class 'int'> <class 'float'>
-True
-9.95 10.95

@@ -1,7 +1,0 @@
-$ python main.py
-5797 lines, mean 69.24791098844229774021045368
-median 48.75 mode 17.50
-mean, to the cent: 69.25
-2.67 2.68
-2.68 0 2
-23302 bags fill 1942 boxes of 12

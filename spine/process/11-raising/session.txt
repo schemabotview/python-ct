@@ -1,9 +1,0 @@
-$ python main.py
-rejected: ORD-1008: quantity must be positive
-Traceback (most recent call last):
-  File "/home/ana/roastery-etl/main.py", line 19, in <module>
-    validate({"id": "ORD-1007", "sku": "ETH-250", "quantity": "0"})
-    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ana/roastery-etl/main.py", line 9, in validate
-    raise InvalidOrder(f"{row['id']}: quantity must be positive")
-InvalidOrder: ORD-1007: quantity must be positive

@@ -1,5 +1,0 @@
-$ python sum_two_ways.py
-True
-for loop: 22.3 ms
-sum():    4.8 ms
-sum() is 4.6x faster here

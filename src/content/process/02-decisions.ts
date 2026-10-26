@@ -1,9 +1,0 @@
-import type { Section } from '../types'
-
-export const decisions: Section = {
-  id: 'decisions',
-  title: "Decisions: if, elif and else",
-  scene: 'process-decisions',
-  narration:
-    "The roastery has discount rules, and the table on the right sets them out. Ten bags or more is a wholesale order, with fifteen percent off. Otherwise, an order worth fifty dollars or more gets five percent. Anything else pays full price. Rules like these are what an if statement is for. Line sixteen tests the first rule. If quantity is at least ten, the indented line under it runs, and the discount is fifteen percent. The indentation is not decoration: in Python, the indented block is what belongs to the if, and it ends where the indentation does. Line eighteen is an elif, short for else if. Its test is only tried when everything above it was false. And else, on line twenty, catches every case that no test claimed. Python works down the chain and takes the first branch whose test is true, then skips the rest, so exactly one discount is ever chosen. That ordering matters. A wholesale order of twelve bags is also worth more than fifty dollars, and because the wholesale test comes first, it gets the bigger discount, which is what the shop wants. This order is three bags of Colombian at seventeen fifty. That is not wholesale, so the first test is false. The subtotal is fifty-two fifty, so the elif is true, and the discount is five percent. The first line of output shows it: subtotal, discount, and the line total of forty-nine eighty-eight, the forty-nine eight seven five rounded half up to the cent. The last two lines show a shorter kind of test. if not order dot get coupon: the order has no coupon key, so get returns None, and None counts as false, so not makes it true. A missing coupon and an empty one are treated the same, which is exactly what we want. Right now these rules run for one order. Before we loop them over a day, one more way to decide.",
-}

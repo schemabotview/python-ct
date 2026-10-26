@@ -1,6 +1,0 @@
-$ python -m pipeline.decorators
-WARNING fetch_orders: the shop's server timed out, retrying
-WARNING fetch_orders: the shop's server timed out, retrying
-orders-2026-10-31.csv after 3 calls
-INFO    sum took 0.20 s
-199999990000000 | fetch_orders

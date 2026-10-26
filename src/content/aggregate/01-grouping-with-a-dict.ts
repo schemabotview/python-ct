@@ -1,9 +1,0 @@
-import type { Section } from '../types'
-
-export const groupingWithADict: Section = {
-  id: 'grouping-with-a-dict',
-  title: "Grouping with a dict: revenue per product",
-  scene: 'aggregate-grouping',
-  narration:
-    "The pipeline can now read a whole month of orders, clean and validated. The next question the roastery asks is simple: how much did each coffee earn in October? Answering it means grouping, collecting rows that share a value, here the SKU, and combining them, here by adding up their totals. First, notice what is folded at the top of the editor. Everything from the last course, reading the files, validating each row, and setting the bad ones aside, is still there, collapsed into one function, month rows. It also prices each row with the discount rules from course five, so every row arrives with its total already worked out. The bad rows, seventy-nine of them in October, go into the rejected list, and the last line of output reports them, so nothing is lost quietly. Now the grouping itself. It uses nothing but a dictionary. revenue starts empty. For each row, we take its SKU. If that SKU is not yet a key, we create it, with a total of zero. Then we add this row's total to it. One pass over nearly six thousand rows, and the dictionary holds exactly four entries: one running total per product. The terminal prints them, in the order each product was first seen, followed by the month's revenue, just over four hundred and one thousand dollars, the sum of the four totals. This pattern, a dict of running totals keyed by the thing you are grouping by, is one of the most common in all of data processing. In SQL it is GROUP BY; in pandas it is groupby; in Spark it is the same idea spread across machines. Here it is four lines of plain Python, and it is worth writing by hand once, so the tools later never feel like magic. The only clumsy part is that if, which every key needs before its first addition. The next section removes it.",
-}

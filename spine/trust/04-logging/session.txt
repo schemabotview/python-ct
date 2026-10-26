@@ -1,8 +1,0 @@
-$ python main.py
-INFO    extract: 5,797 rows read
-WARNING 79 rejected: see data/out/rejected.csv
-INFO    transform: 31 days, $401,430.14 revenue
-INFO    load: 5,797 rows in warehouse.db
-$ python main.py 2> run.log
-$ wc -l run.log
-4 run.log

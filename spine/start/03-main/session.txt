@@ -1,3 +1,0 @@
-$ python main.py
-roastery-etl: starting
-orders processed: 0

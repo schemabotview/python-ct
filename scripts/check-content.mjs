@@ -1,92 +1,107 @@
-// Content guard. Silent failures the engine does NOT catch for you — each builds green and breaks
-// only on screen or in the recording:
+// Content guard — silent failures that build green and break only on screen or in the recording.
+// It reads the REAL registries (scripts/registry.mjs bundles src/content and src/scenes), so it sees
+// exactly what renders:
 //
-//   1. A SLIDE on a section. This course is scene-only; a slide brings the panel back.
-//   2. A `focus:` that names no node in its scene is a silent no-op — SceneView marks `__focus` by
-//      id comparison and simply never matches, so the section renders with nothing lit.
-//   3. A SECTION WITH NO WAV narrates nothing. The app resolves audio by convention —
-//      public/audio/<course>/<section-id>.wav — so a renamed section id or a missed file plays
-//      silence in the app and records a SILENT segment, with no error anywhere.
+//   1. A section must be scene-only and narrated, and its scene must exist.
+//   2. Node ids are unique within a scene (graphl-flow resolves edges and focus by id).
+//   3. An IDE side pane is a DIAGRAM (PYTHON-COURSE-PLAN.md, "The side pane is a diagram"): it holds
+//      an edge, a plot or a table. v1's panes were 79 bullet lists and one edge in 90 sections — the
+//      gap v2 exists to close. A bulleted card in a side pane is a caption, so it holds ≤ 3 bullets.
+//   4. An IDE frame draws edges only INSIDE its side pane: an edge between panes widens the gap it
+//      crosses (graphl-flow's EDGE_GAP) and moves every pane off the shared template.
+//   5. An IDE frame's editor shows no more rows than EDITOR_ROWS (fold with `show`), its lines fit
+//      EDITOR_COLS, and its terminal no more lines than TERMINAL_ROWS: a pane's floor lets content
+//      grow it, which moves the whole template — check-render would only see "the fit differs".
+//   6. Once a course has narration audio, every section of it has its wav — a missing or renamed one
+//      plays silence and records a silent segment, with no error anywhere.
 //
-// Whether text fits its node is NOT modelled here any more: under @graphlearning/flow 2.x cards grow
-// to fit their text, so the old 210x96 leaf model and the slide-height model described nothing real.
-// scripts/check-render.mjs measures the rendered frames instead.
+// What renders is checked by scripts/check-render.mjs: focus landing, overflow, edges, fit, panes.
 //
 // Run: npm run check
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
+import { existsSync, readdirSync, statSync } from 'node:fs'
 import { join } from 'node:path'
+import { isIde, loadRegistry, nodesOf } from './registry.mjs'
 
-const walk = (dir) =>
-  readdirSync(dir).flatMap((f) => {
-    const p = join(dir, f)
-    return statSync(p).isDirectory() ? walk(p) : p.endsWith('.ts') ? [p] : []
-  })
-
+const { COURSES, SCENES, IDE } = await loadRegistry()
 const problems = []
+const MAX_CAPTION_BULLETS = 3
 
-// --- content: every section is scene-only and narrated -------------------------------------
-// This course has no slides (PYTHON-COURSE-PLAN.md): a `slide:` would bring the panel back and halve
-// the frame. An empty narration records a silent segment, like a missing wav.
-for (const file of walk('src/content')) {
-  if (!/\/\d\d-[\w-]+\.ts$/.test(file)) continue
-  const src = readFileSync(file, 'utf8')
-  if (/\bslide:/.test(src)) problems.push(`${file}  has a slide — sections in this repo are scene-only`)
-  if (!/\bnarration:\s*["'`][^"'`]/.test(src)) problems.push(`${file}  has no narration`)
+// --- 1. sections --------------------------------------------------------------------------------
+for (const course of Object.values(COURSES))
+  for (const section of course.sections) {
+    const at = `${course.id}-${section.id}`
+    if ('slide' in section) problems.push(`${at}  has a slide — sections in this repo are scene-only`)
+    if (!section.narration?.trim()) problems.push(`${at}  has no narration`)
+    if (!SCENES[section.scene]) problems.push(`${at}  scene '${section.scene}' is not registered`)
+  }
+
+for (const [id, scene] of Object.entries(SCENES)) {
+  const all = nodesOf(scene)
+  // --- 2. unique ids ----------------------------------------------------------------------------
+  const seen = new Set()
+  for (const { node } of all) {
+    if (seen.has(node.id)) problems.push(`scene ${id}  node id '${node.id}' is used twice`)
+    seen.add(node.id)
+  }
+  if (!isIde(scene)) continue
+  const top = new Map(all.map(({ node, top }) => [node.id, top]))
+  const side = all.filter(({ top }) => top === 'side').map(({ node }) => node)
+  // An endpoint is a node id or `<table>.<row>` / `<code>.L<n>` / `<tree>.<path>`: its node is the
+  // part before the first dot.
+  const paneOf = (end) => top.get(end.split('.')[0])
+  // --- 4. edges stay inside the side pane --------------------------------------------------------
+  const edges = scene.edges ?? []
+  for (const e of edges)
+    for (const end of [e.from, e.to])
+      if (paneOf(end) !== 'side') problems.push(`scene ${id}  edge ${e.from} → ${e.to}: '${end}' is ${paneOf(end) ? `in the ${paneOf(end)} pane` : 'not a node'} — IDE edges stay inside the side pane`)
+  // --- 3. the side pane is a diagram ---------------------------------------------------------------
+  const sideEdges = edges.filter((e) => paneOf(e.from) === 'side' && paneOf(e.to) === 'side')
+  if (!sideEdges.length && !side.some((n) => n.type === 'table' || n.type === 'plot'))
+    problems.push(`scene ${id}  the side pane holds no edge, plot or table — it must carry a diagram, not a list`)
+  // --- 5. the editor and terminal hold what they show -------------------------------------------
+  // Rows as graphl-flow draws them (Code.tsx codeRows): every line, or the `show` ranges with each
+  // skipped run folded to one row. graphl-flow drops a template literal's common indent; spine files
+  // have none.
+  const editor = all.find(({ node }) => node.id === 'editor')?.node
+  const term = all.find(({ node }) => node.id === 'terminal')?.node
+  if (editor) {
+    const lines = editor.code.split('\n')
+    const keep = editor.show && new Set(editor.show.flatMap(([a, b]) => Array.from({ length: b - a + 1 }, (_, i) => a + i)))
+    // A kept line is a row; each RUN of skipped lines is one fold row.
+    const rows = keep ? lines.filter((_, i) => keep.has(i + 1) || i === 0 || keep.has(i)).length : lines.length
+    if (rows > IDE.EDITOR_ROWS) problems.push(`scene ${id}  the editor shows ${rows} rows; it holds ${IDE.EDITOR_ROWS} — fold with show`)
+    const shown = lines.filter((_, i) => !keep || keep.has(i + 1))
+    const wide = shown.find((l) => l.length > IDE.EDITOR_COLS)
+    if (wide) problems.push(`scene ${id}  a line is ${wide.length} columns; the editor holds ${IDE.EDITOR_COLS} — "${wide.slice(0, 40)}…"`)
+  }
+  if (term) {
+    const lines = term.code.split('\n')
+    if (lines.length > IDE.TERMINAL_ROWS) problems.push(`scene ${id}  the terminal shows ${lines.length} lines; it holds ${IDE.TERMINAL_ROWS} — shorten the session`)
+    const wide = lines.find((l) => l.replace(/^! /, '').length > IDE.EDITOR_COLS)
+    if (wide) problems.push(`scene ${id}  a terminal line is longer than ${IDE.EDITOR_COLS} columns — "${wide.slice(0, 40)}…"`)
+  }
+  for (const n of side)
+    if (n.type === 'item' && (n.bullets?.length ?? 0) > MAX_CAPTION_BULLETS)
+      problems.push(`scene ${id}  '${n.id}' has ${n.bullets.length} bullets — a side-pane list is a caption (≤ ${MAX_CAPTION_BULLETS}); draw the rest`)
 }
 
-// --- content: every `focus` must name a node in that section's scene -------------------------
-// SceneView sets `__focus` by comparing ids, so a focus that matches nothing just fails to light
-// anything — no error, no warning. Node ids are collected per scene file; a module with no top-level
-// Scene id is a shared node factory, and its ids are in scope for every scene that spreads it.
-const sceneNodeIds = new Map()
-const sharedIds = []
-for (const file of walk('src/scenes')) {
-  const src = readFileSync(file, 'utf8')
-  const consts = new Map([...src.matchAll(/^\s*(\w+): '([\w-]+)',$/gm)].map((m) => [m[1], m[2]]))
-  const ids = [
-    ...[...src.matchAll(/\bid: '([\w-]+)',/g)].map((m) => m[1]),
-    ...[...src.matchAll(/\bid: \w+\.(\w+),/g)].map((m) => consts.get(m[1])).filter(Boolean),
-  ]
-  const sceneId = (src.match(/^\s*id: '([\w-]+)',$/m) || [])[1]
-  if (!sceneId || !/:\s*Scene\s*=/.test(src)) sharedIds.push(...ids)
-  else sceneNodeIds.set(sceneId, new Set(ids))
-}
-for (const [, ids] of sceneNodeIds) for (const id of sharedIds) ids.add(id)
-for (const file of walk('src/content')) {
-  const src = readFileSync(file, 'utf8')
-  const focus = (src.match(/\bfocus: '([\w-]+)'/) || [])[1]
-  if (!focus) continue
-  const scene = (src.match(/\bscene: '([\w-]+)'/) || [])[1]
-  const ids = sceneNodeIds.get(scene)
-  if (!ids) problems.push(`${file}  scene '${scene}' not found`)
-  else if (!ids.has(focus)) problems.push(`${file}  focus '${focus}' names no node in scene '${scene}' — nothing will light up`)
-}
-
-// --- content: every section has its narration wav ---------------------------------------------
-// src/content/<course>/NN-<id>.ts  ⇄  public/audio/<course>/<id>.wav
-//
-// Gated PER COURSE on that course having at least one wav. A course still being written has none at
-// all — audio is a single Colab pass at the end of authoring — and reporting ten known-missing files
-// on every run just trains you to ignore the guard. What it must catch is a course whose audio HAS
-// been generated and is now incomplete: a renamed section id, or one file that never came back. So
-// the moment a course has its first wav, every section in it is required to have one.
-const coursesWithAudio = new Set(
-  readdirSync('public/audio').filter((c) => statSync(join('public/audio', c)).isDirectory() && readdirSync(join('public/audio', c)).some((f) => f.endsWith('.wav'))),
-)
-for (const file of walk('src/content')) {
-  const parts = file.split('/')
-  if (parts.length !== 4 || parts[3] === 'index.ts') continue // src/content/<course>/<section>.ts only
-  const course = parts[2]
-  if (!coursesWithAudio.has(course)) continue // pre-Colab: nothing generated for this course yet
-  const src = readFileSync(file, 'utf8')
-  if (!/:\s*Section\s*=/.test(src)) continue
-  const id = (src.match(/\bid: '([\w-]+)',/) || [])[1]
-  const wav = join('public/audio', course, `${id}.wav`)
-  if (!existsSync(wav)) problems.push(`${file}  no narration wav at ${wav} — the section plays silence`)
+// --- 6. every section has its narration wav, once its course has any -----------------------------
+// public/audio/<course>/<section-id>.wav. Gated PER COURSE on that course having at least one wav:
+// audio is one Colab pass after a course's frames are approved, and reporting a whole course of
+// known-missing files on every run trains you to ignore the guard.
+const audio = 'public/audio'
+for (const course of Object.values(COURSES)) {
+  const dir = join(audio, course.id)
+  if (!existsSync(dir) || !statSync(dir).isDirectory() || !readdirSync(dir).some((f) => f.endsWith('.wav'))) continue
+  for (const section of course.sections) {
+    const wav = join(dir, `${section.id}.wav`)
+    if (!existsSync(wav)) problems.push(`${course.id}-${section.id}  no narration wav at ${wav} — the section plays silence`)
+  }
 }
 
 if (problems.length) {
-  console.error(`✗ ${problems.length} content-budget violation(s):\n` + problems.map((p) => '  ' + p).join('\n'))
+  console.error(`✗ ${problems.length} content problem(s):\n` + problems.map((p) => '  ' + p).join('\n'))
   process.exit(1)
 }
-console.log('✓ content budgets OK')
+const sections = Object.values(COURSES).reduce((n, c) => n + c.sections.length, 0)
+console.log(`✓ content OK — ${sections} section(s), ${Object.keys(SCENES).length} scene(s), every IDE side pane a diagram`)

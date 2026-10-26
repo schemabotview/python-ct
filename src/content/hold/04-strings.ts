@@ -1,9 +1,0 @@
-import type { Section } from '../types'
-
-export const strings: Section = {
-  id: 'strings',
-  title: "Strings: SKUs, names, indexing and slicing",
-  scene: 'hold-strings',
-  narration:
-    "Every product in the roastery has a stock code, a SKU, and in this shop it encodes two facts: the origin, E T H for Ethiopia, and the size of the bag in grams. The pipeline will need both, and both live inside a string. The editor has folded away the constants from the last section; the new lines are highlighted. A string is a sequence of characters, and each one has a position. The table on the right lays out E T H dash two fifty: indexes zero to six from the start, and minus one to minus seven from the end. So sku zero is E, sku minus one is the last character, zero, and len counts seven characters. That is the first line of output. Line fifteen takes a slice. sku up to three means from the start up to, but not including, index three, which is E T H. Python's slices always stop before their end, which is why the length of a slice is simply end minus start. Line sixteen slices from index four to the end, two fifty, but that is still text. To use it as a number, int converts it, and grams times quantity is seven hundred and fifty grams. Line nineteen shows two string methods: split breaks the SKU at the dash into a list of two parts, and upper gives the name in capitals. Note the word gives. A string can never be changed; upper returns a new string and leaves name as it was. Line twenty is an f-string: put an f before the quotes and anything in braces is replaced by its value, here the quantity, the name, the grams and the Decimal total, in dollars. And the last line is a warning for later. Two fifty in quotes, times two, is not five hundred: it is the text repeated, two fifty two fifty. Every value in a CSV file arrives as text like this, which is why reading files, in course six, always converts first.",
-}

@@ -1,4 +1,0 @@
-$ python main.py
-omar 2
-2 1
-True False True

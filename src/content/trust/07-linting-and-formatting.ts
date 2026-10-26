@@ -1,9 +1,0 @@
-import type { Section } from '../types'
-
-export const lintingAndFormatting: Section = {
-  id: 'linting-and-formatting',
-  title: "Linting and formatting: ruff",
-  scene: 'trust-ruff',
-  narration:
-    "Every team argues about style: line lengths, quotes, how to wrap a long call. The arguments are a waste of time, and the modern answer is to let a tool decide, consistently, every time. This course uses ruff, which is both a linter, a tool that reads code looking for bugs and needless constructions, and a formatter, which rewrites layout into one standard style. It is the third tool in the dev extra, pinned like the others, and the editor shows its one line of configuration at the bottom of pyproject: a line length of eighty, PEP 8's limit, and the width of the editor in every frame of this course. The first command runs the linter in its concise mode. It finds one thing, in the pipeline's own code: in transform dot py, Decimal of the string zero could simply be Decimal of the integer zero. That is rule FURB157, and the star in brackets means ruff can fix it safely itself. The second command does exactly that, quietly. A linter's real value is in the problems it catches before a test or a user does: names that are never defined, imports never used, comparisons that are always true, a breakpoint left behind. Then ruff format rewrites the layout of the whole project to its standard style: four files reformatted, six left alone. Mostly it splits long calls and literals across lines the way it prefers, which can differ from what a person chose by hand, and that is precisely the point: there is now one way the code looks, and nobody has to decide it. The last command checks both again: no lint problems, and all ten files already formatted. From here, the routine before every commit is the same three tools: pytest for behaviour, mypy for types, ruff for style. Next course, with the pipeline correct and trustworthy, we make it fast.",
-}

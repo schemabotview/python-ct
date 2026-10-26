@@ -1,9 +1,5 @@
-/* This repo's whole design surface — the three tokens @graphlearning/shell leaves to the repo.
-   Imported AFTER the shell's stylesheet in main.tsx, so these win the cascade.
-
-   Python blue as --brand, a lighter tint for hover, and Python yellow as the counter tone. */
+/* This repo's whole design surface — the token @graphlearning/shell leaves to the repo. Imported
+   AFTER the shell's stylesheet in main.tsx, so it wins the cascade. Python blue as --brand. */
 :root {
-  --brand: #3776ab; /* the subject's identity colour */
-  --brand-hover: #739fc4; /* a lighter tint — the eyebrow's hover state */
-  --accent-2: #ffd43b; /* the counter tone — the slide's `###` subheading */
+  --brand: #3776ab;
 }

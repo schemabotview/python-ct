@@ -1,8 +1,0 @@
-$ python main.py
-extract:   5,797 rows read, 79 rejected
-transform: 31 days, $401,430.14 revenue
-load:      5,797 rows in warehouse.db, two CSV files
-$ ls data/out
-daily_report.csv
-rejected.csv
-warehouse.db

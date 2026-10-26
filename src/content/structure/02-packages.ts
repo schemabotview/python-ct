@@ -1,9 +1,0 @@
-import type { Section } from '../types'
-
-export const packagesSection: Section = {
-  id: 'packages',
-  title: "Packages: the pipeline/ folder and __init__.py",
-  scene: 'structure-packages',
-  narration:
-    "One module at a time works for a while, but the pipeline has three stages, and each deserves a file of its own. A folder of modules is called a package. The explorer shows the new pipeline folder. Inside it are extract dot py, transform dot py, load dot py, and one more file, double underscore init dot py. That file marks the folder as a regular package, and Python runs it the first time anything in the package is imported. Ours holds only a docstring, a one-line description of the whole pipeline, and the terminal shows it, printed by importing pipeline and asking for its doc attribute. Now look at main dot py. It has shrunk to its imports and one function. from pipeline dot extract import month rows reads naturally: the package, a dot, the module, then the name inside it. The transform and load stages are imported the same way, and each import names exactly what main uses, so the top of the file is also a list of everything it depends on. The body of main, partly folded in the editor, is unchanged, and the terminal shows the same result as before. The last command imports one module from the package and prints its full name, pipeline dot extract, and the file it was loaded from. These imports are absolute: they start from the package name, and Python finds the package because it sits in the folder the program was started from. That is why the pipeline is always run from the project folder, and it is the one rule the note on the right repeats. Splitting the code this way changes nothing about what it does, and that is the point. Each file now has one job, can be read on one screen, and, from the next course on, can be tested on its own. Next, a small but famous line that lets a module double as a script.",
-}

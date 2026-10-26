@@ -1,3 +1,0 @@
-$ python orders.py
-['line_total', 'order_total', '<module>']
-19.0

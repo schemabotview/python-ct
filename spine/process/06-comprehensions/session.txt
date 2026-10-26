@@ -1,6 +1,0 @@
-$ python main.py
-[Decimal('29.85'), Decimal('210.00'), Decimal('62.00'), Decimal('9.95')]
-['ORD-1001', 'ORD-1002']
-['COL-500', 'ETH-250', 'KEN-1000']
-8.955 3
-18

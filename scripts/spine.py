@@ -16,11 +16,25 @@ in a real terminal. A command followed by `>>> ` (or `(Pdb) `) lines is an inter
 pseudo-terminal and fed those lines. Temp paths are rewritten to /home/ana/roastery-etl, the path the
 frames show. Run it with the course's pinned interpreter first on PATH as `python` (see CLAUDE.md).
 
-step.json (all keys optional):
+THE SPINE IS CUMULATIVE. Every step is the step before it plus the changes it declares, and this
+script fails a step whose project differs from its parent's anywhere it did not declare — so nothing
+written for the pipeline is thrown away or edited silently. Each step.json says where it sits:
+
+  {"first": true}               starts the chain (2.1: an empty folder)
+  {"from": "start/02-main",     continues that step; `changes` lists every path it adds, edits or
+   "changes": ["main.py"]}      removes (a directory covers everything under it). A declared path
+                                that did not change fails too: the list is the section's diff.
+  {"lab": true}                 a standalone lab outside the chain (Course 1: the project does not
+                                exist yet)
+
+A failure branch (run the wrong version, then fix it) is two steps with the same `from`.
+__pycache__, .venv and *.pyc are never compared.
+
+step.json (other keys, all optional):
   {"start": "home"}             start in the directory ABOVE the project (default: the project)
   {"venv": true}                create .venv before replaying and start with it activated
   {"capture": ["path", ...]}    files the session creates that a scene shows; saved to captured/
-  {"project": "name"}           the folder's name (default roastery-etl): Course 1-2 demos are not the spine
+  {"project": "name"}           the folder's name (default roastery-etl): Course 1 labs are not the spine
   {"volatile": true}            output carries ids or timings that change every run: compared with every
                                 digit masked, so the text and shape are checked but not the numbers
   {"setup": ["cmd", ...]}       run silently before the transcript (after the venv): the state a step
@@ -40,6 +54,11 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent / 'spine'
+# Every output in the course is produced on this interpreter (PYTHON-COURSE-PLAN.md, "Python
+# version"). A different `python` changes the banner, pyvenv.cfg and error text, so it is refused up
+# front rather than reported as a hundred transcript differences.
+PINNED = 'Python 3.15.1'
+IGNORED = {'__pycache__', '.venv'}
 SHOWN_HOME = '/home/ana'
 PROJECT = 'roastery-etl'
 ANSI = re.compile(r'\x1b\[[0-9;?]*[@-~]|\x1b[=>]|\r')
@@ -99,7 +118,7 @@ def repl(cwd: Path, env: dict, inputs: list[str], argv: list[str]) -> str:
 
 
 def replay(step: Path) -> tuple[str, dict[str, str]]:
-    config = json.loads((step / 'step.json').read_text()) if (step / 'step.json').exists() else {}
+    config = config_of(step)
     session = (step / 'session.txt').read_text()
     with tempfile.TemporaryDirectory() as tmp:
         home = Path(tmp) / 'home'
@@ -147,16 +166,70 @@ def replay(step: Path) -> tuple[str, dict[str, str]]:
 
 def masked(text: str, step: Path) -> str:
     """For a volatile step, hide the numbers that legitimately change from run to run."""
-    config = json.loads((step / 'step.json').read_text()) if (step / 'step.json').exists() else {}
+    config = config_of(step)
     return re.sub(r'\d+(?:[.,]\d+)*', '#', text) if config.get('volatile') else text
+
+
+def config_of(step: Path) -> dict:
+    return json.loads((step / 'step.json').read_text()) if (step / 'step.json').exists() else {}
+
+
+def files(step: Path) -> dict[str, bytes]:
+    """A step's project as {relative path: bytes}, without caches and the venv."""
+    root = step / 'project'
+    if not root.exists():
+        return {}
+    return {
+        p.relative_to(root).as_posix(): p.read_bytes()
+        for p in sorted(root.rglob('*'))
+        if p.is_file() and not IGNORED & set(p.relative_to(root).parts) and p.suffix != '.pyc'
+    }
+
+
+def lineage(step: Path) -> list[str]:
+    """Why this step is not its parent plus its declared changes (empty when it is)."""
+    name = step.relative_to(ROOT)
+    config = config_of(step)
+    kinds = [k for k in ('first', 'from', 'lab') if config.get(k)]
+    if len(kinds) != 1:
+        return [f'{name}: step.json needs exactly one of "first", "from", "lab" (has {kinds or "none"})']
+    if 'from' not in kinds:
+        return [f'{name}: "changes" only means something with "from"'] if config.get('changes') else []
+    parent = ROOT / config['from']
+    if not (parent / 'session.txt').exists():
+        return [f'{name}: "from" names {config["from"]}, which is not a step']
+    if config_of(parent).get('lab'):
+        return [f'{name}: "from" names a lab, which is outside the chain']
+    changes = config.get('changes') or []
+    if not changes:
+        return [f'{name}: "from" without "changes" — a step that changes nothing is not a section']
+    under = lambda path, c: path == c or path.startswith(c.rstrip('/') + '/')
+    covered = lambda path: any(under(path, c) for c in changes)
+    before, after = files(parent), files(step)
+    differs = {path for path in before.keys() | after.keys() if before.get(path) != after.get(path)}
+    out = [f'{name}: {path} differs from {config["from"]} but is not in "changes"' for path in sorted(differs) if not covered(path)]
+    out += [f'{name}: "changes" lists {c}, which did not change' for c in changes if not any(under(p, c) for p in differs)]
+    return out
 
 
 def main() -> int:
     write = '--write' in sys.argv
+    version = subprocess.run(['python', '--version'], capture_output=True, text=True).stdout.strip()
+    if version != PINNED:
+        print(f'✗ `python` is {version or "missing"}, not {PINNED}: put the pinned interpreter first on PATH (CLAUDE.md)')
+        return 1
     only = [a for a in sys.argv[1:] if not a.startswith('--')]
     steps = sorted(p.parent for p in ROOT.glob('*/*/session.txt'))
     steps = [s for s in steps if not only or any(str(s.relative_to(ROOT)).startswith(o) for o in only)]
     problems = 0
+    # The chain is checked over EVERY step, whatever was asked for: a filtered run must not hide a
+    # parent edited out from under its children.
+    for problem in (p for s in sorted(p.parent for p in ROOT.glob('*/*/session.txt')) for p in lineage(s)):
+        problems += 1
+        print(f'✗ {problem}')
+    if problems and write:
+        print('✗ the chain is broken: fix step.json or the snapshots before rewriting transcripts')
+        return 1
     for step in steps:
         transcript, captured = replay(step)
         name = step.relative_to(ROOT)
@@ -179,7 +252,7 @@ def main() -> int:
                 problems += 1
                 print(f'✗ {name}: captured/{file} differs from a real run')
     if not write:
-        print(f"{'✗' if problems else '✓'} {len(steps)} spine step(s) replayed, {problems} difference(s)")
+        print(f"{'✗' if problems else '✓'} {len(steps)} spine step(s) replayed, {problems} problem(s)")
     return 1 if problems else 0
 
 
