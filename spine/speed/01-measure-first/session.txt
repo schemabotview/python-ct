@@ -1,0 +1,8 @@
+$ python -m cProfile main.py 2>/dev/null | head -1
+         53938 function calls (52705 primitive calls) in 0.071 seconds
+$ python -X importtime -c "import main" 2>&1 | tail -1
+import time:      2881 |      36207 | main
+$ python -m cProfile -s ncalls main.py 2>/dev/null | grep model.py | head -3
+     1477    0.001    0.000    0.001    0.000 model.py:16(__post_init__)
+      910    0.001    0.000    0.001    0.000 model.py:23(__mul__)
+      652    0.000    0.000    0.001    0.000 model.py:111(<genexpr>)

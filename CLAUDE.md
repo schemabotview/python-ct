@@ -40,7 +40,7 @@ infra step's temporary template course is gone.
 | 8 | `structure` | Structure the pipeline | 5 | authored, awaiting owner review; no audio yet (§5's mypy bug, `sum(totals)` without a Decimal start, is fixed in Course 9 §1) |
 | 9 | `model` | Model the domain | 10 | authored, awaiting owner review; no audio yet (`Orders` is the month's lines, not one order: every CSV row is its own order) |
 | 10 | `trust` | Make it trustworthy | 7 | authored, awaiting owner review; no audio yet (§7 ends with ruff's 4 findings and 9 reformatted files; Course 11 §1 starts from the fixed, formatted code) |
-| 11 | `speed` | Make it fast | 7 | not started |
+| 11 | `speed` | Make it fast | 7 | authored, awaiting owner review; no audio yet (every timing step is `volatile`: re-running `--write` changes the numbers, so re-run the scene generator and re-read the narration's claims) |
 | 12 | `ship` | Ship it | 6 | not started |
 
 Each course is authored, replayed, rendered and captured, then the owner reviews its routes before

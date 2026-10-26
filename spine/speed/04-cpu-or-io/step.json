@@ -1,0 +1,1 @@
+{"from": "speed/03-memory", "changes": ["bench/cpu_or_io.py"], "venv": true, "volatile": true, "setup": ["pip install -q --group dev"]}

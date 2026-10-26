@@ -1,0 +1,6 @@
+id,date,customer,sku,quantity
+ORD-1016,2026-10-04,maya,ETH-250,1
+ORD-1017,2026-10-04,tom,COL-500,2
+ORD-1018,2026-10-04,jo,COL-500,1
+ORD-1019,2026-10-04,raj,ETH-250,2
+ORD-1020,2026-10-04,"smith, kim",ETH-250,1

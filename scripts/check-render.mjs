@@ -41,16 +41,17 @@ const server = await createServer({ server: { host: '127.0.0.1', port: PORT, str
 await server.listen()
 const browser = await chromium.launch()
 try {
-  const page = await browser.newPage({ viewport: { width: 3840, height: 2160 }, deviceScaleFactor: 1 })
-  let at = ''
-  page.on('pageerror', (e) => problems.push(`${at}  page error: ${e.message}`))
-  page.on('console', (m) => m.type() === 'error' && problems.push(`${at}  console error: ${m.text()}`))
+  let page
   for (const { slug, section, scene } of sections) {
-    at = slug
     // A FRESH page per section. Hash navigation keeps the shell's one <Scene> instance alive
     // (ui-shell 1.0 renders it without a key), so the new scene is measured under the previous one's
     // fit and its data-fit can read "ready" before it has settled — a check must not inherit that.
-    await page.goto('about:blank')
+    // A new TAB, not just a reload: one tab navigated ~80 times exhausted Chromium's per-page
+    // resources (net::ERR_INSUFFICIENT_RESOURCES, then no data-fit) on whichever section came next.
+    await page?.close()
+    page = await browser.newPage({ viewport: { width: 3840, height: 2160 }, deviceScaleFactor: 1 })
+    page.on('pageerror', (e) => problems.push(`${slug}  page error: ${e.message}`))
+    page.on('console', (m) => m.type() === 'error' && problems.push(`${slug}  console error: ${m.text()}`))
     await page.goto(`http://127.0.0.1:${PORT}/?capture=1#/${slug}`)
     try {
       await page.waitForSelector('.gf-scene[data-fit="ready"]', { timeout: 20000 })

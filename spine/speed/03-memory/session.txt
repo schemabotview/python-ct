@@ -1,0 +1,5 @@
+$ python -m bench.memory 2>/dev/null
+months   as a list    streamed
+     1      341 KiB     147 KiB
+     3      364 KiB     151 KiB
+    12    1,048 KiB     159 KiB

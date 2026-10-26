@@ -1,0 +1,7 @@
+$ python -m bench.api
+one request at a time: 3.23s
+all 31 at once:        0.14s, 176 rows
+$ mypy
+Success: no issues found in 11 source files
+$ ruff check
+All checks passed!

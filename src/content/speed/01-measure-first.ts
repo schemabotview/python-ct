@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const measureFirst: Section = {
+  id: 'measure-first',
+  title: 'Measure first: cProfile',
+  scene: 'speed-measure-first',
+  narration:
+    "First, the tidy up promised at the end of the last course: ruff's four findings are fixed, and every file is in the formatter's layout. Now, speed. The most common mistake in making code faster is guessing which part is slow. Programmers guess wrong surprisingly often, so the rule is simple: measure first. Python ships a profiler, cProfile, which records every function call while a program runs: how many times each function was called, and how long it took. Running main dot py under it gives a surprise. The whole job, reading thirty one files, pricing a hundred and sixty three lines and writing three outputs, makes around fifty thousand function calls in well under a tenth of a second. Python's own import timer, the second command, shows that about half of that is simply importing main and every module it pulls in: the cost of starting up. The third command sorts the profile by number of calls and keeps only model dot py, so our own code appears. Money's post init ran fourteen hundred and seventy seven times, about nine for every line, followed by multiply and the discount rule search. That is a real finding: every line's total is worked out more than once, and each time it builds several Money objects along the way. Is it worth fixing? Not today. Our own code takes about a hundredth of a second, and a month will never be slow. The note on the right says it plainly: worth knowing, not yet worth changing. Measuring told us where the time goes, and also that we do not have a speed problem yet. That is just as valuable. The rest of this course looks at the cases where speed really matters. Next, how the choice of data structure changes the cost of a single question.",
+}

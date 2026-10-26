@@ -1,0 +1,8 @@
+$ python -m bench.threads 2>/dev/null
+GIL enabled: True
+1 thread(s): 0.57s, every total 11578.88
+4 thread(s): 1.71s, every total 11578.88
+$ python3.15t -m bench.threads 2>/dev/null
+GIL enabled: False
+1 thread(s): 0.57s, every total 11578.88
+4 thread(s): 0.35s, every total 11578.88

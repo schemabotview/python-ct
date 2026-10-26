@@ -1,0 +1,1 @@
+{"from": "speed/01-measure-first", "changes": ["bench/lookup.py", "pipeline/validate.py"], "venv": true, "volatile": true, "setup": ["pip install -q --group dev"]}

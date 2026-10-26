@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const asyncioSection: Section = {
+  id: 'asyncio',
+  title: 'asyncio: ApiSource',
+  scene: 'speed-asyncio',
+  narration:
+    "The shop has started publishing its orders through an API, one request per day. Each request spends nearly all of its time waiting for the server, which is the purest I O bound work there is. asyncio handles it on a single thread. A function defined with async def is a coroutine: it can pause at an await, hand control back, and resume later where it left off. An event loop runs many coroutines, switching to whichever one is ready, so while one waits for its answer, others can send their requests. ApiSource, in extract dot py, is a new Source. Its fetch coroutine opens a connection with asyncio, writes a plain HTTP request for one day, awaits the whole response, and returns the CSV after the headers. fetch all creates a fetch for every day and awaits them together with gather. And rows, the method every Source has, runs that with asyncio dot run and yields the rows, so the rest of the pipeline cannot tell this source from the files. The flow on the right shows the loop, with all thirty one requests suspended at once. To keep the course repeatable, bench slash api dot py starts a small stand in for the API with the standard library's http dot server, where every request takes a tenth of a second to answer. Fetching the days one at a time takes just over three seconds: thirty one waits, end to end. ApiSource fetches all thirty one in under a fifth of a second: the waits overlap, on one thread, with no locks and no extra processes. Every row arrives, a hundred and seventy six including the bad ones. mypy and ruff both pass. Each tool fits its kind of slowness: asyncio for waiting, processes for computing. The pipeline is fast where it matters. Last, we ship it.",
+}

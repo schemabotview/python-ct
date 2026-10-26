@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const threadsAndTheGil: Section = {
+  id: 'threads-and-the-gil',
+  title: 'Threads, the GIL and the free-threaded build',
+  scene: 'speed-threads',
+  narration:
+    "A thread is a separate line of execution inside one process, sharing its memory. The obvious way to use four processors is four threads. But the standard build of Python has a global interpreter lock, the GIL, which allows only one thread to run Python code at any moment. It keeps the interpreter simple and safe, at the cost of parallelism. Python three thirteen introduced a second build without it, called free threaded, officially supported since three fourteen, and installed here as python three fifteen t. bench slash threads dot py prices the month two hundred times, each job reading the files itself, so the jobs share no data. It uses a ThreadPoolExecutor, from concurrent dot futures, which hands jobs to a pool of threads, first with one thread, then with four. It also prints whether the GIL is enabled, and the total each job computed, to prove the threads all got the same answer. On the standard build, the GIL is on, and four threads are not faster. They are slower, roughly three times slower in this run, because the threads take turns and spend time handing the lock between them. On the free threaded build, the GIL is off, and the same code with four threads takes about a third less time than with one. The chart on the right shows both. Two honest cautions. On a single thread the free threaded build was no faster than the standard one, and on some runs it is a little slower, the cost of staying safe without the lock. And the speed up is not four times: our jobs still share the catalogue and the interpreter's internals. Measure on your own work before you switch builds. For CPU bound work on the standard build, there is another way. Next, processes.",
+}
