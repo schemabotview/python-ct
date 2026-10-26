@@ -1,0 +1,13 @@
+$ python main.py
+data/raw/orders-2026-10-02.csv is not UTF-8: read as Latin-1
+ORD-1001 ETH-250 3 29.85
+ORD-1002 COL-500 12 178.50
+ORD-1003 KEN-1000 2 58.90
+ORD-1004 ETH-250 1 9.95
+ORD-1007 COL-500 1 17.50
+ORD-1008 ETH-250 2 19.90
+total: 314.60 | rejected: 2
+  rejected ORD-1005: quantity 'three'
+  rejected ORD-1006: unknown product BRA-500
+$ file data/raw/orders-2026-10-02.csv
+data/raw/orders-2026-10-02.csv: CSV ISO-8859 text

@@ -7,8 +7,10 @@ import { SCENE_ASPECT } from '@graphlearning/shell'
 //   explorer (EXPLORER_W) | editor (EDITOR_W × EDITOR_H)    | side pane (SIDE_W, fixed)
 //                         | terminal docked under it (TERMINAL_H)
 //
-// Every pane has FLOORS (minW / minH) and the side pane is a FIXED column (`w`): content wider than
-// it overflows (check-render fails it) instead of moving the frame. graphl-flow's fit is a pure
+// Every column is a FIXED width (`w`) — explorer, editor, terminal and side pane — so content wider
+// than its column overflows (check-render fails it) instead of moving the frame; heights are floors
+// (minH), with check-content holding the editor and terminal to what they fit. The explorer was a
+// floor until a long entry for the rest of October widened it 85px and moved every pane. graphl-flow's fit is a pure
 // function of the natural box, so equal boxes mean equal zoom — check-render asserts every IDE
 // section lands on the same fit, to the pixel. A file longer than the editor is folded with `show`,
 // never allowed to grow the pane.
@@ -89,14 +91,14 @@ export interface IdeFrame {
 export const IDE_IDS = { explorer: 'explorer', editor: 'editor', terminal: 'terminal', side: 'side' } as const
 
 export function ideFrame({ project = 'roastery-etl', tree, editor, session, side, edges = [] }: IdeFrame): SceneModel {
-  const explorer: Tree = { type: 'tree', id: IDE_IDS.explorer, title: project, entries: tree, fill: true, minW: EXPLORER_W }
+  const explorer: Tree = { type: 'tree', id: IDE_IDS.explorer, title: project, entries: tree, fill: true, w: EXPLORER_W }
   const code: Code = {
     type: 'code', id: IDE_IDS.editor, filename: editor.file, lang: editor.lang ?? 'python', code: trim(editor.code),
-    show: editor.show, highlight: editor.highlight, tone: 'ingest', fill: true, minW: EDITOR_W, minH: EDITOR_H,
+    show: editor.show, highlight: editor.highlight, tone: 'ingest', fill: true, w: EDITOR_W, minH: EDITOR_H,
   }
   const term: Code = {
     type: 'code', id: IDE_IDS.terminal, terminal: true, filename: `terminal — ${project}`, code: terminal(session),
-    fill: true, minW: EDITOR_W, minH: TERMINAL_H,
+    fill: true, w: EDITOR_W, minH: TERMINAL_H,
   }
   const pane: Group = { type: 'group', id: IDE_IDS.side, bare: true, w: SIDE_W, minH: FRAME_H, children: side }
   return {

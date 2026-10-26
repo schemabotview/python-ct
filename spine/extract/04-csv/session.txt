@@ -1,0 +1,12 @@
+$ python -q -i main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+2026-10-01 6 lines 277.20
+2026-10-02 2 lines 37.40
+2026-10-03 4 lines 199.65
+total: 514.25 | rejected: 3
+  rejected ORD-1005: quantity 'three'
+  rejected ORD-1006: unknown product BRA-500
+  rejected ORD-1012: unknown product BRA-500
+>>> DAYS["2026-10-03"][-1]["customer"]
+'smith, kim'
+>>> exit()

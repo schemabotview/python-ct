@@ -1,0 +1,4 @@
+id,date,customer,sku,quantity
+ORD-1127,2026-10-23,ana,COL-500,2
+ORD-1128,2026-10-23,zoé,ETH-250,12
+ORD-1129,2026-10-23,raj,ETH-250,10

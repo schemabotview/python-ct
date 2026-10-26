@@ -1,0 +1,10 @@
+$ python -q -i main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+2026-10-01 6 lines 309.70
+2026-10-02 2 lines 37.40
+2026-10-03 4 lines 261.40
+total: 608.50 | rejected: 1
+  rejected ORD-1005: quantity 'three'
+>>> CATALOGUE["BRA-500"]
+Decimal('16.25')
+>>> exit()

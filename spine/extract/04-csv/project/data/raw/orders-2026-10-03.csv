@@ -1,0 +1,5 @@
+id,date,customer,sku,quantity
+ORD-1009,2026-10-03,raj,KEN-1000,1
+ORD-1010,2026-10-03,maya,COL-500,10
+ORD-1011,2026-10-03,lena,ETH-250,2
+ORD-1012,2026-10-03,"smith, kim",BRA-500,4

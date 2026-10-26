@@ -34,7 +34,7 @@ infra step's temporary template course is gone.
 | 2 | `start` | Start the project | 5 | pilot authored, awaiting owner review; no audio yet |
 | 3 | `hold` | Hold the data | 9 | authored, awaiting owner review; no audio yet |
 | 4 | `process` | Process the data | 11 | authored, awaiting owner review; no audio yet |
-| 5 | `extract` | Read the data | 7 | not started |
+| 5 | `extract` | Read the data | 7 | authored, awaiting owner review; no audio yet |
 | 6 | `transform` | Transform and aggregate | 7 | not started |
 | 7 | `load` | Write the results | 6 | not started |
 | 8 | `structure` | Structure the pipeline | 5 | not started |
@@ -118,7 +118,8 @@ frame is 1736 × 977 — 16:9, derived from the shell's `SCENE_ASPECT` — and t
 is ~30px in the 4K frame. Fixed ids: `explorer`, `editor`, `terminal`, `side`, so a `focus` can
 name `editor.L12` or any side-pane id.
 
-- **Panes have floors, so content can grow them**, and a grown pane moves the whole template. So
+- **Every column is a fixed width (`w`)** — a too-wide explorer entry once widened it 85px and moved
+  every pane — and **heights are floors**, so content can grow them and move the template. So
   check-content fails an editor showing more than 23 rows (fold with `show`), a line wider than 80
   columns, or a session longer than 13 lines — with a message naming the pane — and check-render
   fails any IDE frame not on the same fit and pane pixels as the others.

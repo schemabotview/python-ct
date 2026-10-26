@@ -1,0 +1,8 @@
+$ python -q -i main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+files: 31 | priced: 163 | rejected: 13
+October total: 11578.88
+>>> rows = iter_rows(paths)
+>>> next(rows)["id"], next(rows)["id"]
+('ORD-1001', 'ORD-1002')
+>>> exit()
