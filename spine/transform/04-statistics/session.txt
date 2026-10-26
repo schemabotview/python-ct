@@ -1,0 +1,10 @@
+$ python main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+lines: 163 | mean: 71.04
+median: 49.75 | largest: 316.20
+bags a day: 23.483870967741936 | roast: 24
+$ python -q
+>>> import math
+>>> math.ceil(2.1), math.floor(2.9), round(2.5), round(3.5)
+(3, 2, 2, 4)
+>>> exit()

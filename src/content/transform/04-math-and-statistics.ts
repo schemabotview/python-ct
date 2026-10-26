@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const mathAndStatistics: Section = {
+  id: 'math-and-statistics',
+  title: 'math and statistics: averages, medians, and rounding',
+  scene: 'transform-statistics',
+  narration:
+    "The shop wants to know what a typical order line is worth, and how much coffee to roast each day. The statistics module answers the first question. main dot py now keeps every line's total in a list, and the terminal reports three numbers: the mean, seventy one oh four, the median, forty nine seventy five, and the largest line, three hundred sixteen twenty. The chart at the top of the pane shows them side by side. Why is the mean so far above the median? The median is the middle value when the lines are sorted, so half the lines are worth less and half are worth more. The mean is the total divided by the count, and a handful of large wholesale lines pull it upwards. When a few big values dominate, the median is the better answer to what is typical, and a good report gives both. Notice that the mean is rounded to cents only when it is printed. Round money at the end, never part way through a calculation, or the small errors add up. The second question needs a decision about rounding. Across October, the shop sold twenty three point four eight bags a day, on average. You cannot roast part of a bag, and running short is worse than having one spare, so the program rounds up, with math dot ceil, to twenty four. The REPL compares the options. ceil always rounds up, floor always rounds down, and the built in round, on a value exactly halfway, rounds to the nearest even number: two point five becomes two, and three point five becomes four. That surprises people, and it is exactly why rounding should always be a deliberate choice. Next, the dates in the data.",
+}

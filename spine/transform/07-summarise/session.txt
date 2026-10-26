@@ -1,0 +1,9 @@
+$ python -q -i main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+October: 11578.88 | rejected: 13
+top product: KEN-1000 4460.90
+best customer: ('maya', 23)
+mean line: 71.04 | median: 49.75
+>>> sorted(summary)
+['bags', 'customers', 'daily', 'mean', 'median', 'revenue', 'total', 'weekly']
+>>> exit()

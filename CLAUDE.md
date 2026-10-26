@@ -35,7 +35,7 @@ infra step's temporary template course is gone.
 | 3 | `hold` | Hold the data | 9 | authored, awaiting owner review; no audio yet |
 | 4 | `process` | Process the data | 11 | authored, awaiting owner review; no audio yet |
 | 5 | `extract` | Read the data | 7 | authored, awaiting owner review; no audio yet |
-| 6 | `transform` | Transform and aggregate | 7 | not started |
+| 6 | `transform` | Transform and aggregate | 7 | authored, awaiting owner review; no audio yet |
 | 7 | `load` | Write the results | 6 | not started |
 | 8 | `structure` | Structure the pipeline | 5 | not started |
 | 9 | `model` | Model the domain | 10 | not started |

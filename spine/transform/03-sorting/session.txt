@@ -1,0 +1,9 @@
+$ python -q -i main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+1 KEN-1000 4460.90 160 bags
+2 COL-500 3196.39 203 bags
+3 ETH-250 2420.90 264 bags
+4 BRA-500 1500.69 101 bags
+>>> sorted(bags, key=bags.get)
+['BRA-500', 'KEN-1000', 'COL-500', 'ETH-250']
+>>> exit()

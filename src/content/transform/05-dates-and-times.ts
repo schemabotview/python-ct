@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const datesAndTimes: Section = {
+  id: 'dates-and-times',
+  title: 'Dates and times: daily and weekly totals',
+  scene: 'transform-dates',
+  narration:
+    "Every order line carries its date, but so far only as text. The datetime module turns text into real dates, and real dates can answer questions text cannot. main dot py now converts each line's date with date dot fromisoformat, the standard way to read a date written year, month, day. It adds the line's total to two new groupings: one by date, and one by ISO week number, which isocalendar provides. The terminal then reports the busiest day of the month and the total for each week. The busiest day was Wednesday the seventh of October, with eleven hundred and six eighty one. strftime turned that date into words, using a format string where percent capital A means the weekday name, percent d the day, and percent capital B the month. The table in the middle of the pane shows those steps. In the REPL, the busiest day's isocalendar gives its year, its week number, forty one, and its weekday, three, because ISO weeks count Monday as day one. The chart at the top of the pane shows the five weeks. And the note at the bottom points out a trap that has fooled many real reports. Week forty looks terrible, at seven hundred, and week forty four looks weak too. But October twenty twenty six starts on a Thursday and ends on a Saturday, so week forty only contains four days of the month, and week forty four contains six. Compare only whole weeks, or the chart tells a story the business did not live. Dates have many traps like this, from month lengths to time zones, which is why you should always reach for datetime rather than doing date arithmetic on text. Next, iterating without building lists.",
+}

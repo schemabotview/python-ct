@@ -1,0 +1,11 @@
+$ python -q -i main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+busiest day: Wednesday 07 October 1106.81
+week 40 700.80
+week 41 3131.40
+week 42 2807.93
+week 43 2956.95
+week 44 1981.80
+>>> busiest.isocalendar()
+datetime.IsoCalendarDate(year=2026, week=41, weekday=3)
+>>> exit()

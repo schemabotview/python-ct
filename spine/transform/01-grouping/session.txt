@@ -1,0 +1,10 @@
+$ python -q -i main.py
+orders-2026-10-02.csv is not UTF-8: read as Latin-1
+rejected: 13
+BRA-500 1500.69
+COL-500 3196.39
+ETH-250 2420.90
+KEN-1000 4460.90
+>>> revenue.get("GUA-250", Decimal("0"))
+Decimal('0')
+>>> exit()

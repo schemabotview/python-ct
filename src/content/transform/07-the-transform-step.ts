@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const theTransformStep: Section = {
+  id: 'the-transform-step',
+  title: 'The transform step: summarise()',
+  scene: 'transform-summarise',
+  narration:
+    "Over this course, main dot py has grown a collection of loops and counters, each answering one question. The final step gathers them into one function, and that function is the transform stage of the pipeline. summarise takes the priced lines, makes one pass over them, grouping by day, and returns a dictionary holding everything the report needs: revenue ranked by product, bags, customers, daily and weekly totals, the overall total, the mean and the median. Look at what it does not do. It reads no files, prints nothing and touches no names outside its argument. Lines go in, a summary comes out, which is exactly what the diagram on the right draws. In the REPL, sorted of summary lists its keys, from bags to weekly. The bottom of the file is now short: build the priced lines from the files, pass them to summarise, and print a small report. The terminal shows it, and the table on the right repeats it: October's total of eleven thousand five hundred seventy eight eighty eight, thirteen rejected rows, Kenyan coffee as the top product, Maya as the best customer, and the mean and median line. Why does this shape matter? Because each stage of the pipeline can now be understood, changed and checked on its own. The reading part knows nothing about discounts. The summarising part knows nothing about files, which means that in course ten we can test it by handing it three made up lines and checking the answer, without a single file on disk. That is the transform stage done. The pipeline can read the month and answer the shop's questions. In the next course, it writes the answers down.",
+}

@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const grouping: Section = {
+  id: 'grouping',
+  title: 'Grouping with a dict: revenue per product',
+  scene: 'transform-grouping',
+  narration:
+    "The pipeline can now read a whole month, but so far it only adds everything into one number. The shop's real questions are more specific, and the first is: which coffees earn the money? Answering it means grouping: sorting the priced lines into buckets, one per product, and keeping a running total in each. A dictionary is the natural bucket store, with the product code as the key and its revenue so far as the value. main dot py's loop now does that in two lines. It takes the line's product, then sets that product's revenue to whatever it was before, plus this line's total. The tricky part is the very first line for each product, when there is no entry yet. The get method handles it: revenue dot get of a key, with a default, returns the value if the key exists, and the default otherwise. So the first Brazilian line adds to zero, and every later one adds to the running total. The REPL shows the default in action: asking for Guatemalan, which never appears among the priced lines, returns a Decimal zero rather than raising a KeyError. The diagram on the right shows the idea, every priced line dropping into its product's bucket, and the table holds October's answer. Kenyan coffee earns the most, four thousand four hundred sixty, then Colombian, Ethiopian and Brazilian. The terminal also reports thirteen rejected rows, the same as at the end of the last course, which is a useful sanity check: grouping must not change what counts as valid. One pass over the month, one running total per key: that pattern will answer most of the questions in this course. Next, two tools that make it even shorter.",
+}
