@@ -1,0 +1,4 @@
+$ python sum_two_ways.py
+a Python loop:  21.9 ms
+sum():           4.5 ms
+sum() is 4.9 times faster

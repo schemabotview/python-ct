@@ -1,0 +1,10 @@
+$ python readable.py
+27.0 27.0
+$ python -m this | sed -n "3,9p"
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.

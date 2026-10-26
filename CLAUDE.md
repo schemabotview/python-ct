@@ -30,7 +30,7 @@ infra step's temporary template course is gone.
 
 | # | Course id | Course | Sections | Status |
 | --- | --- | --- | --- | --- |
-| 1 | `picture` | The picture: why Python, and how it runs your code | 11 | not started (after the pilot) |
+| 1 | `picture` | The picture: why Python, and how it runs your code | 11 | authored, awaiting owner review; no audio yet |
 | 2 | `start` | Start the project | 5 | pilot authored, awaiting owner review; no audio yet |
 | 3 | `hold` | Hold the data | 9 | not started |
 | 4 | `process` | Process the data | 11 | not started |

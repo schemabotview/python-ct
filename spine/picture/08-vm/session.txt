@@ -1,0 +1,10 @@
+$ python -c "import vm; print(vm.line_total(10, 3, 2))"
+28
+$ python -c "import dis, vm; dis.dis(vm.line_total)"
+  1           RESUME                   0
+
+  2           LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (price, quantity)
+              BINARY_OP                5 (*)
+              LOAD_FAST_BORROW         2 (discount)
+              BINARY_OP               10 (-)
+              RETURN_VALUE

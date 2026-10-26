@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const pythonMainPy: Section = {
+  id: 'python-main-py',
+  title: 'What happens when you type python main.py',
+  scene: 'picture-run',
+  narration:
+    "When you type python main dot py and press enter, a lot happens before your first line of output appears, and knowing the stages explains most of the errors you will ever see. Each stage on screen shows what it makes of a one line program that prints the word hi. The interpreter first reads the file as plain text, a sequence of characters. The tokenizer turns those characters into tokens: names, numbers, strings and operators, the words of the language. The parser then checks those tokens against Python's grammar and builds a syntax tree, a structure that records what the code means. If the grammar is broken, this is where it stops, with a SyntaxError, before a single line has run. Next the compiler turns the tree into bytecode: a list of small, simple instructions. For a module that your program imports, that bytecode is saved, so the work is not repeated next time. Finally, the virtual machine runs the bytecode, one instruction at a time, and that is when your code actually does things: printing, reading files, computing. Errors found here, like a NameError for a misspelt name, only appear when the program reaches the line that causes them. The red row sums it up: which stage finds an error decides what has already happened. The important thing is that none of this is hidden. The bottom row shows how to look at every stage yourself, using tools that ship with Python. python dash m tokenize prints the tokens. python dash m ast prints the syntax tree, and python dash m dis prints the bytecode. The saved bytecode lives in a folder called pycache. Over the next five sections we will look inside: the bytecode, the virtual machine, the call stack, and how Python keeps track of names and objects in memory.",
+}

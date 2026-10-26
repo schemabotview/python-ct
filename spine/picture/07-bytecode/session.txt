@@ -1,0 +1,12 @@
+$ python main.py
+29.849999999999998
+$ python look.py
+NAME 'price'
+OP '*'
+NAME 'quantity'
+BinOp(left=Name(id='price'), op=Mult(), right=Name(id='quantity'))
+  1           RESUME                   0
+
+  2           LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (price, quantity)
+              BINARY_OP                5 (*)
+              RETURN_VALUE

@@ -1,0 +1,4 @@
+$ python identity.py
+140670914129600 140670914129600 140670912209216
+True False
+True True

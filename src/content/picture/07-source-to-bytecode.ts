@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const sourceToBytecode: Section = {
+  id: 'source-to-bytecode',
+  title: 'Source to bytecode',
+  scene: 'picture-bytecode',
+  narration:
+    'Let us watch the compiler at work on the smallest useful function. pricing dot py, in the editor, defines line total, which multiplies a price by a quantity. A second file, main dot py, imports it and prints the total for three bags. Run it, and look at the explorer: a folder called pycache has appeared, holding a file whose name ends in cpython three fifteen dot pyc. That is the compiled bytecode of pricing dot py, saved because it was imported. The next run can skip compiling it, as long as the source has not changed. The script you run directly, main dot py, is compiled every time and never saved, and the version number in the file name means each version of Python keeps its own cache. The table at the bottom of the right hand pane collects those rules. This folder is safe to delete, and it never belongs in version control. The second command runs look dot py, which shows the stages in between for the expression price times quantity. First the tokens, at the top of the right hand pane: a name, an operator, and another name. Then the syntax tree, drawn below them: a binary operation, whose operator is multiplication, with a name on the left and a name on the right. Then the bytecode for line total, which the next table explains line by line. After a resume instruction that starts the function, one instruction pushes both arguments, price and quantity. Recent versions of Python fuse common pairs like this into a single instruction, which is why the name is so long. Then binary op multiplies the top two values, and return value hands back the result. Four instructions for one line of Python. Next, how the virtual machine runs them.',
+}

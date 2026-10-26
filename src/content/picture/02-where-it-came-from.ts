@@ -1,0 +1,9 @@
+import type { Section } from '../types'
+
+export const whereItCameFrom: Section = {
+  id: 'where-it-came-from',
+  title: 'Where Python came from',
+  scene: 'picture-history',
+  narration:
+    "Python is older than most people expect. In December nineteen eighty nine, Guido van Rossum started it as a holiday project at C W I, a research institute in Amsterdam, and the name comes from Monty Python's Flying Circus, not from the snake. The first public release came in February nineteen ninety one, already with classes, exceptions, functions, lists and dictionaries, and version one followed in nineteen ninety four. The second era began with Python two, in October two thousand, which brought list comprehensions and a garbage collector that could find cycles. The year after, the Python Software Foundation was formed to own the language. Then, in December two thousand and eight, Python three made a deliberate break with the past, to fix how text and division worked. The break was right, but it was slow: Python two was only retired in January twenty twenty, more than eleven years later. Everything in this course is Python three. The third era is the one you are joining. In two thousand eighteen Guido stepped down as the language's lead, and an elected Steering Council now guides it. Since three point nine in twenty twenty, a new version arrives every October. Three point eleven made CPython about a quarter faster on average. Three point thirteen offered an experimental build without the global interpreter lock, and three point fourteen made that build officially supported. And in October twenty twenty six, three point fifteen added lazy imports, a frozen dictionary type, and UTF eight as the default text encoding. We will use all three. Next, the ideas that shaped the language.",
+}

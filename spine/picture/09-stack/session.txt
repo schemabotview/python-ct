@@ -1,0 +1,5 @@
+$ python orders.py
+line_total   line 7
+order_total  line 15
+<module>     line 19
+19.9
